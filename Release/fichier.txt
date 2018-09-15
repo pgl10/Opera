@@ -1,0 +1,21 @@
+a = 1234567
+b = 4567
+c = a-b
+f = 987654321/12345
+f2 = f*f
+f4 = f2*f2
+f8 = f4*f4
+#  i est le nombre pour l'infini positif
+i = 1/0
+#  j est le nombre pour l'infini négatif
+j = -1/0
+#  951 = 3 x 317  et  357 = 3 x 119
+x = 951/357
+x + i
+x - i
+x * i
+x / i
+v = 123456789/1234
+w = f+v
+conv w*w
+enti w*w

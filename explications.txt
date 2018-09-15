@@ -1,0 +1,26 @@
+
+Opera est un programme qui permet d'effectuer les 4 opérations arithmétiques de base 
+sur des nombres rationnels représentés par des fractions de deux entiers aussi grands 
+que nécessaires. Il a deux modes de fonctionnement : l'exécution d'un fichier de commandes 
+et le mode conversationnel. C'est un programme interactif qui lit, interprète, calcule 
+et archive les résultats des instructions écrites selon les règles prévues.
+
+Le programme est compilé avec MicroSoft Visual Studio 2012 Express for Windows Desktop 
+en mode Release et configuration Win32(x86) avec l'option /MT : cela ne nécessite aucune 
+dll complémentaire. Il fonctionne dans une fenêtre de Windows en mode console. Le source 
+développé en C++ est entièrement disponible. Il n'a qu'une seule dépendance fournie avec 
+le source : GMP en variante développée par Paul Herman. Il y a deux structures principales. 
+La première est la classe bigRa qui définit un rationnel avec deux entiers sans limite de 
+grandeur : le numérateur et le dénominateur. La seconde est listera qui est une liste 
+simplement chainée servant à gérer les rationnels utilisés pendant l'exécution du programme.
+
+La programmation fait un usage important des pointeurs. Le source est assez facile à 
+comprendre et comporte des commentaires. Dans les emplois habituels il n'y a pas de 
+problème de performance : les réponses sont obtenues très rapidement. 
+Le fichier joint emploi.txt est le mode d'emploi.
+
+La division par 0 est possible : i = 1/0 définit l'infini positif et j = -1/0 définit 
+l'infini négatif. On peut ensuite utiliser ces deux variables i et j comme les autres. 
+Mais il faut aussi noter que arbitrairement on a ici : 0/0 = 0 sans aucun message 
+d'avertissement à ce sujet ni aucune interruption de l'exécution. Ceci arrive notamment 
+si on écrit : a = 0/0, ou x = 0*i, ou x = i-i, ou x = i/i.

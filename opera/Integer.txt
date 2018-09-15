@@ -1,0 +1,26 @@
+
+--------------------------------------------------------------------------
+
+Integer.h and Integer.cpp proviennent de la variante pour GMP 
+
+développée par Paul Herman et disponible à : 
+
+http://www.frenchfries.net/paul/factoring/source.html
+
+--------------------------------------------------------------------------
+
+La bibliothèque GMP ( The GNU Multiple Precision Arithmetic Library )
+
+est disponible dans sa dernière version à : http://gmplib.org/
+
+Mais pour la version 4.1.2 de GMP il y a un tutoriel très complet 
+
+pour l'installer et l'utiliser à : http://cs.nyu.edu/exact/core/gmp/
+
+et de plus sa documentation et gmp-man-4.1.2.pdf sont à : 
+
+http://cse.taylor.edu/~btoll/s04/320/res/a/gmpmanual/index-2.html
+
+http://www.icsd.aegean.gr/website_files/metaptyxiako/647399925.pdf
+
+--------------------------------------------------------------------------
