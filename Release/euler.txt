@@ -65,4 +65,5 @@ s30 = s29 + a30
 s31 = s30 + a31
 s32 = s31 + a32
 conv s32
-enti s32*100000000000000000000
+enti s32*1000000000000000000000000000000000000
+# Ceci montre que s32 a 36 décimales exactes après la virgule.
