@@ -1,0 +1,31 @@
+# La méthode de Newton : s(n+1) = [s(n) + 2/s(n)] / 2 
+# pour approximer sqrt(2) a une convergence quadratique
+# Le nombre de chiffres décimaux exacts double à chaque itération.
+s0 = 2
+b0 = 2/s0
+c0 = s0+b0
+s1 = c0/2
+b1 = 2/s1
+c1 = s1+b1
+s2 = c1/2
+b2 = 2/s2
+c2 = s2+b2
+s3 = c2/2
+b3 = 2/s3
+c3 = s3+b3
+s4 = c3/2
+conv s4
+enti s4*100000000000
+# s4 x 10^11 a 12 chiffres décimaux exacts !
+b4 = 2/s4
+c4 = s4+b4
+s5 = c4/2
+conv s5
+enti s5*100000000000000000000000
+# s5 x 10^23 a 24 chiffres décimaux exacts !
+b5 = 2/s5
+c5 = s5+b5
+s6 = c5/2
+conv s6
+enti s6*100000000000000000000000000000000000000000000000
+# s6 x 10^47 a 48 chiffres décimaux exacts !

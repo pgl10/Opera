@@ -12,7 +12,7 @@
 #include "utils.hpp"
 #include "listera.hpp"
 
-void aout(char* s);
+void aout(std::string s);
 
 elemra* listera;
 

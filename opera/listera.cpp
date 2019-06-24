@@ -27,6 +27,20 @@ elemra* chercherra(char* name){  // pour chercher un élément
     return NULL;
 }
 
+bool modifierra(char* name, bigRa& a) {  // pour mettre à jour la valeur
+    elemra* era;                         // d'un élement de listera
+    era = listera;
+    while(era != NULL) { 
+        if(strcmp(era->nom, name) == 0) {
+            delete era->ra;
+            era->ra = new bigRa(a);
+            return true;
+        }
+        era = era->suiv;
+    }
+    return false;
+}
+
 void archiver(std::string st, bigRa& ra) {  // pour archiver une
     char* nom = new char[1+st.size()];      // nouvelle variable
     strcpy(nom, st.c_str());

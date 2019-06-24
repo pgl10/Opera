@@ -43,6 +43,7 @@ int main(int argc, char *argv[]) {
         aout("Pour une aide immédiate entrez : aide\n");
     }
     initra();
+    ajouterra("last", bigRa(0));
     for(;;) {
         std::string ligne;
         if(lect == 1) {
@@ -52,7 +53,11 @@ int main(int argc, char *argv[]) {
                 filein.close();
                 continue;
             }
-            else std::cout << "\n> " << ligne << std::endl;
+            else {
+                std::cout << "\n> ";
+                aout(ligne);
+                std::cout << std::endl;
+            }
         }
         else {
             std::cout << "\n> ";
@@ -79,6 +84,10 @@ int main(int argc, char *argv[]) {
         }    
         if(ligne.size() > 4 && ligne.substr(0, 4) == "exec") {
             ligne = ligne.substr(4);
+            if(lect != 0) {
+                std::cout << "Un fichier de commandes ne peut pas en utiliser un autre.\n";
+                continue;
+            }
             filein.open(ligne.c_str());
             if(!filein.good()) {
                 std::cout << "Le fichier " << ligne.c_str() << " n'est pas disponible.\n";
@@ -100,7 +109,10 @@ int main(int argc, char *argv[]) {
             Integer r;
             bool good = nval(ligne, r);
             if(!good) aout("calcul impossible.\n");
-            else std::cout << r << std::endl;
+            else {
+                std::cout << r << std::endl;
+                modifierra("last", bigRa(r));
+            }
             continue;
         }
         std::size_t found = ligne.find("=");
@@ -110,13 +122,19 @@ int main(int argc, char *argv[]) {
                 bigRa ra;
                 if(isname(ligne.c_str())) {
                     bool good = vval(ligne, ra);
-                    if(good) std::cout << ligne << " = " << ra << std::endl;
+                    if(good) {
+                        std::cout << ligne << " = " << ra << std::endl;
+                        modifierra("last", ra);
+					}
                     else std::cout << "variable inconnue." << std::endl;
                     continue;
                 }
                 else {
                     bool good = eval(ligne, ra);
-                    if(good) std::cout << ra << std::endl;
+                    if(good) {
+                        std::cout << ligne << " = " << ra << std::endl;
+                        modifierra("last", ra);
+					}
                     else aout("instruction non reconnue.\n");
                     continue;
                 }
@@ -133,6 +151,7 @@ int main(int argc, char *argv[]) {
                         if(good) {
                             std::cout << res << " = " << ra << std::endl;
                             archiver(res, ra);
+                            modifierra("last", ra);
                         }
                         else std::cout << "variable inconnue." << std::endl;
                         continue;
@@ -142,6 +161,7 @@ int main(int argc, char *argv[]) {
                         if(good) {
                             std::cout << res << " = " << ra << std::endl;
                             archiver(res, ra);
+                            modifierra("last", ra);
                         }
                         else aout("instruction non reconnue.\n");
                         continue;

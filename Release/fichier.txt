@@ -17,5 +17,8 @@ x * i
 x / i
 v = 123456789/1234
 w = f+v
+enti w
+we = last
+wf = w - we
 conv w*w
 enti w*w

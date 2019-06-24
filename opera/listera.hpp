@@ -7,7 +7,7 @@
 
 #include "bigRa.hpp"
 
-void aout(char* s);
+void aout(std::string s);
 
 struct elemra {     // structure pour
     char* nom;      // un élément d'archive
@@ -22,6 +22,7 @@ extern elemra* listera;  // archive des bigRa
 void initra();
 void ajouterra(char* name, bigRa& a);
 elemra* chercherra(char* name);
+bool modifierra(char* name, bigRa& a);
 void archiver(std::string st, bigRa& ra);
 void supprimer(std::string st);
 void lister();

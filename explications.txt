@@ -24,3 +24,6 @@ l'infini négatif. On peut ensuite utiliser ces deux variables i et j comme les a
 Mais il faut aussi noter que arbitrairement on a ici : 0/0 = 0 sans aucun message 
 d'avertissement à ce sujet ni aucune interruption de l'exécution. Ceci arrive notamment 
 si on écrit : a = 0/0, ou x = 0*i, ou x = i-i, ou x = i/i.
+
+Le programme Opera ne met rien dans dans le système Windows ni dans la base de registre,
+il n'a pas d'instaleur et il est portable. On peut l'utiliser avec une clef USB.
