@@ -7,9 +7,8 @@ void initra() {       // pour initialiser listera
     return;
 }
 
-void ajouterra(char* name, bigRa& a) {  // pour ajouter un élément
-    elemra* era;                        // dans listera
-    era = (elemra *)malloc(sizeof(elemra));
+void ajouterra(char* name, bigRa& a) {  // pour ajouter un élément validé
+    elemra* era = new elemra;           // en fin de liste dans listera
     era->nom = name;
     era->ra = new bigRa(a);
     era->suiv = listera;
@@ -41,21 +40,26 @@ bool modifierra(char* name, bigRa& a) {  // pour mettre à jour la valeur
     return false;
 }
 
-void archiver(std::string st, bigRa& ra) {  // pour archiver une
-    char* nom = new char[1+st.size()];      // nouvelle variable
+bool archiverra(std::string st, bigRa& ra) {  // pour archiver une nouvelle
+    char* nom = new char[1+st.size()];        // variable dans listera
     strcpy(nom, st.c_str());
     elemra* era = chercherra(nom);
     if(era != NULL) {
         aout("Cette variable existe déjà : ce résultat n'est pas archivé.\n");
-        return;
+        return false;
     }
     ajouterra(nom, ra);
+    return true;
 }
 
-void supprimer(std::string st) {         // pour supprimer
-    char* nom = new char[1+st.size()];   // une variable
+void supprimerra(std::string st) {       // pour supprimer une variable
+    char* nom = new char[1+st.size()];   // dans listera
     strcpy(nom, st.c_str());
-    // erx : le précédent de era
+	if(strcmp(nom, "last") == 0) {
+        std::cout << "c'est impossible." << std::endl;
+        return;
+    }
+    // erx : pointeur sur l'élement précédent de era
     elemra* erx = NULL;
     elemra* era = listera;
     while(era != NULL) { 
@@ -69,11 +73,9 @@ void supprimer(std::string st) {         // pour supprimer
     }
     delete era->nom;
     delete era->ra;
-    if(erx == NULL) {
-        listera = era->suiv;
-        return;
-    }
-    erx->suiv = era->suiv;
+    if(erx == NULL) listera = era->suiv;
+    else erx->suiv = era->suiv;
+    delete era;
 }
 
 void lister() {  // pour lister toutes les variables actuelles

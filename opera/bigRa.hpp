@@ -39,6 +39,7 @@ class bigRa {
     bigRa soustraire(bigRa& x) const;
     bigRa multiplier(bigRa& x) const;
     bigRa diviser(bigRa& x) const;
+    bigRa puissance(int n) const;
 };
 
 bigRa operator + (bigRa& l, bigRa& r);
@@ -52,5 +53,6 @@ Integer entier(bigRa a);
 bigRa pfract(bigRa a);
 int cmpRa(bigRa a, bigRa b);
 bool isEnti(bigRa a);
+bigRa inverser(bigRa a);
 
 #endif // BIGRA_HPP

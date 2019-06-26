@@ -1,6 +1,6 @@
 /*******************************************************************************
 *  Opera : calculs arithmétiques avec des nombres rationnels de grande taille  *
-*  On a ici les 4 opérations de base  -  par : pgl10  -   utilisation : Opera  *              
+*  On a ici les 5 opérations de base  -  par : pgl10  -   utilisation : Opera  *              
 *******************************************************************************/
 
 #include "main.hpp"
@@ -12,9 +12,9 @@ void pause() {
 
 void aide() {
     aout("\nopera : les seules commandes valides sont de type : \n");
-    aout("> a = 123456789 ( nombre entier de longueur et signe quelconques )\n");
-    aout("> b = 123 / 456 ( num et den de longueurs et signes quelconques. )\n");
-    aout("> n = a ? b ( où ? est l'un des opérateurs suivants : +  -  *  / )\n");
+    aout("> a = 1234567890 ( nombre entier de longueur et signe quelconques )\n");
+    aout("> b = 123 / 4567 ( num et den de longueurs et signes quelconques. )\n");
+    aout("> n = a ? b ( où ? est l'un des cinq opérateurs : +  -  *  / ou ^ )\n");
     aout("> a ? b (ou a seulement) (variables ou constantes) pour un calcul.\n");
     aout("> del v : supprimer v | > out sauv.txt | > exec fic.txt | > liste \n");
     aout("> conv r | enti v | aide | > exit : fin de session (var. perdues) \n");
@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
         aout("Pour une aide immédiate entrez : aide\n");
     }
     initra();
-    ajouterra("last", bigRa(0));
+    archiverra("last", bigRa(0));
     for(;;) {
         std::string ligne;
         if(lect == 1) {
@@ -71,7 +71,7 @@ int main(int argc, char *argv[]) {
             continue;
         }
         if(ligne.size() > 3 && ligne.substr(0, 3) == "del") {
-            supprimer(ligne.substr(3));
+            supprimerra(ligne.substr(3));
             continue;
         }
         if(ligne == "liste") {
@@ -149,9 +149,11 @@ int main(int argc, char *argv[]) {
                     if(isname(ligne.c_str())) {
                         bool good = vval(ligne, ra);
                         if(good) {
-                            std::cout << res << " = " << ra << std::endl;
-                            archiver(res, ra);
-                            modifierra("last", ra);
+                            if(archiverra(res, ra)) {
+                                std::cout << res << " = " << ra << std::endl;
+                                modifierra("last", ra);
+                            }
+                            else continue;
                         }
                         else std::cout << "variable inconnue." << std::endl;
                         continue;
@@ -159,9 +161,11 @@ int main(int argc, char *argv[]) {
                     else {
                         bool good = eval(ligne, ra);
                         if(good) {
-                            std::cout << res << " = " << ra << std::endl;
-                            archiver(res, ra);
-                            modifierra("last", ra);
+                            if(archiverra(res, ra)) {
+                                std::cout << res << " = " << ra << std::endl;
+                                modifierra("last", ra);
+                            }
+                            else continue;
                         }
                         else aout("instruction non reconnue.\n");
                         continue;

@@ -1,5 +1,5 @@
          
-Opera est un programme qui permet d'effectuer les 4 opérations arithmétiques de base 
+Opera est un programme qui permet d'effectuer les 5 opérations arithmétiques de base 
 sur les nombres rationnels représentés par des fractions de deux entiers aussi grands 
 que nécessaires. Il a deux modes de fonctionnement : l'exécution d'un fichier de commandes 
 et le mode conversationnel. C'est un programme interactif qui lit, interprète, calcule et 
@@ -29,7 +29,7 @@ dans fichier et les recharger ensuite.
 Une ligne qui commence par : # est une ligne de commentaires. Il n'est pas admis de mettre 
 des commentaires à la fin des instructions.
          
-Les 4 opérateurs : + - * et / signifient : additionner, soustraire, multiplier et diviser.
+Les 5 opérateurs sont : + - * / et ^ : additionner, soustraire, multiplier, diviser et puissance.
          
 Voici une série d'exemples d'instructions de base qui sont reconnues et valides :
 > a = 3/7   pour créer la variable a
@@ -37,6 +37,8 @@ Voici une série d'exemples d'instructions de base qui sont reconnues et valides 
 > c = b*b
 > d = c-6
 > r = a/b
+> x = a^2   calcul de a²
+> y = b^n   la valeur de l'exposant doit être un entier
 > c         pour afficher la valeur actuelle de c
 > 2*c       pour faire ce calcul et afficher le résultat
 > 5-3       résultat : 2
@@ -55,6 +57,10 @@ opposée d'un entier ou d'une variable et qui peut être utilisée seule ou comme o
 une expression arithmétique. 
         
 La division par 0 est possible : i = 1/0 définit l'infini positif et j = -1/0 définit l'infini négatif. 
+
+Dans l'intruction x^n pour calculer x élévé à la puissance n : l'exposant n doit être soit une constante 
+entière soit une variable dont la valeur est un entier positif ou négatif. Il convient d'utiliser pour n 
+une valeur qui ne soit excessive.
         
 En complément des instructions de base ci-dessus expliquées il y a aussi les instructions suivantes :
 > del var         pour supprimer la variable var

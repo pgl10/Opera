@@ -190,6 +190,16 @@ bigRa bigRa::diviser(bigRa& x) const {
   return t;
 }
 
+bigRa bigRa::puissance(int n) const {
+  bigRa t = bigRa(_num, _den), x = bigRa(1);
+  if(n == 0) return x;
+  int m = n;
+  if(n < 0) {t = inverser(t); m=-n;}
+  for(int i=0; i<m; i++) x = x.multiplier(t);
+  x.simplifier();
+  return x;
+}
+
 bigRa operator + (bigRa& l, bigRa& r) {
   bigRa t = l.additionner(r);
   return t;
@@ -262,5 +272,20 @@ bool isEnti(bigRa a) {
     a.simplifier();
     if(a.getDen() == 1) return true;
     return false;
+}
+
+// Inverser un bigRa
+bigRa inverser(bigRa a) {
+    bigRa r;
+	if(a.getNum() < 0) {
+    r.setDen(-a.getNum());
+    r.setNum(-a.getDen());
+    }
+	else {
+    r.setDen(a.getNum());
+    r.setNum(a.getDen());
+    }
+    r.simplifier();
+    return r;
 }
 

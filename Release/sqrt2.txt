@@ -11,6 +11,9 @@ s2 = c1/2
 b2 = 2/s2
 c2 = s2+b2
 s3 = c2/2
+conv s3
+enti s3*100000
+# s3 x 10^5 a 5 chiffres décimaux exacts !
 b3 = 2/s3
 c3 = s3+b3
 s4 = c3/2

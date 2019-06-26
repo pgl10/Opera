@@ -47,6 +47,8 @@ bool eval(std::string ligne, bigRa& r) {
     if(found != std::string::npos) {++nbop; pos=found;}
     found = ligne.find("/");
     if(found != std::string::npos) {++nbop; pos=found;}
+    found = ligne.find("^");
+    if(found != std::string::npos) {++nbop; pos=found;}
     found = ligne.find("-");
     if(found != std::string::npos) {
         pm=found;
@@ -54,6 +56,7 @@ bool eval(std::string ligne, bigRa& r) {
         if(pm > 0 && ligne[pm-1] == '+') bon = false;
         if(pm > 0 && ligne[pm-1] == '*') bon = false;
         if(pm > 0 && ligne[pm-1] == '/') bon = false;
+        if(pm > 0 && ligne[pm-1] == '^') bon = false;
         // bon = true pour l'opérateur - à 2 arguments
         if(bon) {
             ++nbop;
@@ -94,6 +97,14 @@ bool eval(std::string ligne, bigRa& r) {
     if(ligne[pos] == '+') r=r1.additionner(r2);
     if(ligne[pos] == '-') r=r1.soustraire(r2);
     if(ligne[pos] == '*') r=r1.multiplier(r2);
+    if(ligne[pos] == '^') {
+        if(r2.getDen() != 1) {
+            aout("l'exposant doit être un entier.\n");
+            return false;
+		}
+        int n2 = r2.getNum();
+        r=r1.puissance(n2);
+    }
     if(ligne[pos] == '/') r=r1.diviser(r2);
     r.simplifier();
     return true;

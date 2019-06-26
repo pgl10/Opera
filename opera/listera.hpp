@@ -20,11 +20,10 @@ extern elemra* listera;  // archive des bigRa
 // le programme principal : elemra* listera;
 
 void initra();
-void ajouterra(char* name, bigRa& a);
 elemra* chercherra(char* name);
 bool modifierra(char* name, bigRa& a);
-void archiver(std::string st, bigRa& ra);
-void supprimer(std::string st);
+bool archiverra(std::string st, bigRa& ra);
+void supprimerra(std::string st);
 void lister();
 void sauvegarder(std::string filename);
 
