@@ -1,7 +1,7 @@
-# constante d'Euler ( an = 1 / n! )
+# calcul de la constante d'Euler ( an = 1 / n! )
 a0 = 1
-a1 = 1 / 1
-a2 = 1 / 2
+a1 = a0 / 1
+a2 = a1 / 2
 a3 = a2 / 3
 a4 = a3 / 4
 a5 = a4 / 5
@@ -65,5 +65,6 @@ s30 = s29 + a30
 s31 = s30 + a31
 s32 = s31 + a32
 conv s32
-enti s32*1000000000000000000000000000000000000
+d36 = 10^36
+enti s32*d36
 # Ceci montre que s32 a 36 décimales exactes après la virgule.

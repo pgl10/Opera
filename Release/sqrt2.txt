@@ -12,23 +12,27 @@ b2 = 2/s2
 c2 = s2+b2
 s3 = c2/2
 conv s3
-enti s3*100000
-# s3 x 10^5 a 5 chiffres décimaux exacts !
+d5 = 10^5
+enti s3*d5
+# donc la valeur de s3 a 6 chiffres décimaux exacts !
 b3 = 2/s3
 c3 = s3+b3
 s4 = c3/2
 conv s4
-enti s4*100000000000
-# s4 x 10^11 a 12 chiffres décimaux exacts !
+d12 = 10^12
+enti s4*d12
+# donc la valeur de s4 a 12 chiffres décimaux exacts !
 b4 = 2/s4
 c4 = s4+b4
 s5 = c4/2
 conv s5
-enti s5*100000000000000000000000
-# s5 x 10^23 a 24 chiffres décimaux exacts !
+d24 = 10^24
+enti s5*d24
+# donc la valeur de s5 a 24 chiffres décimaux exacts !
 b5 = 2/s5
 c5 = s5+b5
 s6 = c5/2
 conv s6
-enti s6*100000000000000000000000000000000000000000000000
-# s6 x 10^47 a 48 chiffres décimaux exacts !
+d47 = 10^47
+enti s6*d47
+# donc la valeur de s6 a 48 chiffres décimaux exacts !
