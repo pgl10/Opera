@@ -17,9 +17,12 @@ x - i
 x * i
 x / i
 v = 123456789/1234
+f > x
+f < x
 w = f+v
 enti w
 we = last
 wf = w - we
+frac w
 conv w*w
 enti w*w

@@ -72,6 +72,7 @@ En complément des instructions de base ci-dessus expliquées il y a aussi les ins
 > conv x/123      pour convertir et afficher en nombre réel cette expression arithmétique
 > enti vr         pour calculer et afficher la partie entière de la variable vr
 > enti x*100000   pour calculer et afficher la partie entière de cette expression arithmétique
+> frac vr         pour calculer et afficher la partie fractionnaire de vr ou d'une expression
 > num vr          pour calculer et afficher le numérateur de la variable vr ou d'une expression
 > den vr          pour calculer et afficher le dénominateur de la variable vr ou d'une expression
 > liste           pour afficher toutes les variables actuelles
@@ -89,9 +90,8 @@ de chiffres significatifs que l'on veut.
          
 Quand on calcule ou que l'on affiche une variable ou une expression il y a une variable particulière 
 nommée last qui contient une copie du résultat. Il en est de même quand on affiche la valeur entière
-d'une variable ou d'une expression. Exemple : enti var, varpe=last et varpf=var-varpe vont afficher
-la partie entière de la variable var puis l'archiver puis archiver la partie fractionnaire de var.
-Le résultat des instructions num et den est lui aussi disponible dans la variable last.
+d'une variable ou d'une expression avec la commande enti. Et les commandes frac, num et den ont aussi
+la même propriété avec la variable last.
          
 En phase conversationnelle on peut récupérer une instruction du passé récent avec la flèche <haut> 
 du clavier puis l'exécuter identique ou modifiée. Dans certaines circonstances, une instruction 
