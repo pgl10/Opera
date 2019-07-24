@@ -15,9 +15,9 @@ void aide() {
     aout("> a = 1234567890 ( nombre entier de longueur et signe quelconques )\n");
     aout("> b = 123 / 4567 ( num et den de longueurs et signes quelconques. )\n");
     aout("> n = a ? b  ( où ? est un opérateur :  +   -   *   /   ^   >   < )\n");
-    aout("> a ? b (ou a seulement) (variables ou constantes) pour un calcul.\n");
-    aout("> del v : supprimer v | > out sauv.txt | > exec fic.txt | > liste \n");
-    aout("> conv v | enti v | num v | den v | aide | > exit : (var. perdues)\n");
+    aout("> a ? b (ou a seulement) (variables ou constantes) pour un calcul. \n");
+    aout("> del v : supprimer v | > out sauv.txt | > exec fic.txt | > liste |\n");
+    aout("> | > conv v | enti v | frac v | num v | den v | > aide | > exit  |\n");
 }    
 
 int main(int argc, char *argv[]) {
@@ -112,6 +112,20 @@ int main(int argc, char *argv[]) {
             else {
                 std::cout << n << std::endl;
                 modifierra("last", bigRa(n));
+            }
+            continue;
+        }
+        if(ligne.size() > 4 && ligne.substr(0, 4) == "frac") {
+            ligne = ligne.substr(4);
+            Integer n;
+            bool good = nval(ligne, n);
+            if(!good) aout("calcul impossible.\n");
+            else {
+                bigRa x;
+                eval(ligne, x);
+                bigRa r = x - bigRa(n);
+                std::cout << r << std::endl;
+                modifierra("last", r);
             }
             continue;
         }
