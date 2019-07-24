@@ -3,6 +3,8 @@
 #define BIGRA_HPP
 
 #include <iostream>
+#include <sstream> 
+#include <string>
 #include "Integer.h"
 
 class bigRa {
@@ -30,8 +32,9 @@ class bigRa {
     Integer getNum();
     Integer getDen();
 
-    bigRa operator -  () const;
-    bigRa operator =  (bigRa& a);
+    bigRa operator - () const;
+    bigRa operator = (bigRa& a);
+    bigRa operator = (int n);
 
     void simplifier();
 
@@ -46,13 +49,17 @@ bigRa operator + (bigRa& l, bigRa& r);
 bigRa operator - (bigRa& l, bigRa& r);
 bigRa operator * (bigRa& l, bigRa& r);
 bigRa operator / (bigRa& l, bigRa& r);
+bigRa operator ^ (bigRa& l, bigRa& r);
+bigRa operator ^ (bigRa& l, int r);
 
 std::ostream& operator << (std::ostream& ost, bigRa& a);
+std::istream& operator >> (std::istream& ist, bigRa& a);
 
 Integer entier(bigRa a);
 bigRa pfract(bigRa a);
 int cmpRa(bigRa a, bigRa b);
 bool isEnti(bigRa a);
 bigRa inverser(bigRa a);
+double reel(bigRa a);
 
 #endif // BIGRA_HPP

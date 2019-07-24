@@ -124,6 +124,12 @@ bigRa bigRa::operator = (bigRa& a) {
     return *this;
 }
 
+bigRa bigRa::operator = (int n) {
+    _num = n;
+    _den = 1;
+    return *this;
+}
+
 void bigRa::simplifier() {
     if(_num == 0) {
         // simplifier : 0/d  =>  0/1 (c'est à dire : 0)
@@ -220,11 +226,46 @@ bigRa operator / (bigRa& l, bigRa& r) {
   return t;
 }
 
+bigRa operator ^ (bigRa& l, bigRa& r) {
+  bigRa t = l.puissance(entier(r));
+  return t;
+}
+
+bigRa operator ^ (bigRa& l, int r) {
+  bigRa t = l.puissance(r);
+  return t;
+}
+
 std::ostream& operator << (std::ostream& ost, bigRa& a) {
     a.simplifier();
     if(a.getDen() == 1) ost << a.getNum();
     else ost << a.getNum() << "/" << a.getDen();
     return ost;
+}
+
+std::istream& operator >> (std::istream& ist, bigRa& a) {
+    std::string st;
+    ist >> st;
+    std::size_t found;
+    found = st.find('/');
+    if(found == std::string::npos) {
+        std::istringstream iss;
+        iss.str(st);
+        Integer n;
+        iss >> n;
+        a = bigRa(n);
+    }
+    else {
+        std::istringstream issn, issd;
+        issn.str(st.substr(0, found));
+        issd.str(st.substr(found+1));
+        Integer n, d;
+        issn >> n;
+        issd >> d;
+        a = bigRa(n, d);
+    }
+    a.simplifier();
+    return ist;
 }
 
 // Partie entière de a
@@ -286,6 +327,12 @@ bigRa inverser(bigRa a) {
     r.setNum(a.getDen());
     }
     r.simplifier();
+    return r;
+}
+
+// convertir en double un bigRa 
+double reel(bigRa a) {
+    double r = double(a.getNum())/double(a.getDen());
     return r;
 }
 

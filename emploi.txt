@@ -29,16 +29,18 @@ dans fichier et les recharger ensuite.
 Une ligne qui commence par : # est une ligne de commentaires. Il n'est pas admis de mettre 
 des commentaires à la fin des instructions.
          
-Les 5 opérateurs sont : + - * / et ^ : additionner, soustraire, multiplier, diviser et puissance.
+Les opérateurs + - * / ^ > < (additionner, soustraire, multiplier, diviser, puissance et comparer).
          
 Voici une série d'exemples d'instructions de base qui sont reconnues et valides :
 > a = 3/7   pour créer la variable a
 > b = a+2
 > c = b*b
 > d = c-6
-> r = a/b
+> q = a/b
 > x = a^2   calcul de a²
 > y = b^n   la valeur de l'exposant doit être un entier
+> z = a>b   résultat : 1 si a>b, 0 si a=b et -1 si a<b
+> z = a<b   résultat : 1 si a<b, 0 si a=b et -1 si a>b
 > c         pour afficher la valeur actuelle de c
 > 2*c       pour faire ce calcul et afficher le résultat
 > 5-3       résultat : 2
@@ -60,7 +62,7 @@ La division par 0 est possible : i = 1/0 définit l'infini positif et j = -1/0 dé
 
 Dans l'intruction x^n pour calculer x élévé à la puissance n : l'exposant n doit être soit une constante 
 entière soit une variable dont la valeur est un entier positif ou négatif. Il convient d'utiliser pour n 
-une valeur qui ne soit excessive.
+une valeur qui ne soit pas excessive.
         
 En complément des instructions de base ci-dessus expliquées il y a aussi les instructions suivantes :
 > del var         pour supprimer la variable var
@@ -70,6 +72,8 @@ En complément des instructions de base ci-dessus expliquées il y a aussi les ins
 > conv x/123      pour convertir et afficher en nombre réel cette expression arithmétique
 > enti vr         pour calculer et afficher la partie entière de la variable vr
 > enti x*100000   pour calculer et afficher la partie entière de cette expression arithmétique
+> num vr          pour calculer et afficher le numérateur de la variable vr ou d'une expression
+> den vr          pour calculer et afficher le dénominateur de la variable vr ou d'une expression
 > liste           pour afficher toutes les variables actuelles
 > aide            pour afficher un petit rappel de la syntaxe des instructions
 > exit            pour terminer la session
@@ -87,6 +91,7 @@ Quand on calcule ou que l'on affiche une variable ou une expression il y a une v
 nommée last qui contient une copie du résultat. Il en est de même quand on affiche la valeur entière
 d'une variable ou d'une expression. Exemple : enti var, varpe=last et varpf=var-varpe vont afficher
 la partie entière de la variable var puis l'archiver puis archiver la partie fractionnaire de var.
+Le résultat des instructions num et den est lui aussi disponible dans la variable last.
          
 En phase conversationnelle on peut récupérer une instruction du passé récent avec la flèche <haut> 
 du clavier puis l'exécuter identique ou modifiée. Dans certaines circonstances, une instruction 

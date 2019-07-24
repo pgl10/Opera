@@ -49,6 +49,10 @@ bool eval(std::string ligne, bigRa& r) {
     if(found != std::string::npos) {++nbop; pos=found;}
     found = ligne.find("^");
     if(found != std::string::npos) {++nbop; pos=found;}
+    found = ligne.find(">");
+    if(found != std::string::npos) {++nbop; pos=found;}
+    found = ligne.find("<");
+    if(found != std::string::npos) {++nbop; pos=found;}
     found = ligne.find("-");
     if(found != std::string::npos) {
         pm=found;
@@ -57,11 +61,8 @@ bool eval(std::string ligne, bigRa& r) {
         if(pm > 0 && ligne[pm-1] == '*') bon = false;
         if(pm > 0 && ligne[pm-1] == '/') bon = false;
         if(pm > 0 && ligne[pm-1] == '^') bon = false;
-        // bon = true pour l'opérateur - à 2 arguments
-        if(bon) {
-            ++nbop;
-            pos = pm;
-        }
+        // bon = false pour l'opérateur - à un seul argument
+        if(bon) {++nbop; pos = pm;}
     }
     // il faut un seul opérateur : ni au début, ni à la fin
     if(nbop != 1) return false;
@@ -106,6 +107,8 @@ bool eval(std::string ligne, bigRa& r) {
         r=r1.puissance(n2);
     }
     if(ligne[pos] == '/') r=r1.diviser(r2);
+    if(ligne[pos] == '>') r=cmpRa(r1, r2);
+    if(ligne[pos] == '<') r=cmpRa(r2, r1);
     r.simplifier();
     return true;
 }

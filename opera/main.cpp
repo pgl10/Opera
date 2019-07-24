@@ -14,10 +14,10 @@ void aide() {
     aout("\nopera : les seules commandes valides sont de type : \n");
     aout("> a = 1234567890 ( nombre entier de longueur et signe quelconques )\n");
     aout("> b = 123 / 4567 ( num et den de longueurs et signes quelconques. )\n");
-    aout("> n = a ? b ( où ? est l'un des cinq opérateurs : +  -  *  / ou ^ )\n");
+    aout("> n = a ? b  ( où ? est un opérateur :  +   -   *   /   ^   >   < )\n");
     aout("> a ? b (ou a seulement) (variables ou constantes) pour un calcul.\n");
     aout("> del v : supprimer v | > out sauv.txt | > exec fic.txt | > liste \n");
-    aout("> conv r | enti v | aide | > exit : fin de session (var. perdues) \n");
+    aout("> conv v | enti v | num v | den v | aide | > exit : (var. perdues)\n");
 }    
 
 int main(int argc, char *argv[]) {
@@ -106,12 +106,34 @@ int main(int argc, char *argv[]) {
         }
         if(ligne.size() > 4 && ligne.substr(0, 4) == "enti") {
             ligne = ligne.substr(4);
-            Integer r;
-            bool good = nval(ligne, r);
+            Integer n;
+            bool good = nval(ligne, n);
             if(!good) aout("calcul impossible.\n");
             else {
-                std::cout << r << std::endl;
-                modifierra("last", bigRa(r));
+                std::cout << n << std::endl;
+                modifierra("last", bigRa(n));
+            }
+            continue;
+        }
+        if(ligne.size() > 3 && ligne.substr(0, 3) == "num") {
+            ligne = ligne.substr(3);
+            bigRa p;
+            bool good = eval(ligne, p);
+            if(!good) aout("calcul impossible.\n");
+            else {
+                std::cout << p.getNum() << std::endl;
+                modifierra("last", bigRa(p.getNum()));
+            }
+            continue;
+        }
+        if(ligne.size() > 3 && ligne.substr(0, 3) == "den") {
+            ligne = ligne.substr(3);
+            bigRa q;
+            bool good = eval(ligne, q);
+            if(!good) aout("calcul impossible.\n");
+            else {
+                std::cout << q.getDen() << std::endl;
+                modifierra("last", bigRa(q.getDen()));
             }
             continue;
         }
