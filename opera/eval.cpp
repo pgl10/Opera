@@ -61,6 +61,8 @@ bool eval(std::string ligne, bigRa& r) {
         if(pm > 0 && ligne[pm-1] == '*') bon = false;
         if(pm > 0 && ligne[pm-1] == '/') bon = false;
         if(pm > 0 && ligne[pm-1] == '^') bon = false;
+        if(pm > 0 && ligne[pm-1] == '<') bon = false;
+        if(pm > 0 && ligne[pm-1] == '>') bon = false;
         // bon = false pour l'opérateur - à un seul argument
         if(bon) {++nbop; pos = pm;}
     }
