@@ -284,7 +284,9 @@ std::istream& operator >> (std::istream& ist, bigRa& a) {
 // Partie entière de a
 Integer entier(bigRa a) {
     a.simplifier();
-    Integer n = a.getNum()/a.getDen();
+    Integer n, d = a.getDen();
+    if(d == 0) n = 0;
+    else n = a.getNum()/d;
     return n;
 }
 
