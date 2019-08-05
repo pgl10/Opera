@@ -16,7 +16,7 @@ fois le même opérateur dans la même expression, il en résulte les exemples :
 9-3+8-2 = 6+8-2 = 6+6 = 12
 9-3>8-2 = 6>8-2 = 6>6 = 0
 3^3^3 = 27^3 = 19683
-4/9^3/2 = 4/729/2 = (4/729)*2 = 2/729
+4/9^3/2 = 4/729/2 = (4/729)/2 = 2/729
 On peut noter 4/9 élevé à la puissance 3/2 a pour valeur le nombre rationnel 8/27.
 Mais Opera ne permet pas de l'obtenir parce que ^ est prioritaire sur / et que même si on 
 fait x = 4/9  y = 3/2 et x^y ce sera refusé : l'exposant doit être un entier ou un nombre 
