@@ -39,6 +39,7 @@ bool isname(const char* nom) {
 
 // Ce nombre entier est-il valide ?
 bool isnumb(const char* nbr) {
+    if(strlen(nbr) == 0) return false;
     char alfa[11] = "0123456789";
     bool good = false;
     for(unsigned int k=0; k<strlen(nbr); k++) {

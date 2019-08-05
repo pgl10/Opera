@@ -1,9 +1,9 @@
-     
+         
 Opera est un programme qui permet d'effectuer les 5 opérations arithmétiques de base 
-sur des nombres rationnels représentés par des fractions de deux entiers aussi grands 
+sur les nombres rationnels représentés par des fractions de deux entiers aussi grands 
 que nécessaires. Il a deux modes de fonctionnement : l'exécution d'un fichier de commandes 
-et le mode conversationnel. C'est un programme interactif qui lit, interprète, calcule 
-et archive les résultats des instructions écrites selon les règles prévues.
+et le mode conversationnel. C'est un programme interactif qui lit, interprète, calcule et 
+archive les résultats des instructions écrites selon les règles prévues.
      
 Le programme est compilé avec MicroSoft Visual Studio 2012 Express for Windows Desktop 
 en mode Release et configuration Win32(x86) avec l'option /MT : cela ne nécessite aucune 
@@ -25,6 +25,6 @@ Mais il faut aussi noter que arbitrairement on a ici : 0/0 = 0 sans aucun messag
 d'avertissement à ce sujet ni aucune interruption de l'exécution. Ceci arrive notamment 
 si on écrit : a = 0/0, ou x = 0*i, ou x = i-i, ou x = i/i.
      
-Le programme Opera ne met rien dans dans le système Windows ni dans la base de registre,
-il n'a pas d'instaleur et il est portable. On peut l'utiliser avec une clef USB.
+Le programme Opera ne met rien dans le système Windows ni dans la base de registre,
+il n'a pas d'installeur et il est portable. On peut l'utiliser avec une clef USB.
      

@@ -1,0 +1,29 @@
+             
+Les 7 opérateurs binaires à deux opérandes sont :  ^ / * - + < > et ils ont cet ordre de priorités.
+L'opérateur - à un seul opérande permet d'utiliser la valeur opposée de son argument. Les opérations
+sont effectuées suivant l'ordre de priorités des opérateurs et de gauche à droite s'il y a plusieurs
+fois le même opérateur dans la même expression, il en résulte les exemples : 
+2+3*4/5 = 2+3*(4/5) = 2+12/5 = 22/5
+2+3/4*5 = 2+(3/4)*5 = 2+15/4 = 23/4
+2+3-4+5 = 2+(-1)+5 = 1+5 = 6
+2-3+4-5 = (-1)+4-5 = -1+(-1) = -2
+1/2*3/4 = (1/2)*3/4 = (1/2)*(3/4) = 3/8
+1*2/3*4 = 1*(2/3)*4 = (2/3)*4 = 8/3
+9-3^8-2 = 9-6561-2 = -6552-2 = -6554
+9-3/8-2 = 9-(3/8)-2 = (69/8)-2 = 53/8
+9-3*8-2 = 9-24-2 = -15-2 = -17
+9-3-8-2 = 6-8-2 = -2-2 = -4
+9-3+8-2 = 6+8-2 = 6+6 = 12
+9-3>8-2 = 6>8-2 = 6>6 = 0
+3^3^3 = 27^3 = 19683
+4/9^3/2 = 4/729/2 = (4/729)*2 = 2/729
+On peut noter 4/9 élevé à la puissance 3/2 a pour valeur le nombre rationnel 8/27.
+Mais Opera ne permet pas de l'obtenir parce que ^ est prioritaire sur / et que même si on 
+fait x = 4/9  y = 3/2 et x^y ce sera refusé : l'exposant doit être un entier ou un nombre 
+rationnel ayant une valeur entière.
+             
+Le fichier exemples.bat permet de montrer l'exécution des exemples indiqués ci-dessus.
+             
+a--b = a-(-b) = a+b  mais : --v est une commande erronée tout comme : *-v
+a*-b = a*(-b) = -(a*b)  mais : a-*b est une commande erronée évidente.
+             

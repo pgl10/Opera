@@ -1,0 +1,17 @@
+# Voici une liste d'exemples simples
+# pour montrer l'ordre des opérations
+# dans les expressions arithmétiques
+2+3*4/5
+2+3/4*5
+2+3-4+5
+2-3+4-5
+1/2*3/4
+1*2/3*4
+9-3^8-2
+9-3/8-2
+9-3*8-2
+9-3-8-2
+9-3+8-2
+9-3>8-2
+3^3^3
+4/9^3/2

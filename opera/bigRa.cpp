@@ -196,13 +196,26 @@ bigRa bigRa::diviser(bigRa& x) const {
   return t;
 }
 
+// calcul de t^n (n positif ou nul)
+bigRa fnctp(bigRa t, int n) {
+    bigRa r;
+    if(n > 2) {
+        bigRa x = fnctp(t, n/2);
+        if((n&1) == 0) r = x*x;
+        else r = x*x*t;
+    }
+    else if(n == 0) r = bigRa(1);
+    else if(n == 1) r = t;
+    else if(n == 2) r = t*t;
+    return r;
+}
+
 bigRa bigRa::puissance(int n) const {
-  bigRa t = bigRa(_num, _den), x = bigRa(1);
-  if(n == 0) return x;
+  bigRa t = bigRa(_num, _den), x;
   int m = n;
   if(n < 0) {t = inverser(t); m=-n;}
-  for(int i=0; i<m; i++) x = x.multiplier(t);
-  x.simplifier();
+  t.simplifier();
+  x = fnctp(t, m);
   return x;
 }
 

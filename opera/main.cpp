@@ -11,13 +11,11 @@ void pause() {
 }
 
 void aide() {
-    aout("\nopera : les seules commandes valides sont de type : \n");
-    aout("> a = 1234567890 ( nombre entier de longueur et signe quelconques )\n");
-    aout("> b = 123 / 4567 ( num et den de longueurs et signes quelconques. )\n");
-    aout("> n = a ? b  ( où ? est un opérateur :  +   -   *   /   ^   >   < )\n");
-    aout("> a ? b (ou a seulement) (variables ou constantes) pour un calcul. \n");
-    aout("> del v : supprimer v | > out sauv.txt | > exec fic.txt | > liste |\n");
-    aout("> | > conv v | enti v | frac v | num v | den v | > aide | > exit  |\n");
+    aout("\nOpera utilise les 7 opérateurs binaires :  ^  /  *  -  +  <  >   \n");
+    aout("avec cet ordre de priorité et l'opérateur - ayant un seul opérande.\n");
+    aout("Soit : > e ou bien : > v = e où e : entier, variable ou expression.\n");
+    aout("> del v : supprimer v | > out sauv.txt | > exec fic.txt | > conv e \n");
+    aout("> enti e | > frac e | > num e | > den e | > liste | > aide | > exit\n");
 }    
 
 int main(int argc, char *argv[]) {
@@ -101,7 +99,11 @@ int main(int argc, char *argv[]) {
             double r;
             bool good = rval(ligne, r);
             if(!good) aout("conversion impossible.\n");
-            else std::cout << r << std::endl;
+            else {
+                std::cout << r << std::endl;
+                bigRa x;
+                if(eval(ligne, x)) modifierra("last", bigRa(x));
+			}
             continue;
         }
         if(ligne.size() > 4 && ligne.substr(0, 4) == "enti") {

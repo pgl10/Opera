@@ -15,102 +15,103 @@ bool vval(std::string& name, bigRa& r) {
     return true;                  
 }
 
+// Pour obtenir la valeur d'un entier ou d'une variable
+bool cval(std::string str, bigRa& r) {
+    int s = 1;
+    if(str.size() > 0 && str[0] == '-') {
+        s = -1;
+        str = str.substr(1);
+    }
+    if(isnumb(str.c_str())) {
+        Integer n;
+        n = str.c_str();
+        r = bigRa(n);
+        if(s < 0) r.setNum(-r.getNum());
+        return true;
+    }
+    if(vval(str, r)) {
+        if(s < 0) r.setNum(-r.getNum());
+        return true;
+    }
+    return false;    
+}
+
 // Pour calculer la valeur d'une instruction définie
 bool eval(std::string ligne, bigRa& r) {
-    int s = 1;
-    if(ligne[0] == '-') {
-        s = -1;
-        ligne = ligne.substr(1);
-    }
-    if(vval(ligne, r)) {
-        if(s < 0) r.setNum(-r.getNum());
-        return true;
-    }
-    // r = 0 si l'instruction n'est pas reconnue
-    bigRa z;
-    r = z;
-    char* line = new char[1+ligne.size()];
-    strcpy(line, ligne.c_str());
-    if(isnumb(line)) {
-        r = bigRa(line);
-        if(s < 0) r.setNum(-r.getNum());
-        delete [] line;
-        return true;
-    }
-    delete [] line;
-    // nbop : nombre d'opérateurs présents
-    int nbop = 0;
-    std::size_t found, pos, pm;
-    found = ligne.find("+");
-    if(found != std::string::npos) {++nbop; pos=found;}
-    found = ligne.find("*");
-    if(found != std::string::npos) {++nbop; pos=found;}
-    found = ligne.find("/");
-    if(found != std::string::npos) {++nbop; pos=found;}
-    found = ligne.find("^");
-    if(found != std::string::npos) {++nbop; pos=found;}
-    found = ligne.find(">");
-    if(found != std::string::npos) {++nbop; pos=found;}
-    found = ligne.find("<");
-    if(found != std::string::npos) {++nbop; pos=found;}
-    found = ligne.find("-");
+    if(ligne.size() == 0) {r=0; return true;}
+    std::string ops = "^/*-+<>";
+    std::size_t found;
+    found = ops.find(ligne[ligne.size()-1]);
+    // le dernier caractère de ligne ne doit pas être un opérateur
+    if(found != std::string::npos) return false;
+    if(cval(ligne, r)) return true;
+    std::size_t pos=-1, pm;
+    found = ligne.find_last_of("^");
+    if(found != std::string::npos) pos=found;
+    found = ligne.find_last_of("/");
+    if(found != std::string::npos) pos=found;
+    found = ligne.find_last_of("*");
+    if(found != std::string::npos) pos=found;
+    found = ligne.find_last_of("-");
     if(found != std::string::npos) {
         pm=found;
         bool bon = true;
-        if(pm > 0 && ligne[pm-1] == '+') bon = false;
+        if(pm > 0 && ligne[pm-1] == '^') bon = false;
         if(pm > 0 && ligne[pm-1] == '*') bon = false;
         if(pm > 0 && ligne[pm-1] == '/') bon = false;
-        if(pm > 0 && ligne[pm-1] == '^') bon = false;
+        if(pm > 0 && ligne[pm-1] == '+') bon = false;
+        if(pm > 0 && ligne[pm-1] == '-') pm = found-1;
         if(pm > 0 && ligne[pm-1] == '<') bon = false;
         if(pm > 0 && ligne[pm-1] == '>') bon = false;
+        if(pm == 0) bon = false;
+        // bon = true  pour l'opérateur - à deux opérandes
         // bon = false pour l'opérateur - à un seul argument
-        if(bon) {++nbop; pos = pm;}
+        if(bon) pos = pm;
     }
-    // il faut un seul opérateur : ni au début, ni à la fin
-    if(nbop != 1) return false;
+    found = ligne.find_last_of("+");
+    if(found != std::string::npos) pos=found;
+    found = ligne.find_last_of("<");
+    if(found != std::string::npos) pos=found;
+    found = ligne.find_last_of(">");
+    if(found != std::string::npos) pos=found;
+    // s'il n'y a ici aucun opérateur : instruction non reconnue
+    if(pos+1 == 0) return false;
+    // si un opérateur binaire est au début ou à la fin de ligne
+    // l'instruction ne sera pas reconnue
     if(pos==(ligne.size()-1) || pos==0) return false;
     std::string left = ligne.substr(0, pos);
     std::string right = ligne.substr(pos+1);
     // r1 et r2 seront les deux opérandes
     bigRa r1, r2;
-    Integer nleft, nright;
-    if(isnumb(left.c_str())) {
-        nleft = left.c_str();
-        r1.setNum(nleft);
-        r1.setDen(1);
-    }
-    else if(!vval(left, r1)) return false;
-    if(s < 0) r1.setNum(-r1.getNum());
-    int s2 = 1;
-    if(right[0] == '-') {
-        s2 = -1;
-        right = right.substr(1);
-    }
-    bool good = false;
-    if(isnumb(right.c_str())) {
-        nright = right.c_str();
-        r2.setNum(nright);
-        r2.setDen(1);
-        good = true;
-    }
-    else if(vval(right, r2)) good = true;
-    if(s2<0) r2.setNum(-r2.getNum());
-    if(!good) return false;
+    if(!cval(left, r1)) 
+        if(!eval(left, r1)) return false;
+    if(!cval(right, r2)) 
+        if(!eval(right, r2)) return false;
     // calcul final du résultat
-    if(ligne[pos] == '+') r=r1.additionner(r2);
-    if(ligne[pos] == '-') r=r1.soustraire(r2);
-    if(ligne[pos] == '*') r=r1.multiplier(r2);
     if(ligne[pos] == '^') {
         if(r2.getDen() != 1) {
             aout("l'exposant doit être un entier.\n");
             return false;
 		}
-        int n2 = r2.getNum();
+        Integer num = r2.getNum();
+        int n2;
+        if(num > INT_MAX) {
+            aout("l'exposant est limité au maximum admis.\n");
+            n2 = INT_MAX;
+        }
+        else if (num < -INT_MAX) {
+            aout("l'exposant est limité au minimum admis.\n");
+            n2 = -INT_MAX;
+        }
+        else n2 = num;
         r=r1.puissance(n2);
     }
     if(ligne[pos] == '/') r=r1.diviser(r2);
-    if(ligne[pos] == '>') r=cmpRa(r1, r2);
+    if(ligne[pos] == '*') r=r1.multiplier(r2);
+    if(ligne[pos] == '-') r=r1.soustraire(r2);
+    if(ligne[pos] == '+') r=r1.additionner(r2);
     if(ligne[pos] == '<') r=cmpRa(r2, r1);
+    if(ligne[pos] == '>') r=cmpRa(r1, r2);
     r.simplifier();
     return true;
 }
