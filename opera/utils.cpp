@@ -74,6 +74,6 @@ bool isdecim(const char* nbr) {
             }
         if(!good) return false;
     }
-    if(np==0 || np==strlen(nbr)-1) return false;
+    if(np<=0 || np==strlen(nbr)-1) return false;
     return true;
 }
