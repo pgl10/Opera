@@ -26,3 +26,5 @@ wf = w - we
 frac w
 conv w*w
 enti w*w
+p = 2*3.1416
+e = 2.718281828

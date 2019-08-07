@@ -17,7 +17,7 @@ fois le même opérateur dans la même expression, il en résulte les exemples :
 9-3>8-2 = 6>8-2 = 6>6 = 0
 3^3^3 = 27^3 = 19683
 4/9^3/2 = 4/729/2 = (4/729)/2 = 2/729
-On peut noter 4/9 élevé à la puissance 3/2 a pour valeur le nombre rationnel 8/27.
+On peut noter que 4/9 élevé à la puissance 3/2 a pour valeur le nombre rationnel 8/27.
 Mais Opera ne permet pas de l'obtenir parce que ^ est prioritaire sur / et que même si on 
 fait x = 4/9  y = 3/2 et x^y ce sera refusé : l'exposant doit être un entier ou un nombre 
 rationnel ayant une valeur entière.
@@ -26,4 +26,5 @@ Le fichier exemples.bat permet de montrer l'exécution des exemples indiqués ci-d
              
 a--b = a-(-b) = a+b  mais : --v est une commande erronée tout comme : *-v
 a*-b = a*(-b) = -(a*b)  mais : a-*b est une commande erronée évidente.
+3.14 ou 3.0 ou 0.14 sont des nombres décimaux valides mais 3. et .14 ne sont pas valides.
              

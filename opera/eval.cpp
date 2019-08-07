@@ -15,7 +15,22 @@ bool vval(std::string& name, bigRa& r) {
     return true;                  
 }
 
-// Pour obtenir la valeur d'un entier ou d'une variable
+bigRa decimal(std::string str) {
+    std::size_t found;
+    found = str.find('.');
+    std::string sn, sm;
+    sn = str.substr(0, found);
+    sm = str.substr(found+1);
+    Integer n=0, m=0;
+    if(sn.size()>0) n = sn.c_str();
+    if(sm.size()>0) m = sm.c_str();
+    bigRa d = bigRa(10)^sm.size();
+    bigRa r = bigRa(n) + bigRa(m)/d;
+    return r;
+}
+
+// Pour obtenir la valeur d'un entier ou 
+// d'un nombre décimal ou d'une variable
 bool cval(std::string str, bigRa& r) {
     int s = 1;
     if(str.size() > 0 && str[0] == '-') {
@@ -26,6 +41,11 @@ bool cval(std::string str, bigRa& r) {
         Integer n;
         n = str.c_str();
         r = bigRa(n);
+        if(s < 0) r.setNum(-r.getNum());
+        return true;
+    }
+    if(isdecim(str.c_str())) {
+        r = decimal(str);
         if(s < 0) r.setNum(-r.getNum());
         return true;
     }
@@ -96,11 +116,11 @@ bool eval(std::string ligne, bigRa& r) {
         Integer num = r2.getNum();
         int n2;
         if(num > INT_MAX) {
-            aout("l'exposant est limité au maximum admis.\n");
+            aout("l'exposant est modifié : il est mis à la limite maximum admise.\n");
             n2 = INT_MAX;
         }
         else if (num < -INT_MAX) {
-            aout("l'exposant est limité au minimum admis.\n");
+            aout("l'exposant est modifié : il est mis à la limite minimum admise.\n");
             n2 = -INT_MAX;
         }
         else n2 = num;

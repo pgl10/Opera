@@ -36,12 +36,14 @@ sept opérateurs binaires sont : ^ / * - + < > et ils ont cet ordre de priorités.
 d'élever à la puissance, de diviser, de multiplier, de soustraire, d'additionner et de comparer.
 Les deux opérateurs - sont reconnus d'après le contexte où ils sont employés. Quand l'expression
 arithmétique comporte plusieurs fois le même opérateur binaire le calcul est effectué de gauche
-vers la droite. Les opérandes des opérateurs binaires sont soit des entiers soit des variables
+vers la droite. Les opérandes sont soit des entiers soit des nombres décimaux soit des variables 
 contenant un nombre rationnel pouvant être fractionnaire ou entier. Voici quelques exemples 
 commentés d'expressions arithmétiques valides pour Opera :  
+
 > v         pour afficher la valeur actuelle de la variable v
 > 2+3/4     pour afficher la valeur de cette expression arithmétique
 > a = 3/7   pour créer la variable a avec cette fraction
+> p = 3.14  pour créer la variable p avec ce nombre décimal
 > x = a^2   calcul et archivage de a²
 > y = b^n   la valeur de l'exposant doit être un entier ou un rationnel à valeur entière
 > z = a>b   résultat : 1 si a>b, 0 si a=b et -1 si a<b
@@ -51,8 +53,10 @@ commentés d'expressions arithmétiques valides pour Opera :
          
 Opera ne permet pas l'emploi de parenthèses pour préciser ou modifier l'ordre des opérations effectuées.
 Dans l'expression a+b*c on effectue b*c en premier. Si on veut effectuer a+b en premier il faut faire
-d'abord : d = a+b puis faire ensuite d*c. Les fichiers expressions.txt et exemples.bat complètent les
-explications relatives aux expressions arithmétiques valides ou invalides pour Opera.
+d'abord : d = a+b puis faire ensuite d*c. Les nombres décimaux utilisables ont un . et un seul qui
+n'est ni au début ni à la fin : 3.14 ou 3.0 ou 0.14 sont valides mais 3. et .14 sont invalides. Les 
+fichiers expressions.txt et exemples.bat complètent les explications relatives aux expressions 
+arithmétiques valides ou invalides pour Opera.
         
 La division par 0 est possible : i = 1/0 définit l'infini positif et j = -1/0 définit l'infini négatif. 
          
