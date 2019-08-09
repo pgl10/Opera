@@ -13,7 +13,8 @@ void pause() {
 void aide() {
     aout("\nOpera utilise les 7 opérateurs binaires :  ^  /  *  -  +  <  >   \n");
     aout("avec cet ordre de priorité et l'opérateur - ayant un seul opérande.\n");
-    aout("Soit : > e ou bien : > v = e où e : entier, variable ou expression.\n");
+    aout("Les instructions admises sont : > e ou bien : > v = e où e : entier\n");
+    aout(" ou nombre décimal, ou variable, ou expression arithmétique valide.\n");
     aout("> del v : supprimer v | > out sauv.txt | > exec fic.txt | > conv e \n");
     aout("> enti e | > frac e | > num e | > den e | > liste | > aide | > exit\n");
 }    
