@@ -56,6 +56,56 @@ bool cval(std::string str, bigRa& r) {
     return false;    
 }
 
+// Pour calculer le contenu des parenthèses
+bool parentheses(std::string& ligne) {
+    std::string ops = "^/*-+<>";
+    bool pars;
+    do {
+        pars = false;
+        std::size_t found = ligne.find('(');
+        // S'il y a encore des parenthèses dans ligne
+        if(found != std::string::npos) {
+            pars = true;
+            std::string front, back;
+            if(found == 0) front = "";
+            else {
+                front = ligne.substr(0, found);
+                if(ops.find(front[front.size()-1]) == std::string::npos) return false;
+            }
+            std::size_t last = -1;
+            int niv = 0;
+            unsigned int suiv = found + 1;
+            while(suiv < ligne.size()) {
+                if(ligne[suiv] == ')' && niv == 0) {
+                    last = suiv;
+                    break;
+                }
+                if(ligne[suiv] == '(') niv = niv + 1;
+                if(ligne[suiv] == ')') niv = niv - 1;
+                suiv = suiv + 1;
+            }
+            if(last == -1) return false;
+            // ligne[found] = '(' correspond à ligne[last] = ')'
+            if(last == ligne.size()-1) back = "";
+            else {
+                back = ligne.substr(last+1);
+                if(ops.find(back[0]) == std::string::npos) return false;
+            }
+            std::string subligne = ligne.substr(found+1, last-found-1);
+            // S'il faut effectuer le même traitement à subligne 
+            if(subligne.find('(') != std::string::npos) parentheses(subligne);
+            bigRa subval;
+            if(eval(subligne, subval)) {
+                std::stringstream stream;
+                stream << subval;
+                ligne = front + stream.str() + back;        
+            }
+            else return false;
+        }    
+    }while(pars);
+    return true;
+}
+
 // Pour calculer la valeur d'une instruction définie
 bool eval(std::string ligne, bigRa& r) {
     if(ligne.size() == 0) {r=0; return true;}
@@ -64,7 +114,9 @@ bool eval(std::string ligne, bigRa& r) {
     found = ops.find(ligne[ligne.size()-1]);
     // le dernier caractère de ligne ne doit pas être un opérateur
     if(found != std::string::npos) return false;
+    if(!parentheses(ligne)) return false;
     if(cval(ligne, r)) return true;
+    // ligne[pos] est-il un opérateur ayant 2 opérandes ?
     std::size_t pos=-1, pm;
     found = ligne.find_last_of("^");
     if(found != std::string::npos) pos=found;

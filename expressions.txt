@@ -2,7 +2,7 @@
 Les 7 opérateurs binaires à deux opérandes sont :  ^ / * - + < > et ils ont cet ordre de priorités.
 L'opérateur - à un seul opérande permet d'utiliser la valeur opposée de son argument. Les opérations
 sont effectuées suivant l'ordre de priorités des opérateurs et de gauche à droite s'il y a plusieurs
-fois le même opérateur dans la même expression, il en résulte les exemples : 
+fois le même opérateur dans la même expression, voici des exemples n'ayant pas de parenthèses : 
 2+3*4/5 = 2+3*(4/5) = 2+12/5 = 22/5
 2+3/4*5 = 2+(3/4)*5 = 2+15/4 = 23/4
 2+3-4+5 = 2+(-1)+5 = 1+5 = 6
@@ -20,11 +20,16 @@ fois le même opérateur dans la même expression, il en résulte les exemples :
 On peut noter que 4/9 élevé à la puissance 3/2 a pour valeur le nombre rationnel 8/27.
 Mais Opera ne permet pas de l'obtenir parce que ^ est prioritaire sur / et que même si on 
 fait x = 4/9  y = 3/2 et x^y ce sera refusé : l'exposant doit être un entier ou un nombre 
-rationnel ayant une valeur entière.
+rationnel ayant une valeur entière. Et voici des exemples qui utilisent les parenthèses :
+a = 3*(8-2)/2 = 3*6/2 = 3*3 = 9
+b = (1+1+1)*((1/2+3.5)*2-(1+(0+1)))/2 = 9 comme ci-dessus
+r = (a+5)/(n+1) pour effectuer la division après les additions
+g = 3^(3^3) = 3^27 parce que sans les parenthèses : 3^3^3 = 27^3
              
 Le fichier exemples.bat permet de montrer l'exécution des exemples indiqués ci-dessus.
              
 a--b = a-(-b) = a+b  mais : --v est une commande erronée tout comme : *-v
 a*-b = a*(-b) = -(a*b)  mais : a-*b est une commande erronée évidente.
 3.14 ou 3.0 ou 0.14 sont des nombres décimaux valides mais 3. et .14 ne sont pas valides.
+x/(n+1)) est aussi une commande erronée évidente.
              

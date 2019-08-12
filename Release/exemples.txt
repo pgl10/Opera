@@ -1,6 +1,7 @@
 # Voici une liste d'exemples simples
 # pour montrer l'ordre des opérations
 # dans les expressions arithmétiques
+# qui n'ont pas de parenthèses.
 2+3*4/5
 2+3/4*5
 2+3-4+5
@@ -15,3 +16,10 @@
 9-3>8-2
 3^3^3
 4/9^3/2
+# Et voici quelques instructions avec
+# des expressions ayant des parenthèses.
+a = 3*(8-2)/2
+b = (1+1+1)*((1/2+3.5)*2-(1+(0+1)))/2
+n = 10
+r = (a+5)/(n+1)
+g = 3^(3^3)

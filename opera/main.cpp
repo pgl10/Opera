@@ -164,7 +164,7 @@ int main(int argc, char *argv[]) {
                     if(good) {
                         std::cout << ligne << " = " << ra << std::endl;
                         modifierra("last", ra);
-					}
+                    }
                     else std::cout << "variable inconnue." << std::endl;
                     continue;
                 }
@@ -173,7 +173,7 @@ int main(int argc, char *argv[]) {
                     if(good) {
                         std::cout << ligne << " = " << ra << std::endl;
                         modifierra("last", ra);
-					}
+                    }
                     else aout("instruction non reconnue.\n");
                     continue;
                 }
