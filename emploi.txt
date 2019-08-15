@@ -51,7 +51,7 @@ entre parenthèses. Voici des exemples commentés d'expressions arithmétiques vali
 > -5--7       résultat : 2 ( équivalent à : (-5)-(-7) )
 > 1/2*3/4     résultat : 3/8 ( équivalent à : (1/2)*(3/4) )
 > 3*(8-2)/2   résultat : 9 ( 3*6/2 = 3*3 = 9 )
-> (a+5)/(n+1) dans cet exemple la division est la dernière opération effectuée
+> (a+5)/(n+1) dans cet exemple la division est effectuée après les additions
          
 Opera permet l'emploi de parenthèses pour préciser ou modifier l'ordre des opérations effectuées.
 Dans l'instruction x = a+b*c on effectue b*c en premier. Si on veut effectuer a+b en premier il faut 

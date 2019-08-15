@@ -108,7 +108,8 @@ bool parentheses(std::string& ligne) {
 
 // Pour calculer la valeur d'une instruction définie
 bool eval(std::string ligne, bigRa& r) {
-    if(ligne.size() == 0) {r=0; return true;}
+//    if(ligne.size() == 0) {r=0; return true;}
+    if(ligne.size() == 0) return false;
     std::string ops = "^/*-+<>";
     std::size_t found;
     found = ops.find(ligne[ligne.size()-1]);
@@ -117,7 +118,7 @@ bool eval(std::string ligne, bigRa& r) {
     if(!parentheses(ligne)) return false;
     if(cval(ligne, r)) return true;
     // ligne[pos] est-il un opérateur ayant 2 opérandes ?
-    std::size_t pos=-1, pm;
+    std::size_t pos=std::string::npos;
     found = ligne.find_last_of("^");
     if(found != std::string::npos) pos=found;
     found = ligne.find_last_of("/");
@@ -126,16 +127,19 @@ bool eval(std::string ligne, bigRa& r) {
     if(found != std::string::npos) pos=found;
     found = ligne.find_last_of("-");
     if(found != std::string::npos) {
-        pm=found;
+        std::size_t pm=found;
         bool bon = true;
         if(pm > 0 && ligne[pm-1] == '^') bon = false;
         if(pm > 0 && ligne[pm-1] == '*') bon = false;
         if(pm > 0 && ligne[pm-1] == '/') bon = false;
         if(pm > 0 && ligne[pm-1] == '+') bon = false;
-        if(pm > 0 && ligne[pm-1] == '-') pm = found-1;
+        while(pm > 0 && ligne[pm-1] == '-') pm = pm-1;
         if(pm > 0 && ligne[pm-1] == '<') bon = false;
         if(pm > 0 && ligne[pm-1] == '>') bon = false;
-        if(pm == 0) bon = false;
+        if(pm == 0) {
+            ligne = "0" + ligne;
+            pm = pm+1;
+        }
         // bon = true  pour l'opérateur - à deux opérandes
         // bon = false pour l'opérateur - à un seul argument
         if(bon) pos = pm;
@@ -147,7 +151,7 @@ bool eval(std::string ligne, bigRa& r) {
     found = ligne.find_last_of(">");
     if(found != std::string::npos) pos=found;
     // s'il n'y a ici aucun opérateur : instruction non reconnue
-    if(pos+1 == 0) return false;
+    if(pos == std::string::npos) return false;
     // si un opérateur binaire est au début ou à la fin de ligne
     // l'instruction ne sera pas reconnue
     if(pos==(ligne.size()-1) || pos==0) return false;
