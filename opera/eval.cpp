@@ -72,7 +72,7 @@ bool parentheses(std::string& ligne) {
                 front = ligne.substr(0, found);
                 if(ops.find(front[front.size()-1]) == std::string::npos) return false;
             }
-            std::size_t last = -1;
+            std::size_t last = std::string::npos;
             int niv = 0;
             unsigned int suiv = found + 1;
             while(suiv < ligne.size()) {
@@ -84,7 +84,7 @@ bool parentheses(std::string& ligne) {
                 if(ligne[suiv] == ')') niv = niv - 1;
                 suiv = suiv + 1;
             }
-            if(last == -1) return false;
+            if(last == std::string::npos) return false;
             // ligne[found] = '(' correspond à ligne[last] = ')'
             if(last == ligne.size()-1) back = "";
             else {

@@ -1,0 +1,46 @@
+       
+Ce logiciel Opera a très fortement évolué.
+       
+Au début on admettait un seul opérateur à deux opérandes par instruction 
+et maintenant on peut en utiliser autant qu'on veut. Au début on avait 
+quatre opérateurs : + - * / et maintenant on a sept opérateurs. Au début 
+les opérandes admis étaient des entiers ou des variables et maintenant les 
+opérandes admis sont des entiers, des nombres décimaux, des nombres rationnels, 
+des variables ou des expressions arithmétiques valides entre parenthèses.
+               
+Exemple de ce que l'on peut demander maintenant : k = ((1+1)*3-2)^(0.5+3/2) 
+le résultat vaut : k = 4² = 16
+            
+Qui peut le plus peut le moins : les calculs avec les nombres entiers sont
+possibles aussi y compris la division entière avec quotient et reste.
+      
+En résumé, c'est maintenant un logiciel assez complet pour effectuer les
+opérations arithmétiques mathématiquement exactes qui sont formulées
+avec les expressions habituelles simples ou usuelles.
+          
+Pour aller encore plus loin, est-il possible d'utiliser aussi les fonctions
+classiques : abs(), sqrt(), logn(), sin(), etc. ? Non : parce que ce n'est pas 
+compatible avec l'exigence d'avoir un résultat mathématiquement exact, exemple 
+sqrt(2) n'est pas un nombre rationnel : ici on ne peut le calculer et l'archiver 
+qu'en valeur approximative seulement. Il est donc impossible d'admettre ici 
+les fonctions usuelles sauf abs(), la valeur absolue, ce qui est peu utile.
+        
+Il y a aussi une autre extension qui n'est pas admise c'est le calcul formel.
+Exemple : (n+2)² = n² + 2*n + 4 avec en plus le calcul des dérivées et des
+intégrales définies ou indéfinies, etc. J'avoue que je ne prévois pas cela,
+mais je peux citer des logiciels qui peuvent faire cela. Par définition les 
+nombres réels qui sont irrationnels ne peuvent pas être représentés en valeur
+exacte par une fraction. Il faut donc pour cela les identifier par un nom ou
+un symbole, les reconnaître et les traiter avec leurs valeurs exactes connues. 
+En fait, le calcul formel est indispensable pour effectuer de tels calculs 
+numériques : l'image ci-jointe montre ce qu'on obtient avec un logiciel de 
+calcul formel ( Maple ). De plus, on peut alors utiliser aussi les fonctions 
+usuelles, les nombres complexes, etc.
+       
+Donc, même s'il y a mieux, Opera est maintenant un bon outil de calcul.
+Il peut exécuter des fichiers de commandes et archiver les résultats obtenus.
+Son avantage principal est d'effectuer les calculs mathématiquement exacts.
+J'espère qu'il n'a pas de bug mais je n'en sais rien et je ne peux le garantir.
+Ce que je peux dire : sa programmation est intéressante et exigeante. Et pour
+obtenir le niveau actuel d'utilisation il faut s'y prendre à plusieurs fois.
+          
