@@ -85,6 +85,7 @@
     <ClCompile Include="aout.cpp" />
     <ClCompile Include="bigRa.cpp" />
     <ClCompile Include="eval.cpp" />
+    <ClCompile Include="factor.cpp" />
     <ClCompile Include="Integer.cpp" />
     <ClCompile Include="listera.cpp" />
     <ClCompile Include="main.cpp" />

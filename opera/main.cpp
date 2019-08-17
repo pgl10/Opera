@@ -16,6 +16,7 @@ void aide() {
     aout("Les instructions admises sont : > e ou bien : > v = e où e : entier\n");
     aout(" ou nombre décimal, ou variable, ou expression arithmétique valide.\n");
     aout("> del v : supprimer v | > out sauv.txt | > exec fic.txt | > conv e \n");
+    aout("Avec des entiers > pgcd e1,e2 | > ppcm e1,e2 | > prem e | > ndiv e \n");
     aout("> enti e | > frac e | > num e | > den e | > liste | > aide | > exit\n");
 }    
 
@@ -43,7 +44,7 @@ int main(int argc, char *argv[]) {
     }
     initra();
     archiverra("last", bigRa(0));
-    for(;;) {
+        for(;;) {
         std::string ligne;
         if(lect == 1) {
             std::getline(filein, ligne);
@@ -152,6 +153,100 @@ int main(int argc, char *argv[]) {
                 std::cout << q.getDen() << std::endl;
                 modifierra("last", bigRa(q.getDen()));
             }
+            continue;
+        }
+        if(ligne.size() > 4 && ligne.substr(0, 4) == "pgcd") {
+            ligne = ligne.substr(4);
+            std::size_t fv = ligne.find(",");
+            if(fv == std::string::npos || fv==(ligne.size()-1) || fv==0) {
+                aout("instruction non reconnue.\n");
+                continue;
+            }
+            std::string left = ligne.substr(0, fv);
+            std::string right = ligne.substr(fv+1);
+            bigRa r1, r2;
+            if(!(eval(left, r1) && eval(right,r2))) {
+                aout("instruction non reconnue.\n");
+                continue;
+            }
+            if(!(isEnti(r1) && isEnti(r2))) {
+                aout("il faut deux entiers.\n");
+                aout("instruction invalide.\n");
+                continue;
+            }
+            Integer r = gcd(r1.getNum(), r2.getNum());
+            std::cout << r << std::endl;
+            modifierra("last", bigRa(r));
+            continue;
+        }
+        if(ligne.size() > 4 && ligne.substr(0, 4) == "ppcm") {
+            ligne = ligne.substr(4);
+            std::size_t fv = ligne.find(",");
+            if(fv == std::string::npos || fv==(ligne.size()-1) || fv==0) {
+                aout("instruction non reconnue.\n");
+                continue;
+            }
+            std::string left = ligne.substr(0, fv);
+            std::string right = ligne.substr(fv+1);
+            bigRa r1, r2;
+            if(!(eval(left, r1) && eval(right,r2))) {
+                aout("instruction non reconnue.\n");
+                continue;
+            }
+            if(!(isEnti(r1) && isEnti(r2))) {
+                aout("il faut deux entiers.\n");
+                aout("instruction invalide.\n");
+                continue;
+            }
+            Integer i1, i2, n, d, r;
+            i1 = r1.getNum();
+            i2 = r2.getNum();
+            d = gcd(i1, i2);
+            if(d == 0) r = 0;
+            else {
+                n = i1*i2;
+                if(n < 0) n = -n;
+                r = n/d;
+            }
+            std::cout << r << std::endl;
+            modifierra("last", bigRa(r));
+            continue;
+        }
+        if(ligne.size() > 4 && ligne.substr(0, 4) == "prem") {
+            ligne = ligne.substr(4);
+            bigRa x;
+            if(!eval(ligne, x)) {
+                aout("instruction non reconnue.\n");
+                continue;
+            }
+            if(!isEnti(x)) {
+                aout("il faut un entier.\n");
+                aout("instruction invalide.\n");
+                continue;
+            }
+            Integer n = x.getNum();
+            int r = 1;
+            if(!isprime(n)) r = 0;
+            std::cout << r << std::endl;
+            modifierra("last", bigRa(r));
+            continue;
+        }
+        if(ligne.size() > 4 && ligne.substr(0, 4) == "ndiv") {
+            ligne = ligne.substr(4);
+            bigRa x;
+            if(!eval(ligne, x)) {
+                aout("instruction non reconnue.\n");
+                continue;
+            }
+            if(!isEnti(x)) {
+                aout("il faut un entier.\n");
+                aout("instruction invalide.\n");
+                continue;
+            }
+            Integer r = x.getNum();
+            if(!isprime(r)) r = get_factor(r);
+            std::cout << r << std::endl;
+            modifierra("last", bigRa(r));
             continue;
         }
         std::size_t found = ligne.find("=");

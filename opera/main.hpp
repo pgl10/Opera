@@ -10,6 +10,7 @@
 #include "eval.hpp"
 #include "bigRa.hpp"
 #include "utils.hpp"
+#include "factor.hpp"
 #include "listera.hpp"
 
 void aout(std::string s);

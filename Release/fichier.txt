@@ -26,6 +26,27 @@ wf = w - we
 frac w
 conv w*w
 enti w*w
-p = 2*3.1416
+t = 2*3.1416
 e = 2.718281828
 1.1*2.2>121/50
+(8/27)^2<(4/9)^3
+# 6-ième nombre de fermat : 2^64 + 1
+f6 = 2^64 + 1
+ndiv f6
+p1 = last
+prem p1
+p2 = f6/p1
+prem p2
+n = 12040983850797527
+ndiv n
+m = last
+prem m
+p = n/m
+prem p
+yz = 961958186090139713862109
+ndiv yz
+y = last
+z = yz/y
+pgcd 1234, 8765
+ppcm 1234, 8765
+pgcd 50594, 124634

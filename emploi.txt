@@ -77,6 +77,10 @@ En complément des instructions de base ci-dessus expliquées il y a aussi les ins
 > frac vr         pour calculer et afficher la partie fractionnaire de vr ou d'une expression
 > num vr          pour calculer et afficher le numérateur de la variable vr ou d'une expression
 > den vr          pour calculer et afficher le dénominateur de la variable vr ou d'une expression
+> pgcd e1, e2     pour calculer et afficher le pgcd de deux expressions à valeurs entières
+> ppcm e1, e2     pour calculer et afficher le ppcm de deux expressions à valeurs entières
+> prem e          résultat : 1 si l'expression ou le nombre entier e est premier et 0 si non
+> ndiv e          pour calculer et afficher un facteur premier d'une expression à valeur entière
 > liste           pour afficher toutes les variables actuelles
 > aide            pour afficher un petit rappel des instructions utilisables
 > exit            pour terminer la session
@@ -93,6 +97,14 @@ nommée last qui contient une copie du résultat. Il en est de même quand on affic
 d'une variable ou d'une expression avec la commande enti. Et les commandes conv, frac, num et den ont 
 aussi la même propriété avec la variable last. Si a et d sont deux variables ayant pour valeurs deux
 entiers, pour obtenir le quotient faire : enti a/d et q = last et pour le reste : r = a-q*d.
+         
+La commande prem utilise la méthode de Miler et Rabin incluse dans GMP. Et la commande ndiv utilise
+la méthode de l'algorithme rho de John M. Pollard qui est performante pour trouver un petit facteur 
+premier. Cette méthode simple a une durée d'exécution imprévisible : il faut éviter de demander une 
+recherche très difficile : pour information, le 7-ième nombre de Fermat 2^128 + 1 est le produit
+de 2 nombres premiers ayant 17 et 22 chiffres décimaux et sur un PC avec un Intel i7 sa factorisation 
+a duré 43 minutes. En pratique, il est préférable d'éviter de dépasser environ 17 chiffres décimaux 
+pour le plus petit facteur premier à rechercher.
          
 En phase conversationnelle on peut récupérer une instruction du passé récent avec la flèche <haut> 
 du clavier puis l'exécuter identique ou modifiée. Dans certaines circonstances, une instruction 

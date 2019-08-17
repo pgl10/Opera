@@ -9,6 +9,7 @@ bool vval(std::string& name, bigRa& r) {
     char* nom = new char[1+name.size()];
     strcpy(nom, name.c_str());
     elemra* elra = chercherra(nom);
+    delete [] nom;
     if(elra == NULL) return false;
     bigRa* pra = elra->ra;  
     r = *pra;
@@ -96,9 +97,15 @@ bool parentheses(std::string& ligne) {
             if(subligne.find('(') != std::string::npos) parentheses(subligne);
             bigRa subval;
             if(eval(subligne, subval)) {
+                static int num = 0;
+                num = num+1;
                 std::stringstream stream;
-                stream << subval;
-                ligne = front + stream.str() + back;        
+                stream << num;
+                std::string name;
+                // on utilise une nouvelle variable auxiliaire
+                name = "&t" + stream.str();
+                archiverra(name, subval);
+                ligne = front + name + back;
             }
             else return false;
         }    
@@ -108,7 +115,6 @@ bool parentheses(std::string& ligne) {
 
 // Pour calculer la valeur d'une instruction définie
 bool eval(std::string ligne, bigRa& r) {
-//    if(ligne.size() == 0) {r=0; return true;}
     if(ligne.size() == 0) return false;
     std::string ops = "^/*-+<>";
     std::size_t found;

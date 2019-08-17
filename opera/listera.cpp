@@ -83,7 +83,8 @@ void lister() {  // pour lister toutes les variables actuelles
     while(era != NULL) { 
         std::string name = era->nom;
         bigRa* pra = era->ra;
-        std::cout << name << " = " << *pra << std::endl;
+        // sauf last et les variables auxiliaires
+        if(name != "last" && name[0] != '&') std::cout << name << " = " << *pra << std::endl;
         era = era->suiv;
     }
 }
@@ -105,7 +106,8 @@ void sauvegarder(std::string filename) {
     while(era != NULL) { 
         std::string name = era->nom;
         bigRa* pra = era->ra;
-        fileout << name << " = " << *pra << std::endl;
+        // sauf last et les variables auxiliaires
+        if(name != "last" && name[0] != '&') fileout << name << " = " << *pra << std::endl;
         era = era->suiv;
     }
     fileout.close();
