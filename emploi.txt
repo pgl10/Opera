@@ -98,7 +98,7 @@ d'une variable ou d'une expression avec la commande enti. Et les commandes conv,
 aussi la même propriété avec la variable last. Si a et d sont deux variables ayant pour valeurs deux
 entiers, pour obtenir le quotient faire : enti a/d et q = last et pour le reste : r = a-q*d.
          
-La commande prem utilise la méthode de Miler et Rabin incluse dans GMP. Et la commande ndiv utilise
+La commande prem utilise la méthode de Miller et Rabin incluse dans GMP. Et la commande ndiv utilise
 la méthode de l'algorithme rho de John M. Pollard qui est performante pour trouver un petit facteur 
 premier. Cette méthode simple a une durée d'exécution imprévisible : il faut éviter de demander une 
 recherche très difficile : pour information, le 7-ième nombre de Fermat 2^128 + 1 est le produit
