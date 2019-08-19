@@ -8,7 +8,7 @@ void initra() {       // pour initialiser listera
 }
 
 void ajouterra(char* name, bigRa& a) {  // pour ajouter un élément validé
-    elemra* era = new elemra;           // en fin de liste dans listera
+    elemra* era = new elemra;           // au début de liste dans listera
     era->nom = name;
     era->ra = new bigRa(a);
     era->suiv = listera;

@@ -5,14 +5,6 @@ que nécessaires. Il a deux modes de fonctionnement : l'exécution d'un fichier de
 et le mode conversationnel. C'est un programme interactif qui lit, interprète, calcule et 
 archive les résultats des instructions écrites selon les règles prévues et exposées ci-après.
          
-Le mode fichier de commandes est utilisable au début de la session par l'intermédiaire d'un 
-fichier batch qui désigne le fichier des instructions à exécuter. Le mode conversationnel 
-est automatiquement utilisé ensuite jusqu'à la fin de la session. Si on exécute seulement
-le fichier opera.exe on commence directement en phase conversationnelle. L'utilisation d'un
-fichier de commandes pendant la phase conversationnelle est tout à fait possible aussi.
-Les lignes de commentaires commencent par # et tous les caractères y sont acceptés. Les
-commentaires en fin de ligne de commande ne sont pas admis.
-         
 Les nombres rationnels utilisés sont définis par une variable ayant un nom et une valeur. 
 Le nom commence par une lettre et comporte seulement les caractères : lettres et chiffres 
 auxquels on joint le caractère _ pour pouvoir indiquer un nom composé de plusieurs mots. 
@@ -29,6 +21,16 @@ de suite la même variable il faut la supprimer avant chaque nouvel archivage, ma
 en calculer plusieurs versions avec un suffixe servant de numéro d'ordre. Quand la session est 
 terminée les variables encore disponibles sont perdues, mais on peut avant cela les sauvegarder
 dans un fichier et les recharger ensuite.
+         
+Le mode fichier de commandes est utilisable au début de la session par l'intermédiaire d'un 
+fichier batch qui désigne le fichier des instructions à exécuter. Le mode conversationnel 
+est automatiquement utilisé ensuite jusqu'à la fin de la session. Si on exécute seulement
+le fichier opera.exe on commence directement en phase conversationnelle. L'utilisation d'un
+fichier de commandes pendant la phase conversationnelle est tout à fait possible aussi.
+Les lignes de commentaires commencent par # et tous les caractères y sont acceptés. Les
+commentaires en fin de ligne de commande ne sont pas admis. Un fichier de commandes ne peut 
+pas en appeler un autre. Les noms des variables internes au fichier de commandes ne doivent
+pas être en conflit avec les noms des variables actives au moment de l'appel.
          
 Opera reconnaît 7 opérateurs binaires ayant 2 opérandes et un opérateur ayant un seul opérande,
 c'est l'opérateur - qui permet d'utiliser directement la valeur opposée de son argument. Les
@@ -93,10 +95,11 @@ faire par exemples : enti v*1000 ou enti v*1000000 etc. Ce qui permet facilement
 de chiffres significatifs que l'on veut.
          
 Quand on calcule ou que l'on affiche une variable ou une expression il y a une variable particulière 
-nommée last qui contient une copie du résultat. Il en est de même quand on affiche la valeur entière
-d'une variable ou d'une expression avec la commande enti. Et les commandes conv, frac, num et den ont 
-aussi la même propriété avec la variable last. Si a et d sont deux variables ayant pour valeurs deux
-entiers, pour obtenir le quotient faire : enti a/d et q = last et pour le reste : r = a-q*d.
+nommée last qui contient une copie du résultat. Il en est de même quand on affiche la valeur rélle 
+d'une variable ou d'une expression avec la commande conv. Et les commandes enti, frac, num, den, 
+pgcd, ppcm, prem et ndiv ont aussi la même propriété avec la variable last. Si a et d sont deux 
+variables ayant pour valeurs deux entiers, pour obtenir le quotient faire : enti a/d et q = last 
+et pour le reste : r = a-q*d.
          
 La commande prem utilise la méthode de Miller et Rabin incluse dans GMP. Et la commande ndiv utilise
 la méthode de l'algorithme rho de John M. Pollard qui est performante pour trouver un petit facteur 
