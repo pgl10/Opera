@@ -102,7 +102,7 @@ int main(int argc, char *argv[]) {
             bool good = rval(ligne, r);
             if(!good) aout("conversion impossible.\n");
             else {
-                std::cout << r << std::endl;
+                std::cout << std::setprecision(10) << r << std::endl;
                 bigRa x;
                 if(eval(ligne, x)) modifierra("last", bigRa(x));
 			}
