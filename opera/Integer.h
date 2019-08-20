@@ -38,7 +38,7 @@
 #ifndef __GMP_INTEGER_CLASS__
 #define __GMP_INTEGER_CLASS__
 
-#include "gmp.h"		// provides the mpz integer routines
+#include "gmp.h"			// provides the mpz integer routines
 #include <iostream>		// for cin & cout istreams & ostreams
 #include <time.h>		// use time as seed for random numbers
 
@@ -75,16 +75,16 @@ class Integer {
 //
 // Casting	(changing Integer to another type)
 //
-    operator bool(void);	// (bool) i
+    operator bool(void);		// (bool) i
     operator int(void);		// (int)  i
-    operator unsigned int(void);// (unsigned int) i
-    operator float(void);	// (float) i
-    operator double(void);	// (double)i
+    operator unsigned int(void);	// (unsigned int) i
+    operator float(void);		// (float) i
+    operator double(void);		// (double)i
 //
 // Assignments	(Setting Integer equal to something else)
 //
     void operator =(Integer a);		// c = (Integer) a;
-    void operator =(int a);		// c = (int) a;
+    void operator =(int a);			// c = (int) a;
     void operator =(unsigned int a);	// c = (unsigned int) a;
     void operator =(char *a);		// c = a (a string);
     void operator =(const char *a);	// c = "1231231";
@@ -93,20 +93,20 @@ class Integer {
 // Binary (one sided) operators
 //
     Integer operator -(void);		// c = -a;
-    bool operator !(void);		// c = (bool) (!a)
-    void operator +=(Integer a);	// c += a;
+    bool operator !(void);			// c = (bool) (!a)
+    void operator +=(Integer a);		// c += a;
     void operator +=(int a);		// c += a;
     void operator +=(unsigned int a);	// c += a;
-    void operator -=(Integer a);	// c -= a;
+    void operator -=(Integer a);		// c -= a;
     void operator -=(int a);		// c -= a;
     void operator -=(unsigned int a);	// c -= a;
-    void operator *=(Integer a);	// c *= a;
+    void operator *=(Integer a);		// c *= a;
     void operator *=(int a);		// c *= a;
     void operator *=(unsigned int a);	// c *= a;
-    void operator /=(Integer a);	// c /= a;
+    void operator /=(Integer a);		// c /= a;
     void operator /=(int a);		// c /= a;
     void operator /=(unsigned int a);	// c /= a;
-    void operator %=(Integer a);	// c %= a;
+    void operator %=(Integer a);		// c %= a;
     void operator %=(int a);		// c %= a;
     void operator ^=(int a);		// c ^= a;
 // WARNING: No ^ with type (Integer) as exponent
@@ -120,21 +120,21 @@ class Integer {
 // The following operators must be friendly because the are binary
 //
     friend Integer operator +(Integer a, Integer b);	// a + b;
-    friend Integer operator +(Integer a, int b);	// a + b;
-    friend Integer operator +(int a, Integer b);	// a + b;
+    friend Integer operator +(Integer a, int b);		// a + b;
+    friend Integer operator +(int a, Integer b);		// a + b;
     friend Integer operator -(Integer a, Integer b);	// a - b;
-    friend Integer operator -(Integer a, int b);	// a - b;
-    friend Integer operator -(int a, Integer b);	// a - b;
+    friend Integer operator -(Integer a, int b);		// a - b;
+    friend Integer operator -(int a, Integer b);		// a - b;
     friend Integer operator *(Integer a, Integer b);	// a * b;
-    friend Integer operator *(Integer a, int b);	// a * b;
-    friend Integer operator *(int a, Integer b);	// a * b;
+    friend Integer operator *(Integer a, int b);		// a * b;
+    friend Integer operator *(int a, Integer b);		// a * b;
     friend Integer operator /(Integer a, Integer b);	// a / b;
-    friend Integer operator /(Integer a, int b);	// a / b;
-    friend Integer operator /(int a, Integer b);	// a / b;
+    friend Integer operator /(Integer a, int b);		// a / b;
+    friend Integer operator /(int a, Integer b);		// a / b;
     friend Integer operator %(Integer a, Integer b);	// a % b;
-    friend Integer operator %(Integer a, int b);	// a % b;
-    friend Integer operator %(int a, Integer b);	// a % b;
-    friend Integer operator ^(Integer a, int b);	// a ^ b;
+    friend Integer operator %(Integer a, int b);		// a % b;
+    friend Integer operator %(int a, Integer b);		// a % b;
+    friend Integer operator ^(Integer a, int b);		// a ^ b;
     friend Integer operator &(Integer a, Integer b);	// a & b;
     friend Integer operator |(Integer a, Integer b);	// a | b;
 
@@ -144,13 +144,13 @@ class Integer {
     friend bool operator !=(Integer a, Integer b);	// (c != a)?
     friend bool operator !=(Integer a, int b);		// (c != a)?
     friend bool operator !=(int a, Integer b);		// (c != a)?
-    friend bool operator <(Integer a, Integer b);	// (c < a)?
+    friend bool operator <(Integer a, Integer b);		// (c < a)?
     friend bool operator <(Integer a, int b);		// (c < a)?
     friend bool operator <(int a, Integer b);		// (c < a)?
     friend bool operator <=(Integer a, Integer b);	// (c <= a)?
     friend bool operator <=(Integer a, int b);		// (c <= a)?
     friend bool operator <=(int a, Integer b);		// (c <= a)?
-    friend bool operator >(Integer a, Integer b);	// (c > a)?
+    friend bool operator >(Integer a, Integer b);		// (c > a)?
     friend bool operator >(Integer a, int b);		// (c > a)?
     friend bool operator >(int a, Integer b);		// (c > a)?
     friend bool operator >=(Integer a, Integer b);	// (c >= a)?
@@ -165,7 +165,7 @@ class Integer {
 //  private parts.
 //
     friend void		Int2a(Integer i, char *string);
-    friend void	      Int2gmp(Integer i, mpz_t n);
+    friend void		Int2gmp(Integer i, mpz_t n);
     friend Integer	gcd(Integer a, Integer b);
     friend Integer	exgcd(Integer a, Integer b, Integer &c, Integer &d);
     friend Integer	InvModN(Integer a, Integer n);

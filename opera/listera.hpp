@@ -21,7 +21,7 @@ extern elemra* listera;  // archive des bigRa
 
 void initra();
 elemra* chercherra(char* name);
-bool modifierra(char* name, bigRa& a);
+bool modifierra(std::string st, bigRa& ra);
 bool archiverra(std::string st, bigRa& ra);
 void supprimerra(std::string st);
 void lister();

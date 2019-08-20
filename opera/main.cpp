@@ -44,6 +44,7 @@ int main(int argc, char *argv[]) {
     }
     initra();
     archiverra("last", bigRa(0));
+    bool modif = false;
         for(;;) {
         std::string ligne;
         if(lect == 1) {
@@ -95,7 +96,14 @@ int main(int argc, char *argv[]) {
             }
             lect = 1;
             continue;
-        }    
+        }   
+        if(ligne.size() > 5 && ligne.substr(0, 5) == "modif") {
+            ligne = ligne.substr(5);
+            if(ligne == "=oui") modif = true;
+            else if(ligne == "=non") modif = false;
+            else aout("instruction non reconnue.\n");
+            continue;
+        }
         if(ligne.size() > 4 && ligne.substr(0, 4) == "conv") {
             ligne = ligne.substr(4);
             double r;
@@ -283,11 +291,33 @@ int main(int argc, char *argv[]) {
                     if(isname(ligne.c_str())) {
                         bool good = vval(ligne, ra);
                         if(good) {
-                            if(archiverra(res, ra)) {
-                                std::cout << res << " = " << ra << std::endl;
-                                modifierra("last", ra);
+                            if(modif) {
+                                char* nom = new char[1+res.size()];
+                                strcpy(nom, res.c_str());
+                                elemra* era = chercherra(nom);
+                                if(era != NULL) {
+                                    if(modifierra(nom, ra)) {
+                                        std::cout << res << " = " << ra << std::endl;
+                                        modifierra("last", ra);
+                                    }
+                                    else continue;
+                                }
+                                else {
+                                    if(archiverra(res, ra)) {
+                                        std::cout << res << " = " << ra << std::endl;
+                                        modifierra("last", ra);
+                                    }
+                                    else continue;
+                                }
+                                delete [] nom;
                             }
-                            else continue;
+                            else {
+                                if(archiverra(res, ra)) {
+                                    std::cout << res << " = " << ra << std::endl;
+                                    modifierra("last", ra);
+                                }
+                                else continue;
+                            }
                         }
                         else std::cout << "variable inconnue." << std::endl;
                         continue;
@@ -295,11 +325,33 @@ int main(int argc, char *argv[]) {
                     else {
                         bool good = eval(ligne, ra);
                         if(good) {
-                            if(archiverra(res, ra)) {
-                                std::cout << res << " = " << ra << std::endl;
-                                modifierra("last", ra);
+                            if(modif) {
+                                char* nom = new char[1+res.size()];
+                                strcpy(nom, res.c_str());
+                                elemra* era = chercherra(nom);
+                                if(era != NULL) {
+                                    if(modifierra(nom, ra)) {
+                                        std::cout << res << " = " << ra << std::endl;
+                                        modifierra("last", ra);
+                                    }
+                                    else continue;
+                                }
+                                else {
+                                    if(archiverra(res, ra)) {
+                                        std::cout << res << " = " << ra << std::endl;
+                                        modifierra("last", ra);
+                                    }
+                                    else continue;
+                                }
+                                delete [] nom;
                             }
-                            else continue;
+                            else {
+                                if(archiverra(res, ra)) {
+                                    std::cout << res << " = " << ra << std::endl;
+                                    modifierra("last", ra);
+                                }
+                                else continue;
+                            }
                         }
                         else aout("instruction non reconnue.\n");
                         continue;

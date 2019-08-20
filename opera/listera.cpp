@@ -7,15 +7,6 @@ void initra() {       // pour initialiser listera
     return;
 }
 
-void ajouterra(char* name, bigRa& a) {  // pour ajouter un élément validé
-    elemra* era = new elemra;           // au début de liste dans listera
-    era->nom = name;
-    era->ra = new bigRa(a);
-    era->suiv = listera;
-    listera = era;
-    return;
-}
-
 elemra* chercherra(char* name){  // pour chercher un élément 
     elemra* era;                 // de listera par son nom
     era = listera;
@@ -26,29 +17,38 @@ elemra* chercherra(char* name){  // pour chercher un élément
     return NULL;
 }
 
-bool modifierra(char* name, bigRa& a) {  // pour mettre à jour la valeur
-    elemra* era;                         // d'un élement de listera
+bool modifierra(std::string st, bigRa& ra) {  // pour mettre à jour la valeur
+    elemra* era;                              // d'une variable dans listera
     era = listera;
+    char* name = new char[1+st.size()];
+    strcpy(name, st.c_str());
     while(era != NULL) { 
         if(strcmp(era->nom, name) == 0) {
             delete era->ra;
-            era->ra = new bigRa(a);
+            era->ra = new bigRa(ra);
+            delete [] name;
             return true;
         }
         era = era->suiv;
     }
+    delete [] name;
     return false;
 }
 
-bool archiverra(std::string st, bigRa& ra) {  // pour archiver une nouvelle
-    char* nom = new char[1+st.size()];        // variable dans listera
+bool archiverra(std::string st, bigRa& ra) {  // pour archiver une nouvelle variable
+    char* nom = new char[1+st.size()];        // au début de listera
     strcpy(nom, st.c_str());
     elemra* era = chercherra(nom);
     if(era != NULL) {
         aout("Cette variable existe déjà : ce résultat n'est pas archivé.\n");
+        delete [] nom;
         return false;
     }
-    ajouterra(nom, ra);
+    era = new elemra;
+    era->nom = nom;
+    era->ra = new bigRa(ra);
+    era->suiv = listera;
+    listera = era;
     return true;
 }
 
@@ -57,6 +57,7 @@ void supprimerra(std::string st) {       // pour supprimer une variable
     strcpy(nom, st.c_str());
 	if(strcmp(nom, "last") == 0) {
         std::cout << "c'est impossible." << std::endl;
+        delete [] nom;
         return;
     }
     // erx : pointeur sur l'élement précédent de era
@@ -69,6 +70,7 @@ void supprimerra(std::string st) {       // pour supprimer une variable
     }
     if(era == NULL) {
         std::cout << "variable inconnue." << std::endl;
+        delete [] nom;
         return;
     }
     delete era->nom;
@@ -76,6 +78,7 @@ void supprimerra(std::string st) {       // pour supprimer une variable
     if(erx == NULL) listera = era->suiv;
     else erx->suiv = era->suiv;
     delete era;
+    delete [] nom;
 }
 
 void lister() {  // pour lister toutes les variables actuelles
