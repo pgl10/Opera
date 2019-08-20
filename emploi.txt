@@ -22,6 +22,10 @@ en calculer plusieurs versions avec un suffixe servant de numéro d'ordre. Quand 
 terminée les variables encore disponibles sont perdues, mais on peut avant cela les sauvegarder
 dans un fichier et les recharger ensuite.
          
+Contrairement à la phase initiale si on veut quand même pouvoir modifier directement une variable
+sans avoir la nécessité de la supprimer préalablement il faut faire l'instruction : modif = oui
+et l'instruction : modif = non permet de rétablir le fonctionnement initial.
+         
 Le mode fichier de commandes est utilisable au début de la session par l'intermédiaire d'un 
 fichier batch qui désigne le fichier des instructions à exécuter. Le mode conversationnel 
 est automatiquement utilisé ensuite jusqu'à la fin de la session. Si on exécute seulement
