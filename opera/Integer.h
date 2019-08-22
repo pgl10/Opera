@@ -144,13 +144,13 @@ class Integer {
     friend bool operator !=(Integer a, Integer b);    // (c != a)?
     friend bool operator !=(Integer a, int b);        // (c != a)?
     friend bool operator !=(int a, Integer b);        // (c != a)?
-    friend bool operator <(Integer a, Integer b);	     // (c < a)?
+    friend bool operator <(Integer a, Integer b);     // (c < a)?
     friend bool operator <(Integer a, int b);         // (c < a)?
     friend bool operator <(int a, Integer b);         // (c < a)?
     friend bool operator <=(Integer a, Integer b);    // (c <= a)?
     friend bool operator <=(Integer a, int b);        // (c <= a)?
     friend bool operator <=(int a, Integer b);        // (c <= a)?
-    friend bool operator >(Integer a, Integer b);	     // (c > a)?
+    friend bool operator >(Integer a, Integer b);     // (c > a)?
     friend bool operator >(Integer a, int b);         // (c > a)?
     friend bool operator >(int a, Integer b);         // (c > a)?
     friend bool operator >=(Integer a, Integer b);    // (c >= a)?
