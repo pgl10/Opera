@@ -21,10 +21,13 @@ Integer get_prime(Integer n, int a, Integer x) {
 }
 
 Integer get_factor(Integer n) {
-   if (n%2 == 0) return 2; 
-   if (n%3 == 0) return 3; 
-   if (n%5 == 0) return 5; 
-   if (n%7 == 0) return 7;
+   if(n < 0) n = -n;
+   if(n == 0) return 0;
+   if(n == 1) return 1;
+   if(n%2 == 0) return 2; 
+   if(n%3 == 0) return 3; 
+   if(n%5 == 0) return 5; 
+   if(n%7 == 0) return 7;
    // on choisit : f(x) = (x^2) + a 
    // avec a = 1, 3, 5 ou 7 et x0 = 2
    Integer p, x = 2;

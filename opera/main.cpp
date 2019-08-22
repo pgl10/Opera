@@ -112,8 +112,8 @@ int main(int argc, char *argv[]) {
             else {
                 std::cout << std::setprecision(10) << r << std::endl;
                 bigRa x;
-                if(eval(ligne, x)) modifierra("last", bigRa(x));
-			}
+                if(eval(ligne, x)) modifierra("last", x);
+            }
             continue;
         }
         if(ligne.size() > 4 && ligne.substr(0, 4) == "enti") {
@@ -252,6 +252,7 @@ int main(int argc, char *argv[]) {
                 continue;
             }
             Integer r = x.getNum();
+            if(r < 0) r = -r;
             if(!isprime(r)) r = get_factor(r);
             std::cout << r << std::endl;
             modifierra("last", bigRa(r));
