@@ -84,7 +84,7 @@ class Integer {
 // Assignments	(Setting Integer equal to something else)
 //
     void operator =(Integer a);       // c = (Integer) a;
-    void operator =(int a);	           // c = (int) a;
+    void operator =(int a);           // c = (int) a;
     void operator =(unsigned int a);  // c = (unsigned int) a;
     void operator =(char *a);         // c = a (a string);
     void operator =(const char *a);   // c = "1231231";
