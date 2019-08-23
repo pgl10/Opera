@@ -68,4 +68,4 @@ fn = fn*32
 e = e + 1/fn
 conv e
 enti e*10^36
-# Pour n = 32 on a 36 décimales exactes après la virgule.
+# Jusqu'à 1/32! on a 36 décimales exactes.
