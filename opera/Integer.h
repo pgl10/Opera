@@ -38,7 +38,7 @@
 #ifndef __GMP_INTEGER_CLASS__
 #define __GMP_INTEGER_CLASS__
 
-#include "gmp.h"	           // provides the mpz integer routines
+#include "gmp.h"           // provides the mpz integer routines
 #include <iostream>        // for cin & cout istreams & ostreams
 #include <time.h>          // use time as seed for random numbers
 

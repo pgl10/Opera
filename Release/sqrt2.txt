@@ -2,37 +2,21 @@
 # pour approximer sqrt(2) a une convergence quadratique
 # Le nombre de chiffres décimaux exacts double à chaque itération.
 s0 = 2
-b0 = 2/s0
-c0 = s0+b0
-s1 = c0/2
-b1 = 2/s1
-c1 = s1+b1
-s2 = c1/2
-b2 = 2/s2
-c2 = s2+b2
-s3 = c2/2
+s1 = (s0+2/s0)/2
+s2 = (s1+2/s1)/2
+s3 = (s2+2/s2)/2
 conv s3
-d5 = 10^5
-enti s3*d5
-# donc la valeur de s3 a 6 chiffres décimaux exacts !
-b3 = 2/s3
-c3 = s3+b3
-s4 = c3/2
+enti s3*10^5
+# La valeur de s3 a 6 chiffres décimaux exacts !
+s4 = (s3+2/s3)/2
 conv s4
-d12 = 10^12
-enti s4*d12
-# donc la valeur de s4 a 12 chiffres décimaux exacts !
-b4 = 2/s4
-c4 = s4+b4
-s5 = c4/2
+enti s4*10^12
+# La valeur de s4 a 12 chiffres décimaux exacts !
+s5 = (s4+2/s4)/2
 conv s5
-d24 = 10^24
-enti s5*d24
-# donc la valeur de s5 a 24 chiffres décimaux exacts !
-b5 = 2/s5
-c5 = s5+b5
-s6 = c5/2
+enti s5*10^24
+# La valeur de s5 a 24 chiffres décimaux exacts !
+s6 = (s5+2/s5)/2
 conv s6
-d47 = 10^47
-enti s6*d47
-# donc la valeur de s6 a 48 chiffres décimaux exacts !
+enti s6*10^47
+# La valeur de s6 a 48 chiffres décimaux exacts !

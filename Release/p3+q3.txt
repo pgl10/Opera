@@ -8,4 +8,4 @@ q = n/d
 p3 = p^3
 q3 = q^3
 s = p3+q3
-# donc on a bien : p^3 + q^3 = 9
+# Donc on a bien : p^3 + q^3 = 9
