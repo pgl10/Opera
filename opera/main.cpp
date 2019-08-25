@@ -22,11 +22,12 @@ void aide() {
 
 int main(int argc, char *argv[]) {
     aout("\nCalculs arithmétiques avec des nombres rationnels de grande taille\n");
-    std::ifstream filein;
+    // filesin[i] utilisable avec i de 1 à 9
+    std::ifstream filesin[10];
     int lect = 0;
     if(argc == 2) {
-        filein.open(argv[1]);
-        if(!filein.good()) {
+        filesin[1].open(argv[1]);
+        if(!filesin[1].good()) {
             std::cout << "\nLe fichier " << argv[1] << " n'est pas disponible.\n";
             pause();
             return 1;
@@ -44,14 +45,18 @@ int main(int argc, char *argv[]) {
     }
     initra();
     archiverra("last", bigRa(0));
+    std::streamoff back, here=0;
+    std::vector<std::streamoff> ret;
     bool modif = false;
         for(;;) {
         std::string ligne;
-        if(lect == 1) {
-            std::getline(filein, ligne);
-            if(!filein.good()) {
-                lect = 0;
-                filein.close();
+        if(lect > 0) {
+            back = here;
+            here = filesin[lect].tellg();
+            std::getline(filesin[lect], ligne);
+            if(!filesin[lect].good()) {
+                filesin[lect].close();
+                lect = lect - 1;
                 continue;
             }
             else {
@@ -85,18 +90,58 @@ int main(int argc, char *argv[]) {
         }    
         if(ligne.size() > 4 && ligne.substr(0, 4) == "exec") {
             ligne = ligne.substr(4);
-            if(lect != 0) {
-                std::cout << "Un fichier de commandes ne peut pas en utiliser un autre.\n";
+            if(lect == 9) {
+                std::cout << "Le fichier de commandes actuel ne peut pas en utiliser un autre.\n";
                 continue;
             }
-            filein.open(ligne.c_str());
-            if(!filein.good()) {
+            filesin[lect+1].open(ligne.c_str());
+            if(!filesin[lect+1].good()) {
                 std::cout << "Le fichier " << ligne.c_str() << " n'est pas disponible.\n";
                 continue;
             }
-            lect = 1;
+            lect = lect + 1;
             continue;
         }   
+        if(ligne == "silast") {
+            if(lect == 0) continue;
+            elemra* era = chercherra("last");
+            if(cmpRa(*era->ra, bigRa(0)) > 0) continue;
+            filesin[lect].close();
+            lect = lect - 1;
+            continue;
+        }
+        if(ligne == "boucle") {
+            if(lect == 0) continue;
+            // si cette boucle n'est pas déjà notée : on la note
+            if((ret.size() == 0) || (ret.size() != 0 && ret[ret.size()-1] != back)) ret.push_back(back);
+            // si l'instruction précédente est une condition positive : on continue
+            elemra* era = chercherra("last");
+            if(cmpRa(*era->ra, bigRa(0)) > 0) continue;
+            // si non : on efface la note et on va après son retour correspondant
+            else {
+                ret.pop_back();
+                int nret = 1;
+                do {
+                    std::getline(filesin[lect], ligne);
+                    outspaces(ligne);
+                    if(!filesin[lect].good()) {
+                        aout("Le retour est absent : abandon du fichier\n");
+                        filesin[lect].close();
+                        lect = lect - 1;
+                        break;
+                    }
+                    if(ligne == "boucle") nret = nret + 1;
+                    if(ligne == "retour") nret = nret - 1;
+                }while(!(ligne == "retour" && nret == 0));
+                continue;
+            }
+        }
+        if(ligne == "retour") {
+            if(lect == 0) continue;
+            if(ret.size() == 0) continue;
+            filesin[lect].seekg(ret.back());
+            continue;
+        }
         if(ligne.size() > 5 && ligne.substr(0, 5) == "modif") {
             ligne = ligne.substr(5);
             if(ligne == "=oui") modif = true;

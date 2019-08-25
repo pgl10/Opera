@@ -32,9 +32,11 @@ est automatiquement utilisé ensuite jusqu'à la fin de la session. Si on exécute 
 le fichier opera.exe on commence directement en phase conversationnelle. L'utilisation d'un
 fichier de commandes pendant la phase conversationnelle est tout à fait possible aussi.
 Les lignes de commentaires commencent par # et tous les caractères y sont acceptés. Les
-commentaires en fin de ligne de commande ne sont pas admis. Un fichier de commandes ne peut 
-pas en appeler un autre. Les noms des variables internes au fichier de commandes ne doivent
-pas être en conflit avec les noms des variables actives au moment de l'appel.
+commentaires en fin de ligne de commande ne sont pas admis. Un fichier de commandes peut en 
+appeler un autre. Les noms des variables internes au fichier de commandes ne doivent pas être 
+en conflit avec les noms des variables actives au moment de l'appel. Avec les débranchements
+conditionnels et les boucles itératives on peut aussi effectuer de véritables petits programmes 
+de calculs arithmétiques exacts. Le fichier joint fonctions.txt en explique le fonctionnement.
          
 Opera reconnaît 7 opérateurs binaires ayant 2 opérandes et un opérateur ayant un seul opérande,
 c'est l'opérateur - qui permet d'utiliser directement la valeur opposée de son argument. Les

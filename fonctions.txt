@@ -1,0 +1,46 @@
+            
+Opera permet maintenant d'effectuer des petits programmes de calculs numériques mathématiquement exacts.
+Dans sa dernière version, un fichier de commandes peut en appeler un autre jusqu'au 9-ième niveau d'appels. 
+De plus, il est possible de programmer des débranchements conditionnels avec la commande silast et des 
+boucles itératives avec les commandes boucle et retour. 
+            
+En complément, la commande : modif = oui permet d'effectuer la redéfinition des variables sans avoir la 
+nécessité de supprimer chaque variable avant sa modification. Cette commande est une commodité aussi bien 
+en mode fichier de commandes qu'en mode conversationnel : on pourrait éventuellement ne pas l'utiliser.
+            
+La commande silast effectue l'abandon du fichier de commandes si la variable last n'est est pas positive.
+La commande boucle notifie l'instruction qui la précède puis si last est positive continue en séquence
+et si non elle va chercher l'instruction qui suit l'instruction retour qui lui correspond. Et la commande
+retour revient à l'instruction notifiée qui précède la commande boucle qui lui correspond.
+            
+On peut effectuer une boucle imbriquée dans une autre comme le montre l'exemple commenté suivant :
+            
+> modif = oui : pour autoriser les redéfinitions des variables
+> m = 0       : valeur initiale de m
+> m < 3       : valeur finale de m et condition relative à m
+> boucle      : boucle sur m : selon la condition précédente
+> m = m+1     : incrémentation interne de m
+> c = m*m     : boucle sur m : instruction interne
+> n = 0       : valeur initiale de n
+> n < 2       : valeur finale de n et condition relative à n
+> boucle      : boucle sur n : selon la condition précédente
+> n = n+1     : incrémentation interne de n
+> d = n+n     : boucle sur n : instruction interne
+> retour      : boucle sur n : instruction finale
+> a = m       : boucle sur m : instruction interne
+> retour      : boucle sur m : instruction finale
+> t = m*n     : instruction séquentielle de ce fichier
+> x = m       : instruction séquentielle de ce fichier
+> y = n       : instruction séquentielle de ce fichier
+            
+Les fichiers boucles.bat et boucles.txt en montrent le fonctionnement.
+            
+Toutes les variables sont globales. Il n'y a aucun dispositif pour distinguer les variables internes
+du fichier de commandes relativement aux variables externes et de même les variables pouvant être
+des données ou bien des résultats du fichier de commandes en cours ne sont pas spécifiées pour cela.
+Il en résulte la nécessité de veiller à éviter un éventuel conflit de nom entre les variables
+internes au fichier de commandes et les autres variables actives au moment de son appel. 
+Si on autorise la redéfinition des variables, une variable interne peut remplacer une autre variable
+qui est donc perdue dans ce cas. Si on n'autorise pas la redéfinition, une variable externe peut
+empêcher l'exécution correcte du fichier de commandes ayant une variable interne du même nom.
+            
