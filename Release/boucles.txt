@@ -1,0 +1,18 @@
+# Exemple simple de boucles imbriquées
+modif = oui
+m = 0      
+m < 3      
+boucle     
+m = m+1    
+c = m*m    
+n = 0      
+n < 2      
+boucle     
+n = n+1    
+d = n+n    
+retour     
+a = m      
+retour     
+t = m*n    
+x = m      
+y = n      
