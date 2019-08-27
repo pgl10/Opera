@@ -9,6 +9,7 @@ nécessité de supprimer chaque variable avant sa modification. Cette commande est
 en mode fichier de commandes qu'en mode conversationnel : on pourrait éventuellement ne pas l'utiliser.
             
 La commande silast effectue l'abandon du fichier de commandes si la variable last n'est est pas positive.
+On utilise silast particulièrement après la commande ilyatil ou bien après avoir effectué une condition.
 La commande boucle notifie l'instruction qui la précède puis si last est positive continue en séquence
 et si non elle va chercher l'instruction qui suit l'instruction retour qui lui correspond. Et la commande
 retour revient à l'instruction notifiée qui précède la commande boucle qui lui correspond.

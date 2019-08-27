@@ -24,6 +24,7 @@ elemra* chercherra(char* name);
 bool modifierra(std::string st, bigRa& ra);
 bool archiverra(std::string st, bigRa& ra);
 void supprimerra(std::string st);
+bool renommer(std::string& ligne);
 void lister();
 void sauvegarder(std::string filename);
 

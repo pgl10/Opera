@@ -17,10 +17,18 @@ mode de représentation les calculs effectués sont mathématiquement exacts.
          
 Pendant son exécution le programme gère les variables qui sont activées. Il n'est pas possible
 de modifier directement la valeur d'une variable. Si on veut calculer et archiver plusieurs fois 
-de suite la même variable il faut la supprimer avant chaque nouvel archivage, mais on peut aussi 
-en calculer plusieurs versions avec un suffixe servant de numéro d'ordre. Quand la session est 
-terminée les variables encore disponibles sont perdues, mais on peut avant cela les sauvegarder
-dans un fichier et les recharger ensuite.
+de suite la même variable il faut la supprimer avant chaque nouvel archivage. Mais on peut aussi 
+en calculer plusieurs versions avec un suffixe servant de numéro d'ordre ou d'indice : ceci peut
+être effectué en nommant successivement les variables de cette suite, exemple : v1, v2, ... 
+Mais il existe aussi un moyen spécifique pour renommer une variable à l'aide de la valeur actuelle
+entière positive ou nulle d'une autre variable connue, exemple : si n = 5 la variable v[n] est 
+automatiquement renommée v5. Ce moyen de renommer une variable est bien utile dans un fichier de 
+commandes pour lequel on veut utiliser cette variable dans une boucle pour obtenir ensuite une liste 
+de variables qui seront archivées et conservées en tant que résultats pour la suite de la session. 
+Il s'agit en fait d'une convention disponible partout, si m = 3 : 2+[m] est remplacé par 2+3 mais 
+dans ce cas l'utilité de ce moyen n'est pas évidente. Quand la session est terminée les variables 
+encore actives sont perdues, mais on peut avant cela les sauvegarder dans un fichier et les 
+recharger ensuite.
          
 Contrairement à la phase initiale si on veut quand même pouvoir modifier directement une variable
 sans avoir la nécessité de la supprimer préalablement il faut effectuer l'instruction : modif = oui
@@ -32,11 +40,14 @@ est automatiquement utilisé ensuite jusqu'à la fin de la session. Si on exécute 
 le fichier opera.exe on commence directement en phase conversationnelle. L'utilisation d'un
 fichier de commandes pendant la phase conversationnelle est tout à fait possible aussi.
 Les lignes de commentaires commencent par # et tous les caractères y sont acceptés. Les
-commentaires en fin de ligne de commande ne sont pas admis. Un fichier de commandes peut en 
-appeler un autre. Les noms des variables internes au fichier de commandes ne doivent pas être 
-en conflit avec les noms des variables actives au moment de l'appel. Avec les débranchements
-conditionnels et les boucles itératives on peut aussi effectuer de véritables petits programmes 
-de calculs arithmétiques exacts. Le fichier joint fonctions.txt en explique le fonctionnement.
+commentaires en fin de ligne de commande ne sont pas admis. Sauf dans une ligne de commentaires,
+le caractère ' ' dans une instruction n'est pas pris en compte, il est même automatiquement
+supprimé. Un fichier de commandes peut en appeler un autre. Les noms des variables internes 
+au fichier de commandes ne doivent pas être en conflit avec les noms des variables actives au 
+moment de l'appel. Avec les débranchements conditionnels et les boucles itératives on peut aussi 
+effectuer de véritables petits programmes de calculs arithmétiques exacts. Le fichier joint 
+fonctions.txt en explique le fonctionnement. Pour assurer la lecture correcte de la dernière 
+ligne utile d'un fichier commandes il convient de la faire suivre d'une et une seule ligne vide.
          
 Opera reconnaît 7 opérateurs binaires ayant 2 opérandes et un opérateur ayant un seul opérande,
 c'est l'opérateur - qui permet d'utiliser directement la valeur opposée de son argument. Les
@@ -75,6 +86,7 @@ entière soit une variable dont la valeur est un entier positif ou négatif. Il co
 une valeur qui ne soit pas excessive.
         
 En complément des instructions de base ci-dessus expliquées il y a aussi les instructions suivantes :
+> ilyatil v       effectue last=1 si la variable v existe et last=0 si non
 > del var         pour supprimer la variable var
 > out sauv.txt    pour sauvegarder toutes les variables actuelles dans le fichier sauv.txt
 > exec fic.txt    pour exécuter le fichier de commandes fic.txt

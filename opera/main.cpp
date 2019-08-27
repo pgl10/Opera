@@ -15,7 +15,7 @@ void aide() {
     aout("avec cet ordre de priorité et l'opérateur - ayant un seul opérande.\n");
     aout("Les instructions admises sont : > e ou bien : > v = e où e : entier\n");
     aout(" ou nombre décimal, ou variable, ou expression arithmétique valide.\n");
-    aout("> del v : supprimer v | > out sauv.txt | > exec fic.txt | > conv e \n");
+    aout("> ilyatil v | > del v | > out sauv.txt | > exec fic.txt | > conv e \n");
     aout("Avec des entiers > pgcd e1,e2 | > ppcm e1,e2 | > prem e | > ndiv e \n");
     aout("> enti e | > frac e | > num e | > den e | > liste | > aide | > exit\n");
 }    
@@ -70,6 +70,7 @@ int main(int argc, char *argv[]) {
             std::getline(std::cin, ligne);
         }
         outspaces(ligne);
+        if(!renommer(ligne)) continue;
         if(ligne[0] == '#') continue;
         if(ligne == "exit") break;
         if(ligne == "aide") {
@@ -207,6 +208,22 @@ int main(int argc, char *argv[]) {
                 modifierra("last", bigRa(q.getDen()));
             }
             continue;
+        }
+        if(ligne.size() > 7 && ligne.substr(0, 7) == "ilyatil") {
+            ligne = ligne.substr(7);
+             char* nom = new char[1+ligne.size()];
+             strcpy(nom, ligne.c_str());
+             elemra* era = chercherra(nom);
+             delete [] nom;
+             if(era != NULL) {
+                 std::cout << "last = 1" << std::endl;
+                 modifierra("last", bigRa(1));
+             }
+             else {
+                 std::cout << "last = 0" << std::endl;
+                 modifierra("last", bigRa(0));
+             }
+             continue;
         }
         if(ligne.size() > 4 && ligne.substr(0, 4) == "pgcd") {
             ligne = ligne.substr(4);

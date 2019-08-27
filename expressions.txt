@@ -33,4 +33,5 @@ a*-b = a*(-b) = -(a*b)  mais : a-*b est une commande erronée évidente.
 a--b = a-(-b) = a+b  et --v = -(-v) = v mais : +-v ou *-v sont des commandes erronées.
 3.14 ou 3.0 ou 0.14 sont des nombres décimaux valides mais 3. et .14 ne sont pas valides.
 x/(n+1)) ou x/((n+1) sont aussi des commandes erronées évidentes.
+x[1] est une erreur : pour renommer il faut utiliser un nom de variable, 1 n'est pas une variable.
              
