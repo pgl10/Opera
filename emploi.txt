@@ -20,7 +20,7 @@ de modifier directement la valeur d'une variable. Si on veut calculer et archive
 de suite la même variable il faut la supprimer avant chaque nouvel archivage. Mais on peut aussi 
 en calculer plusieurs versions avec un suffixe servant de numéro d'ordre ou d'indice : ceci peut
 être effectué en nommant successivement les variables de cette suite, exemple : v1, v2, ... 
-Mais il existe aussi un moyen spécifique pour renommer une variable à l'aide de la valeur actuelle
+Il existe aussi un moyen spécifique pour renommer une variable à l'aide de la valeur actuelle
 entière positive ou nulle d'une autre variable connue, exemple : si n = 5 la variable v[n] est 
 automatiquement renommée v5. Ce moyen de renommer une variable est bien utile dans un fichier de 
 commandes pour lequel on veut utiliser cette variable dans une boucle pour obtenir ensuite une liste 
@@ -116,7 +116,7 @@ Quand on calcule ou que l'on affiche une variable ou une expression il y a une v
 nommée last qui contient une copie du résultat. Il en est de même quand on affiche la valeur rélle 
 d'une variable ou d'une expression avec la commande conv. Et les commandes enti, frac, num, den, 
 pgcd, ppcm, prem et ndiv ont aussi la même propriété avec la variable last. Si a et d sont deux 
-variables ayant pour valeurs deux entiers, pour obtenir le quotient faire : enti a/d et q = last 
+variables ayant pour valeurs deux entiers, pour obtenir le quotient faire : enti a/d et : q = last 
 et pour le reste : r = a-q*d.
          
 La commande prem utilise la méthode de Miller et Rabin incluse dans GMP. Et la commande ndiv utilise

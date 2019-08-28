@@ -211,19 +211,19 @@ int main(int argc, char *argv[]) {
         }
         if(ligne.size() > 7 && ligne.substr(0, 7) == "ilyatil") {
             ligne = ligne.substr(7);
-             char* nom = new char[1+ligne.size()];
-             strcpy(nom, ligne.c_str());
-             elemra* era = chercherra(nom);
-             delete [] nom;
-             if(era != NULL) {
-                 std::cout << "last = 1" << std::endl;
-                 modifierra("last", bigRa(1));
-             }
-             else {
-                 std::cout << "last = 0" << std::endl;
-                 modifierra("last", bigRa(0));
-             }
-             continue;
+            char* nom = new char[1+ligne.size()];
+            strcpy(nom, ligne.c_str());
+            elemra* era = chercherra(nom);
+            delete [] nom;
+            if(era != NULL) {
+                std::cout << "last = 1" << std::endl;
+                modifierra("last", bigRa(1));
+            }
+            else {
+                std::cout << "last = 0" << std::endl;
+                modifierra("last", bigRa(0));
+            }
+            continue;
         }
         if(ligne.size() > 4 && ligne.substr(0, 4) == "pgcd") {
             ligne = ligne.substr(4);
