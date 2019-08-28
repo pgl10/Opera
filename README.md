@@ -1,7 +1,7 @@
 # Opera
 Rational numbers of any size (as big as needed)<br>
 <br>
-Opera performs the mathematically exact operations to rational numbers of any size. The command files are true small programs.
+Opera performs the mathematically exact operations to rational numbers of any size. The command files are true small programs.<br>
 <br>
 The class bigRa implements a rational number with its numerator and its denominator being integer numbers of any size, as big as needed, using the GMP library working like normal arithmetic created by Paul Herman.<br>
 <br>
