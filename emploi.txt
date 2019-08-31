@@ -99,8 +99,8 @@ En complément des instructions de base ci-dessus expliquées il y a aussi les ins
 > frac vr         pour calculer et afficher la partie fractionnaire de vr ou d'une expression
 > num vr          pour calculer et afficher le numérateur de la variable vr ou d'une expression
 > den vr          pour calculer et afficher le dénominateur de la variable vr ou d'une expression
-> pgcd e1, e2     pour calculer et afficher le pgcd de deux expressions à valeurs entières
-> ppcm e1, e2     pour calculer et afficher le ppcm de deux expressions à valeurs entières
+> pgcd e1,e2      pour calculer et afficher le pgcd de deux expressions à valeurs entières
+> ppcm e1,e2      pour calculer et afficher le ppcm de deux expressions à valeurs entières
 > prem e          résultat : 1 si l'expression ou le nombre entier e est premier et 0 si non
 > ndiv e          pour calculer et afficher un facteur premier d'une expression à valeur entière
 > liste           pour afficher toutes les variables actuelles

@@ -36,5 +36,5 @@ x/(n+1)) ou x/((n+1) sont aussi des commandes erronées évidentes (parenthèses in
 x[1] est une erreur : pour renommer il faut utiliser un nom de variable, 1 n'est pas une variable.
 del = 123 est une erreur : le mot-clé del est reconnu grâce à ' ' mais le nom de variable y est invalide.
 del=123 est admis mais une variable ayant del pour nom n'est pas un excellent choix !
-delta = 1 ou delta=2 sont des intructions valides : le mot-clé del n'est pas présent ici.
+delta = 1 ou delta=2 sont des intructions valides : ici le mot-clé del n'est pas présent.
              

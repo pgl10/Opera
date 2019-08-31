@@ -9,5 +9,6 @@ avec le Block-note Notepad. Pour rétablir cette utilisation habituelle
 il faut ouvrir les fichiers de type .txt avec Wordpad et faire "Enregistrer".
          
 Il est conseillé et parfois nécessaire de faire cela pour les fichiers de commandes.
+L'encodage ANSI des fichiers de commandes est nécessaire pour les lire correctement.
          
          
