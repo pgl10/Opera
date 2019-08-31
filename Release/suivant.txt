@@ -1,0 +1,21 @@
+# Ce fichier de commandes suivant.txt
+# calcule le nombre premier suivant
+# du nombre x entier positif connu.
+ilyatil x
+continue
+frac x
+f = last
+1+(f<0)*(f>0)
+continue
+x > 0
+continue
+modif = oui
+delta = 1
+0 < 1
+boucle
+suivant = x + delta
+prem suivant
+1+(last>0)*(last<0)
+continue
+delta = delta + 1
+retour

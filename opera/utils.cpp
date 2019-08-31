@@ -2,6 +2,23 @@
 
 #include "utils.hpp"
 
+// Pour supprimer les premiers ' ' dans cette instruction
+void espaces(std::string& line) {
+    char lign1[1024];
+    strcpy(lign1, line.c_str());
+    char lign2[1024];
+    bool deb = true;
+    int j = 0;
+    for(unsigned int i=0; i<strlen(lign1); i++) 
+        if(deb && lign1[i] == ' ') continue;
+        else {
+            lign2[j++] = lign1[i];
+            deb = false;
+        }
+    lign2[j] = '\0';
+    line = std::string(lign2);
+}
+
 // Pour supprimer les ' ' dans cette instruction
 void outspaces(std::string& line) {
     char lign1[1024];
@@ -9,10 +26,7 @@ void outspaces(std::string& line) {
     char lign2[1024];
     int j = 0;
     for(unsigned int i=0; i<strlen(lign1); i++) 
-        if(lign1[i] != ' ') {
-            lign2[j] = lign1[i];
-            ++j;
-        }
+        if(lign1[i] != ' ') lign2[j++] = lign1[i];
     lign2[j] = '\0';
     line = std::string(lign2);
 }

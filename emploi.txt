@@ -40,14 +40,15 @@ est automatiquement utilisé ensuite jusqu'à la fin de la session. Si on exécute 
 le fichier opera.exe on commence directement en phase conversationnelle. L'utilisation d'un
 fichier de commandes pendant la phase conversationnelle est tout à fait possible aussi.
 Les lignes de commentaires commencent par # et tous les caractères y sont acceptés. Les
-commentaires en fin de ligne de commande ne sont pas admis. Sauf dans une ligne de commentaires,
-le caractère ' ' dans une instruction n'est pas pris en compte, il est même automatiquement
-supprimé. Un fichier de commandes peut en appeler un autre. Les noms des variables internes 
-au fichier de commandes ne doivent pas être en conflit avec les noms des variables actives au 
-moment de l'appel. Avec les débranchements conditionnels et les boucles itératives on peut aussi 
-effectuer de véritables petits programmes de calculs arithmétiques exacts. Le fichier joint 
-fonctions.txt en explique le fonctionnement. Pour assurer la lecture correcte de la dernière 
-ligne utile d'un fichier commandes il convient de la faire suivre d'une et une seule ligne vide.
+commentaires en fin de ligne de commande ne sont pas admis. Le caractère ' ' est pris en
+compte après les mots-clés du langage : ilyatil, del, out, exec, convrt, nbch, ... mais
+ailleurs il n'est pas pris en compte, il est même automatiquement supprimé. Un fichier de 
+commandes peut en appeler un autre. Les noms des variables internes au fichier de commandes 
+ne doivent pas être en conflit avec les noms des variables actives au moment de l'appel. Avec 
+les débranchements conditionnels et les boucles itératives on peut aussi effectuer de véritables 
+petits programmes de calculs arithmétiques exacts. Le fichier joint fonctions.txt en explique le 
+fonctionnement. Pour assurer la lecture correcte de la dernière ligne utile d'un fichier commandes 
+il convient de la faire suivre d'une et une seule ligne vide.
          
 Opera reconnaît 7 opérateurs binaires ayant 2 opérandes et un opérateur ayant un seul opérande,
 c'est l'opérateur - qui permet d'utiliser directement la valeur opposée de son argument. Les
@@ -86,12 +87,13 @@ entière soit une variable dont la valeur est un entier positif ou négatif. Il co
 une valeur qui ne soit pas excessive.
         
 En complément des instructions de base ci-dessus expliquées il y a aussi les instructions suivantes :
-> ilyatil v       effectue last=1 si la variable v existe et last=0 si non
+> ilyatil v       résultat : 1 si la variable v existe et 0 si non
 > del var         pour supprimer la variable var
 > out sauv.txt    pour sauvegarder toutes les variables actuelles dans le fichier sauv.txt
 > exec fic.txt    pour exécuter le fichier de commandes fic.txt
-> conv vr         pour convertir et afficher en nombre réel la variable vr
-> conv x/123      pour convertir et afficher en nombre réel cette expression arithmétique
+> convrt vr       pour convertir et afficher en nombre réel la variable vr
+> convrt x/123    pour convertir et afficher en nombre réel cette expression arithmétique
+> nbch vr         pour calculer et afficher le nombre de chiffres décimaux de la partie entière de vr
 > enti vr         pour calculer et afficher la partie entière de la variable vr
 > enti x*100000   pour calculer et afficher la partie entière de cette expression arithmétique
 > frac vr         pour calculer et afficher la partie fractionnaire de vr ou d'une expression
@@ -105,7 +107,7 @@ En complément des instructions de base ci-dessus expliquées il y a aussi les ins
 > aide            pour afficher un petit rappel des instructions utilisables
 > exit            pour terminer la session
          
-Avec la commande conv on affiche en forme usuelle un nombre réel qui donne une bonne valeur 
+Avec la commande convrt on affiche en forme usuelle un nombre réel qui donne une bonne valeur 
 approchée d'une variable ou d'une expression arithmétique. Mais si on veut voir un grand nombre 
 de chiffres significatifs exacts obtenus il faut utiliser en complément la commande enti qui calcule 
 et affiche la partie entière d'une variable ou d'une expression arithmétique. Selon les cas on pourra 
@@ -114,9 +116,9 @@ de chiffres significatifs que l'on veut.
          
 Quand on calcule ou que l'on affiche une variable ou une expression il y a une variable particulière 
 nommée last qui contient une copie du résultat. Il en est de même quand on affiche la valeur rélle 
-d'une variable ou d'une expression avec la commande conv. Et les commandes enti, frac, num, den, 
-pgcd, ppcm, prem et ndiv ont aussi la même propriété avec la variable last. Si a et d sont deux 
-variables ayant pour valeurs deux entiers, pour obtenir le quotient faire : enti a/d et : q = last 
+d'une variable ou d'une expression avec la commande convrt. Et les commandes ilyatil, nbch, enti, frac, 
+num, den, pgcd, ppcm, prem et ndiv ont aussi la même propriété avec la variable last. Si a et d sont 
+deux variables ayant pour valeurs deux entiers, pour obtenir le quotient faire : enti a/d et : q = last 
 et pour le reste : r = a-q*d.
          
 La commande prem utilise la méthode de Miller et Rabin incluse dans GMP. Et la commande ndiv utilise

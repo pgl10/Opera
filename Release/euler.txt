@@ -9,6 +9,6 @@ n = n+1
 fn = fn*n
 e = e + 1/fn
 retour
-conv e
+convrt e
 enti e*10^36
 # (1 + 1/1! + 1/2! + 1/3! + ... + 1/32!) : 36 décimales exactes.

@@ -5,18 +5,18 @@ s0 = 2
 s1 = (s0+2/s0)/2
 s2 = (s1+2/s1)/2
 s3 = (s2+2/s2)/2
-conv s3
+convrt s3
 enti s3*10^5
 # La valeur de s3 a 6 chiffres décimaux exacts !
 s4 = (s3+2/s3)/2
-conv s4
+convrt s4
 enti s4*10^12
 # La valeur de s4 a 12 chiffres décimaux exacts !
 s5 = (s4+2/s4)/2
-conv s5
+convrt s5
 enti s5*10^24
 # La valeur de s5 a 24 chiffres décimaux exacts !
 s6 = (s5+2/s5)/2
-conv s6
+convrt s6
 enti s6*10^47
 # La valeur de s6 a 48 chiffres décimaux exacts !

@@ -24,7 +24,7 @@ enti w
 we = last
 wf = w - we
 frac w
-conv w*w
+convrt w*w
 enti w*w
 t = 2*3.1416
 e = 2.718281828

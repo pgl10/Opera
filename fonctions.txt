@@ -1,15 +1,15 @@
             
 Opera permet maintenant d'effectuer des petits programmes de calculs numériques mathématiquement exacts.
 Dans sa dernière version, un fichier de commandes peut en appeler un autre jusqu'au 9-ième niveau d'appels. 
-De plus, il est possible de programmer des débranchements conditionnels avec la commande silast et des 
+De plus, il est possible de programmer des débranchements conditionnels avec la commande continue et des 
 boucles itératives avec les commandes boucle et retour. 
             
 En complément, la commande : modif = oui permet d'effectuer la redéfinition des variables sans avoir la 
 nécessité de supprimer chaque variable avant sa modification. Cette commande est une commodité aussi bien 
 en mode fichier de commandes qu'en mode conversationnel : on pourrait éventuellement ne pas l'utiliser.
             
-La commande silast effectue l'abandon du fichier de commandes si la variable last n'est est pas positive.
-On utilise silast particulièrement après la commande ilyatil ou bien après avoir effectué une condition.
+La commande continue effectue l'abandon du fichier de commandes si la variable last n'est est pas positive.
+On utilise continue particulièrement après la commande ilyatil ou bien après avoir effectué une condition.
 La commande boucle notifie l'instruction qui la précède puis si last est positive continue en séquence
 et si non elle va chercher l'instruction qui suit l'instruction retour qui lui correspond. Et la commande
 retour revient à l'instruction notifiée qui précède la commande boucle qui lui correspond.

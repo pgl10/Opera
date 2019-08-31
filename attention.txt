@@ -3,7 +3,7 @@ Attention
          
 Si vous avez téléchargé à : https://github.com/pgl10/Opera 
 le fichier Opera-master.zip après avoir cliqué sur "Clone or download"
-vous pouvez dézipper l'ensemble des fichiers disponibles mais sous Windows
+vous pouvez dézipper l'ensemble des fichiers disponibles, mais sous Windows
 les nombreux fichiers de type .txt ne sont plus utilisables directement
 avec le Block-note Notepad. Pour rétablir cette utilisation habituelle 
 il faut ouvrir les fichiers de type .txt avec Wordpad et faire "Enregistrer".

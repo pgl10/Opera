@@ -32,6 +32,9 @@ Le fichier exemples.bat permet de montrer l'exécution des exemples indiqués ci-d
 a*-b = a*(-b) = -(a*b)  mais : a-*b est une commande erronée évidente.
 a--b = a-(-b) = a+b  et --v = -(-v) = v mais : +-v ou *-v sont des commandes erronées.
 3.14 ou 3.0 ou 0.14 sont des nombres décimaux valides mais 3. et .14 ne sont pas valides.
-x/(n+1)) ou x/((n+1) sont aussi des commandes erronées évidentes.
+x/(n+1)) ou x/((n+1) sont aussi des commandes erronées évidentes (parenthèses incorrectes).
 x[1] est une erreur : pour renommer il faut utiliser un nom de variable, 1 n'est pas une variable.
+del = 123 est une erreur : le mot-clé del est reconnu grâce à ' ' mais le nom de variable y est invalide.
+del=123 est admis mais une variable ayant del pour nom n'est pas un excellent choix !
+delta = 1 ou delta=2 sont des intructions valides : le mot-clé del n'est pas présent ici.
              

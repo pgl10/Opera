@@ -13,11 +13,11 @@ void pause() {
 void aide() {
     aout("\nOpera utilise les 7 opérateurs binaires :  ^  /  *  -  +  <  >   \n");
     aout("avec cet ordre de priorité et l'opérateur - ayant un seul opérande.\n");
-    aout("Les instructions admises sont : > e ou bien : > v = e où e : entier\n");
+    aout("Les instructions admises sont : > e ou bien : > v = e où e : entier,\n");
     aout(" ou nombre décimal, ou variable, ou expression arithmétique valide.\n");
-    aout("> ilyatil v | > del v | > out sauv.txt | > exec fic.txt | > conv e \n");
-    aout("Avec des entiers > pgcd e1,e2 | > ppcm e1,e2 | > prem e | > ndiv e \n");
-    aout("> enti e | > frac e | > num e | > den e | > liste | > aide | > exit\n");
+    aout("> ilyatil v | > del v | > out sauv.txt | > exec fic.txt | > convrt e \n");
+    aout("> nbch e | > enti e | > frac e | > num e | > den e | > liste | > exit\n");
+    aout("Avec des entiers : > pgcd e1,e2 | > ppcm e1,e2 | > prem e | > ndiv e\n");
 }    
 
 int main(int argc, char *argv[]) {
@@ -69,15 +69,24 @@ int main(int argc, char *argv[]) {
             std::cout << "\n> ";
             std::getline(std::cin, ligne);
         }
+        std::string line = ligne;
+        espaces(line);
         outspaces(ligne);
-        if(!renommer(ligne)) continue;
         if(ligne[0] == '#') continue;
+        // Pour supprimer les variables auxiliaires
+        elemra* emra = listera;
+        while(emra != NULL) { 
+            std::string name = emra->nom;
+            if(name[0] == '&') supprimerra(name);
+            emra = emra->suiv;
+        }
+        if(!renommer(ligne)) continue;
         if(ligne == "exit") break;
         if(ligne == "aide") {
             aide();
             continue;
         }
-        if(ligne.size() > 3 && ligne.substr(0, 3) == "del") {
+        if(line[3] == ' ' && ligne.size() > 3 && ligne.substr(0, 3) == "del") {
             supprimerra(ligne.substr(3));
             continue;
         }
@@ -85,11 +94,11 @@ int main(int argc, char *argv[]) {
             lister();
             continue;
         }
-        if(ligne.size() > 3 && ligne.substr(0, 3) == "out") {
+        if(line[3] == ' ' && ligne.size() > 3 && ligne.substr(0, 3) == "out") {
             sauvegarder(ligne.substr(3));
             continue;
         }    
-        if(ligne.size() > 4 && ligne.substr(0, 4) == "exec") {
+        if(line[4] == ' ' && ligne.size() > 4 && ligne.substr(0, 4) == "exec") {
             ligne = ligne.substr(4);
             if(lect == 9) {
                 std::cout << "Le fichier de commandes actuel ne peut pas en utiliser un autre.\n";
@@ -103,7 +112,7 @@ int main(int argc, char *argv[]) {
             lect = lect + 1;
             continue;
         }   
-        if(ligne == "silast") {
+        if(ligne == "continue") {
             if(lect == 0) continue;
             elemra* era = chercherra("last");
             if(cmpRa(*era->ra, bigRa(0)) > 0) continue;
@@ -143,15 +152,15 @@ int main(int argc, char *argv[]) {
             filesin[lect].seekg(ret.back());
             continue;
         }
-        if(ligne.size() > 5 && ligne.substr(0, 5) == "modif") {
+        if(line[5] == ' ' && ligne.size() > 5 && ligne.substr(0, 5) == "modif") {
             ligne = ligne.substr(5);
             if(ligne == "=oui") modif = true;
             else if(ligne == "=non") modif = false;
             else aout("instruction non reconnue.\n");
             continue;
         }
-        if(ligne.size() > 4 && ligne.substr(0, 4) == "conv") {
-            ligne = ligne.substr(4);
+        if(line[6] == ' ' && ligne.size() > 6 && ligne.substr(0, 6) == "convrt") {
+            ligne = ligne.substr(6);
             double r;
             bool good = rval(ligne, r);
             if(!good) aout("conversion impossible.\n");
@@ -162,7 +171,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(ligne.size() > 4 && ligne.substr(0, 4) == "enti") {
+        if(line[4] == ' ' && ligne.size() > 4 && ligne.substr(0, 4) == "enti") {
             ligne = ligne.substr(4);
             Integer n;
             bool good = nval(ligne, n);
@@ -173,7 +182,21 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(ligne.size() > 4 && ligne.substr(0, 4) == "frac") {
+        if(line[4] == ' ' && ligne.size() > 4 && ligne.substr(0, 4) == "nbch") {
+            ligne = ligne.substr(4);
+            Integer n;
+            bool good = nval(ligne, n);
+            if(!good) aout("calcul impossible.\n");
+            else {
+                std::stringstream ss;
+                ss << n;
+                int r = ss.str().size();
+                std::cout << r << std::endl;
+                modifierra("last", bigRa(r));
+            }
+            continue;
+        }
+        if(line[4] == ' ' && ligne.size() > 4 && ligne.substr(0, 4) == "frac") {
             ligne = ligne.substr(4);
             Integer n;
             bool good = nval(ligne, n);
@@ -187,7 +210,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(ligne.size() > 3 && ligne.substr(0, 3) == "num") {
+        if(line[3] == ' ' && ligne.size() > 3 && ligne.substr(0, 3) == "num") {
             ligne = ligne.substr(3);
             bigRa p;
             bool good = eval(ligne, p);
@@ -198,7 +221,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(ligne.size() > 3 && ligne.substr(0, 3) == "den") {
+        if(line[3] == ' ' && ligne.size() > 3 && ligne.substr(0, 3) == "den") {
             ligne = ligne.substr(3);
             bigRa q;
             bool good = eval(ligne, q);
@@ -209,23 +232,23 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(ligne.size() > 7 && ligne.substr(0, 7) == "ilyatil") {
+        if(line[7] == ' ' && ligne.size() > 7 && ligne.substr(0, 7) == "ilyatil") {
             ligne = ligne.substr(7);
             char* nom = new char[1+ligne.size()];
             strcpy(nom, ligne.c_str());
             elemra* era = chercherra(nom);
             delete [] nom;
             if(era != NULL) {
-                std::cout << "last = 1" << std::endl;
+                std::cout << "1" << std::endl;
                 modifierra("last", bigRa(1));
             }
             else {
-                std::cout << "last = 0" << std::endl;
+                std::cout << "0" << std::endl;
                 modifierra("last", bigRa(0));
             }
             continue;
         }
-        if(ligne.size() > 4 && ligne.substr(0, 4) == "pgcd") {
+        if(line[4] == ' ' && ligne.size() > 4 && ligne.substr(0, 4) == "pgcd") {
             ligne = ligne.substr(4);
             std::size_t fv = ligne.find(",");
             if(fv == std::string::npos || fv==(ligne.size()-1) || fv==0) {
@@ -249,7 +272,7 @@ int main(int argc, char *argv[]) {
             modifierra("last", bigRa(r));
             continue;
         }
-        if(ligne.size() > 4 && ligne.substr(0, 4) == "ppcm") {
+        if(line[4] == ' ' && ligne.size() > 4 && ligne.substr(0, 4) == "ppcm") {
             ligne = ligne.substr(4);
             std::size_t fv = ligne.find(",");
             if(fv == std::string::npos || fv==(ligne.size()-1) || fv==0) {
@@ -282,7 +305,7 @@ int main(int argc, char *argv[]) {
             modifierra("last", bigRa(r));
             continue;
         }
-        if(ligne.size() > 4 && ligne.substr(0, 4) == "prem") {
+        if(line[4] == ' ' && ligne.size() > 4 && ligne.substr(0, 4) == "prem") {
             ligne = ligne.substr(4);
             bigRa x;
             if(!eval(ligne, x)) {
@@ -301,7 +324,7 @@ int main(int argc, char *argv[]) {
             modifierra("last", bigRa(r));
             continue;
         }
-        if(ligne.size() > 4 && ligne.substr(0, 4) == "ndiv") {
+        if(line[4] == ' ' && ligne.size() > 4 && ligne.substr(0, 4) == "ndiv") {
             ligne = ligne.substr(4);
             bigRa x;
             if(!eval(ligne, x)) {
@@ -328,7 +351,8 @@ int main(int argc, char *argv[]) {
                 if(isname(ligne.c_str())) {
                     bool good = vval(ligne, ra);
                     if(good) {
-                        std::cout << ligne << " = " << ra << std::endl;
+//                      std::cout << ligne << " = " << ra << std::endl;
+                        std::cout << ra << std::endl;
                         modifierra("last", ra);
                     }
                     else std::cout << "variable inconnue." << std::endl;
@@ -337,7 +361,8 @@ int main(int argc, char *argv[]) {
                 else {
                     bool good = eval(ligne, ra);
                     if(good) {
-                        std::cout << ligne << " = " << ra << std::endl;
+//                      std::cout << ligne << " = " << ra << std::endl;
+                        std::cout << ra << std::endl;
                         modifierra("last", ra);
                     }
                     else aout("instruction non reconnue.\n");
@@ -360,14 +385,16 @@ int main(int argc, char *argv[]) {
                                 elemra* era = chercherra(nom);
                                 if(era != NULL) {
                                     if(modifierra(nom, ra)) {
-                                        std::cout << res << " = " << ra << std::endl;
+//                                      std::cout << res << " = " << ra << std::endl;
+                                        std::cout << ra << std::endl;
                                         modifierra("last", ra);
                                     }
                                     else continue;
                                 }
                                 else {
                                     if(archiverra(res, ra)) {
-                                        std::cout << res << " = " << ra << std::endl;
+//                                      std::cout << res << " = " << ra << std::endl;
+                                        std::cout << ra << std::endl;
                                         modifierra("last", ra);
                                     }
                                     else continue;
@@ -376,7 +403,8 @@ int main(int argc, char *argv[]) {
                             }
                             else {
                                 if(archiverra(res, ra)) {
-                                    std::cout << res << " = " << ra << std::endl;
+//                                  std::cout << res << " = " << ra << std::endl;
+                                    std::cout << ra << std::endl;
                                     modifierra("last", ra);
                                 }
                                 else continue;
@@ -394,14 +422,16 @@ int main(int argc, char *argv[]) {
                                 elemra* era = chercherra(nom);
                                 if(era != NULL) {
                                     if(modifierra(nom, ra)) {
-                                        std::cout << res << " = " << ra << std::endl;
+//                                      std::cout << res << " = " << ra << std::endl;
+                                        std::cout << ra << std::endl;
                                         modifierra("last", ra);
                                     }
                                     else continue;
                                 }
                                 else {
                                     if(archiverra(res, ra)) {
-                                        std::cout << res << " = " << ra << std::endl;
+//                                      std::cout << res << " = " << ra << std::endl;
+                                        std::cout << ra << std::endl;
                                         modifierra("last", ra);
                                     }
                                     else continue;
@@ -410,7 +440,8 @@ int main(int argc, char *argv[]) {
                             }
                             else {
                                 if(archiverra(res, ra)) {
-                                    std::cout << res << " = " << ra << std::endl;
+//                                  std::cout << res << " = " << ra << std::endl;
+                                    std::cout << ra << std::endl;
                                     modifierra("last", ra);
                                 }
                                 else continue;

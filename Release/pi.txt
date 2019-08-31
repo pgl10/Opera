@@ -10,6 +10,6 @@ n = n-1
 d = (2*n-1)+n^2/d
 retour
 pi = 4/d
-conv pi
+convrt pi
 enti pi*10^15
 # On a 15 décimales exactes avec les 21 premiers dénominateurs.
