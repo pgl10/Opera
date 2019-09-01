@@ -351,7 +351,6 @@ int main(int argc, char *argv[]) {
                 if(isname(ligne.c_str())) {
                     bool good = vval(ligne, ra);
                     if(good) {
-//                      std::cout << ligne << " = " << ra << std::endl;
                         std::cout << ra << std::endl;
                         modifierra("last", ra);
                     }
@@ -361,7 +360,6 @@ int main(int argc, char *argv[]) {
                 else {
                     bool good = eval(ligne, ra);
                     if(good) {
-//                      std::cout << ligne << " = " << ra << std::endl;
                         std::cout << ra << std::endl;
                         modifierra("last", ra);
                     }
@@ -385,7 +383,6 @@ int main(int argc, char *argv[]) {
                                 elemra* era = chercherra(nom);
                                 if(era != NULL) {
                                     if(modifierra(nom, ra)) {
-//                                      std::cout << res << " = " << ra << std::endl;
                                         std::cout << ra << std::endl;
                                         modifierra("last", ra);
                                     }
@@ -393,7 +390,6 @@ int main(int argc, char *argv[]) {
                                 }
                                 else {
                                     if(archiverra(res, ra)) {
-//                                      std::cout << res << " = " << ra << std::endl;
                                         std::cout << ra << std::endl;
                                         modifierra("last", ra);
                                     }
@@ -403,7 +399,6 @@ int main(int argc, char *argv[]) {
                             }
                             else {
                                 if(archiverra(res, ra)) {
-//                                  std::cout << res << " = " << ra << std::endl;
                                     std::cout << ra << std::endl;
                                     modifierra("last", ra);
                                 }
@@ -422,7 +417,6 @@ int main(int argc, char *argv[]) {
                                 elemra* era = chercherra(nom);
                                 if(era != NULL) {
                                     if(modifierra(nom, ra)) {
-//                                      std::cout << res << " = " << ra << std::endl;
                                         std::cout << ra << std::endl;
                                         modifierra("last", ra);
                                     }
@@ -430,7 +424,6 @@ int main(int argc, char *argv[]) {
                                 }
                                 else {
                                     if(archiverra(res, ra)) {
-//                                      std::cout << res << " = " << ra << std::endl;
                                         std::cout << ra << std::endl;
                                         modifierra("last", ra);
                                     }
@@ -440,7 +433,6 @@ int main(int argc, char *argv[]) {
                             }
                             else {
                                 if(archiverra(res, ra)) {
-//                                  std::cout << res << " = " << ra << std::endl;
                                     std::cout << ra << std::endl;
                                     modifierra("last", ra);
                                 }
