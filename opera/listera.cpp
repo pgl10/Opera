@@ -125,7 +125,7 @@ void lister() {  // pour lister toutes les variables actuelles
     }
 }
 
-//Pour sauvegarder toutes les variables actuelles dans un fichier
+// Pour sauvegarder toutes les variables actuelles dans un fichier
 void sauvegarder(std::string filename) {
     std::ifstream filein(filename.c_str(), std::ifstream::in);
     if(filein.good()) {

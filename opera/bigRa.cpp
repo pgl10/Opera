@@ -366,6 +366,7 @@ double ra2d(bigRa x) {
     if(nn<lim && nd<lim) return double(num)/double(den);
     int mn = nn - lim;
     if(mn > nd - lim) mn = nd - lim;
+    if(mn < 0) mn = 0;
     nn = nn - mn;
     nd = nd - mn;
     num = sn.str().substr(0, nn).c_str();
