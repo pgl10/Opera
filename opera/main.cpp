@@ -161,13 +161,12 @@ int main(int argc, char *argv[]) {
         }
         if(line[6] == ' ' && ligne.size() > 6 && ligne.substr(0, 6) == "convrt") {
             ligne = ligne.substr(6);
-            double r;
-            bool good = rval(ligne, r);
+            bigRa x;
+            bool good = eval(ligne, x);
             if(!good) aout("conversion impossible.\n");
             else {
-                std::cout << std::setprecision(10) << r << std::endl;
-                bigRa x;
-                if(eval(ligne, x)) modifierra("last", x);
+                std::cout << std::setprecision(10) << ra2d(x) << std::endl;
+                modifierra("last", x);
             }
             continue;
         }

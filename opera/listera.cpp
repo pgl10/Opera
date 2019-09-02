@@ -148,3 +148,25 @@ void sauvegarder(std::string filename) {
     }
     fileout.close();
 }
+
+// Pour convertir un bigRa en double
+double ra2d(bigRa& x) {
+    int lim = 64;
+    Integer num = x.getNum();
+    Integer den = x.getDen();
+    std::stringstream sn;
+    sn << num;
+    std::stringstream sd;
+    sd << den;
+    int nn = sn.str().size();
+    int nd = sd.str().size();
+    if(nn<lim && nd<lim) return double(num)/double(den);
+    int mn = nn - lim;
+    if(mn > nd - lim) mn = nd - lim;
+    nn = nn - mn;
+    nd = nd - mn;
+    num = sn.str().substr(0, nn).c_str();
+    den = sd.str().substr(0, nd).c_str();
+    return double(num)/double(den);
+}
+
