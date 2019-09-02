@@ -345,9 +345,50 @@ bigRa inverser(bigRa a) {
     return r;
 }
 
-// convertir en double un bigRa 
+// Pour convertir en double un bigRa ayant son numérateur 
+// et son dénominateur plus petits que 10^308
 double reel(bigRa a) {
     double r = double(a.getNum())/double(a.getDen());
     return r;
 }
 
+// Pour convertir un bigRa en double
+double ra2d(bigRa x) {
+    int lim = 64;
+    Integer num = x.getNum();
+    Integer den = x.getDen();
+    std::stringstream sn;
+    sn << num;
+    std::stringstream sd;
+    sd << den;
+    int nn = sn.str().size();
+    int nd = sd.str().size();
+    if(nn<lim && nd<lim) return double(num)/double(den);
+    int mn = nn - lim;
+    if(mn > nd - lim) mn = nd - lim;
+    nn = nn - mn;
+    nd = nd - mn;
+    num = sn.str().substr(0, nn).c_str();
+    den = sd.str().substr(0, nd).c_str();
+    return double(num)/double(den);
+}
+
+// Pour calculer en double une approximation r 
+// de la n-ième racine de x telle que : |x-r^n| < r/10^k
+double root(bigRa x, int n, int k) {
+    double a = ra2d(x);
+    if(a < 0) return 0.0;
+    if(n < 2) return 0.0;
+    if(k < 1) return 0.0;
+    double dk = 1.0;
+    for(int i=0; i<k; i++) dk=dk*10.0;
+    double n1 = n-1, r = 1.0, rn = 1.0, dif;
+    do {
+        double rn1 = rn/r;
+        r = (n1*r+a/rn1)/double(n);
+        rn = 1.0;
+        for(int i=0; i<n; i++) rn=rn*r;
+        dif = abs(a - rn);
+    }while(dif > r/dk);
+    return r;
+}

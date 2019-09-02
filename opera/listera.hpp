@@ -27,6 +27,5 @@ void supprimerra(std::string st);
 bool renommer(std::string& ligne);
 void lister();
 void sauvegarder(std::string filename);
-double ra2d(bigRa& x);
 
 #endif // LISTERA_HPP

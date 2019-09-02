@@ -61,5 +61,7 @@ int cmpRa(bigRa a, bigRa b);
 bool isEnti(bigRa a);
 bigRa inverser(bigRa a);
 double reel(bigRa a);
+double ra2d(bigRa x);
+double root(bigRa x, int n, int k);
 
 #endif // BIGRA_HPP
