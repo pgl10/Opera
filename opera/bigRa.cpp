@@ -354,7 +354,7 @@ double reel(bigRa a) {
 
 // Pour convertir un bigRa en double
 double ra2d(bigRa x) {
-    int lim = 64;
+    int lim = 32;
     Integer num = x.getNum();
     Integer den = x.getDen();
     std::stringstream sn;
@@ -378,7 +378,7 @@ double ra2d(bigRa x) {
 // de la n-ième racine de x telle que : |x-r^n| < x/10^k
 double root(bigRa x, int n, int k) {
     double a = ra2d(x);
-    if(a < 0) return 0.0;
+    if(a <= 0.0) return 0.0;
     if(n < 2) return 0.0;
     if(k < 1) return 0.0;
     double dk = 1.0;
