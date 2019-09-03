@@ -375,7 +375,7 @@ double ra2d(bigRa x) {
 }
 
 // Pour calculer en double une approximation r 
-// de la n-ième racine de x telle que : |x-r^n| < r/10^k
+// de la n-ième racine de x telle que : |x-r^n| < x/10^k
 double root(bigRa x, int n, int k) {
     double a = ra2d(x);
     if(a < 0) return 0.0;
@@ -390,6 +390,6 @@ double root(bigRa x, int n, int k) {
         rn = 1.0;
         for(int i=0; i<n; i++) rn=rn*r;
         dif = abs(a - rn);
-    }while(dif > r/dk);
+    }while(dif > a/dk);
     return r;
 }
