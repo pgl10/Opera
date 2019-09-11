@@ -2,7 +2,7 @@
 
 #include "utils.hpp"
 
-// Pour supprimer les premiers ' ' dans cette instruction
+// Pour supprimer les ' ' au début de cette instruction
 void espaces(std::string& line) {
     char lign1[1024];
     strcpy(lign1, line.c_str());
@@ -42,7 +42,7 @@ bool isname(const char* nom) {
     if(!good) return false;
     for(unsigned int k=0; k<strlen(nom); k++) {
         good = false;
-        for(unsigned int i=0; i<64; i++) if(nom[k] == alfa[i]) {
+        for(unsigned int i=0; i<63; i++) if(nom[k] == alfa[i]) {
             good = true;
             break;
         }
