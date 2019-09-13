@@ -27,8 +27,8 @@ boucle
 n
 delta
 suivant
-last = 0
-continue
+liste
+abandon
 retour
 delta = delta + 1
 retour

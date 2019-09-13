@@ -1,0 +1,11 @@
+# Ce fichier de commandes exec.txt
+# montre l'emploi du fichier abandon.txt pour
+# afficher un message quand l'instruction continue
+# qui suit va abandonner le fichier utilisé.
+positif = 1
+exec abandon.txt
+continue
+negatif = -1
+exec abandon.txt
+continue
+ensuite = 0

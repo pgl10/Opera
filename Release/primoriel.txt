@@ -13,8 +13,7 @@ continue
 primoriel[n] = 2
 n > 2
 continue
-primit = 0
-primoriel[n] = 1
+primit = 2
 primit < n
 boucle
 primit = primit + 1

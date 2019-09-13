@@ -45,8 +45,7 @@ p[np] = last
 p[np] > nb - 1
 boucle
 liste
-last = 0
-continue
+abandon
 retour
 nb = nb/p[np]
 np = np+1

@@ -120,6 +120,15 @@ int main(int argc, char *argv[]) {
             lect = lect - 1;
             continue;
         }
+        if(ligne == "abandon") {
+            if(lect == 0) continue;
+            elemra* era = chercherra("last");
+            if(cmpRa(*era->ra, bigRa(0)) > 0) {
+                filesin[lect].close();
+                lect = lect - 1;
+            }
+            continue;
+        }
         if(ligne == "boucle") {
             if(lect == 0) continue;
             // si cette boucle n'est pas déjà notée : on la note
