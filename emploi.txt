@@ -8,6 +8,7 @@ archive les résultats des instructions écrites selon les règles prévues et expos
 Les nombres rationnels utilisés sont définis par une variable ayant un nom et une valeur. 
 Le nom commence par une lettre et comporte seulement les caractères : lettres et chiffres 
 auxquels on joint le caractère _ pour pouvoir indiquer un nom composé de plusieurs mots. 
+Les lettres admises sont les 26 lettres minuscules et majuscules de l'alphabet seulement.
 Ainsi, par exemple : Paris_Brest est un nom reconnu et utilisable. La valeur de chaque nombre 
 rationnel est stockée en mémoire par deux entiers : le numérateur et le dénominateur aussi 
 grands que nécessaires et ceux-ci sont réduits automatiquement sans aucun diviseur commun. 
