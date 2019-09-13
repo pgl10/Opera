@@ -9,7 +9,8 @@ nécessité de supprimer chaque variable avant sa modification. Cette commande est
 en mode fichier de commandes qu'en mode conversationnel : on pourrait éventuellement ne pas l'utiliser.
             
 La commande abandon effectue l'abandon du fichier de commandes si la variable last est positive et continue 
-en séquence si non. La commande continue continue en séquence si la variable last est positive et effectue l'abandon du fichier de commandes si non.
+en séquence si non. La commande continue continue en séquence si la variable last est positive et effectue 
+l'abandon du fichier de commandes si non.
 On utilise continue particulièrement après la commande ilyatil ou bien après avoir effectué une condition.
 La commande boucle notifie l'instruction qui la précède puis si last est positive continue en séquence
 et si non elle va chercher l'instruction qui suit l'instruction retour qui lui correspond. Et la commande
