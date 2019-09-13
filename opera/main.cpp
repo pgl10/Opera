@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
     if(lect == 0) {
-        aout("Pour le mode d'emploi consulez le fichier emploi.txt\n");
+        aout("Pour le mode d'emploi consultez le fichier emploi.txt\n");
         aout("Pour une aide immédiate entrez : aide\n");
     }
     initra();
