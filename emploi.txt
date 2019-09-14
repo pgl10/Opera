@@ -124,8 +124,9 @@ et pour le reste : r = a-q*d.
          
 La commande prem utilise la méthode de Miller et Rabin incluse dans GMP. Et la commande ndiv utilise
 la méthode de l'algorithme rho de John M. Pollard qui est performante pour trouver un petit facteur 
-premier. Cette méthode simple a une durée d'exécution imprévisible : il faut éviter de demander une 
-recherche très difficile : pour information, le 7-ième nombre de Fermat 2^128 + 1 est le produit
+premier. Il est possible mais extrêmement rare que l'algorithme rho soit en échec et dans ce cas le 
+résultat est nul. Avec cette méthode simple qui a une durée d'exécution imprévisible il faut éviter
+une recherche très difficile : pour information, le 7-ième nombre de Fermat 2^128 + 1 est le produit
 de 2 nombres premiers ayant 17 et 22 chiffres décimaux et sur un PC avec un Intel i7 sa factorisation 
 a duré 43 minutes. En pratique, il est préférable d'éviter de dépasser environ 17 chiffres décimaux 
 pour le plus petit facteur premier à rechercher.

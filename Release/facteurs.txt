@@ -42,6 +42,8 @@ np = 1
 boucle
 ndiv nb
 p[np] = last
+last < 1
+abandon
 p[np] > nb - 1
 boucle
 liste
