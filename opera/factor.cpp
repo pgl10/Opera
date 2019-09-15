@@ -2,8 +2,7 @@
 
 // Algorithme rho de Pollard avec f(x)=(x^2)+a et x0=x
 Integer get_prime(Integer n, int a, Integer x) {
-   Integer  y, q, g, s;
-   s = x; 
+   Integer  y, q, g;
    y = x; 
    do {
       x = ((x*x)+a)%n; 
@@ -13,14 +12,15 @@ Integer get_prime(Integer n, int a, Integer x) {
       else q = (x-y)%n;
       g = gcd(n, q); 
       if(g > 1 && g < n) { 
-         // ici : g divise n
-         if(isprime(g)) return g; 
-         else return get_factor(g); 
+         // g est un diviseur de n
+         while(!isprime(g)) g = get_factor(g);
+         return g; 
       } 
    }while(x != y);
    return 0;
 }
 
+// Calcul d'un facteur premier de n
 Integer get_factor(Integer n) {
    if(n < 0) n = -n;
    if(n == 0) return 0;
