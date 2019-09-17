@@ -1,16 +1,19 @@
 # Ce fichier de commandes factoriel.txt
 # calcule factoriel[n] = n!
-# du nombre n entier connu et positif ou nul
-modif = oui
+# du nombre n connu entier et positif ou nul
+redef = oui
 ilyatil n
-continue
+continuer
 frac n
 1+(last>0)*(last<0)
-continue
-n+1 > 0
-continue
-factit = 0
+continuer
+factoriel[n] = 0
+n > 0
+continuer
 factoriel[n] = 1
+n > 1
+continuer
+factit = 0
 factit < n
 boucle
 factit = factit + 1

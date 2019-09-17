@@ -16,7 +16,7 @@ void aide() {
     aout("Les instructions admises sont : > e ou bien : > v = e où e : entier,\n");
     aout(" ou nombre décimal, ou variable, ou expression arithmétique valide.\n");
     aout("> ilyatil v | > del v | > out sauv.txt | > exec fic.txt | > convrt e \n");
-    aout("> nbch e | > enti e | > frac e | > num e | > den e | > liste | > exit\n");
+    aout("> nbch e | > enti e | > frac e | > num e | > den e | > lister | > exit\n");
     aout("Avec des entiers : > pgcd e1,e2 | > ppcm e1,e2 | > prem e | > ndiv e\n");
 }    
 
@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
     archiverra("last", bigRa(0));
     std::streamoff back, here=0;
     std::vector<std::streamoff> ret;
-    bool modif = false;
+    bool redef = false;
         for(;;) {
         std::string ligne;
         if(lect > 0) {
@@ -90,7 +90,7 @@ int main(int argc, char *argv[]) {
             supprimerra(ligne.substr(3));
             continue;
         }
-        if(ligne == "liste") {
+        if(ligne == "lister") {
             lister();
             continue;
         }
@@ -112,7 +112,7 @@ int main(int argc, char *argv[]) {
             lect = lect + 1;
             continue;
         }   
-        if(ligne == "continue") {
+        if(ligne == "continuer") {
             if(lect == 0) continue;
             elemra* era = chercherra("last");
             if(cmpRa(*era->ra, bigRa(0)) > 0) continue;
@@ -120,7 +120,7 @@ int main(int argc, char *argv[]) {
             lect = lect - 1;
             continue;
         }
-        if(ligne == "abandon") {
+        if(ligne == "quitter") {
             if(lect == 0) continue;
             elemra* era = chercherra("last");
             if(cmpRa(*era->ra, bigRa(0)) > 0) {
@@ -161,10 +161,10 @@ int main(int argc, char *argv[]) {
             filesin[lect].seekg(ret.back());
             continue;
         }
-        if(line[5] == ' ' && ligne.size() > 5 && ligne.substr(0, 5) == "modif") {
+        if(line[5] == ' ' && ligne.size() > 5 && ligne.substr(0, 5) == "redef") {
             ligne = ligne.substr(5);
-            if(ligne == "=oui") modif = true;
-            else if(ligne == "=non") modif = false;
+            if(ligne == "=oui") redef = true;
+            else if(ligne == "=non") redef = false;
             else aout("instruction non reconnue.\n");
             continue;
         }
@@ -385,7 +385,7 @@ int main(int argc, char *argv[]) {
                     if(isname(ligne.c_str())) {
                         bool good = vval(ligne, ra);
                         if(good) {
-                            if(modif) {
+                            if(redef) {
                                 char* nom = new char[1+res.size()];
                                 strcpy(nom, res.c_str());
                                 elemra* era = chercherra(nom);
@@ -419,7 +419,7 @@ int main(int argc, char *argv[]) {
                     else {
                         bool good = eval(ligne, ra);
                         if(good) {
-                            if(modif) {
+                            if(redef) {
                                 char* nom = new char[1+res.size()];
                                 strcpy(nom, res.c_str());
                                 elemra* era = chercherra(nom);

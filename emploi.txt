@@ -31,9 +31,9 @@ dans ce cas l'utilité de ce moyen n'est pas évidente. Quand la session est termi
 encore actives sont perdues, mais on peut avant cela les sauvegarder dans un fichier et les 
 recharger ensuite.
          
-Contrairement à la phase initiale si on veut quand même pouvoir modifier directement une variable
-sans avoir la nécessité de la supprimer préalablement il faut effectuer l'instruction : modif = oui
-et l'instruction : modif = non permet de rétablir le fonctionnement initial.
+Contrairement à la phase initiale si on veut quand même pouvoir redéfinir directement une variable
+sans avoir la nécessité de la supprimer préalablement il faut effectuer l'instruction : redef = oui
+et l'instruction : redef = non permet de rétablir le fonctionnement initial.
          
 Le mode fichier de commandes est utilisable au début de la session par l'intermédiaire d'un 
 fichier batch qui désigne le fichier des instructions à exécuter. Le mode conversationnel 
@@ -104,7 +104,7 @@ En complément des instructions de base ci-dessus expliquées il y a aussi les ins
 > ppcm e1,e2      pour calculer et afficher le ppcm de deux expressions à valeurs entières
 > prem e          résultat : 1 si l'expression ou le nombre entier e est premier et 0 si non
 > ndiv e          pour calculer et afficher un facteur premier d'une expression à valeur entière
-> liste           pour afficher toutes les variables actuelles
+> lister          pour afficher toutes les variables actuelles
 > aide            pour afficher un petit rappel des instructions utilisables
 > exit            pour terminer la session
          

@@ -1,3 +1,0 @@
-abandon
-# Attention : actuellement l'instruction continue 
-# qui suit va abandonner ce fichier de commandes.

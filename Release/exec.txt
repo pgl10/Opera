@@ -1,11 +1,12 @@
 # Ce fichier de commandes exec.txt
-# montre l'emploi du fichier abandon.txt pour
-# afficher un message quand l'instruction continue
-# qui suit va abandonner le fichier utilisé.
+# montre l'emploi du fichier avertir.txt pour
+# anticiper et expliquer l'instruction : continuer
+# qui suit quand elle va abandonner le fichier utilisé.
 positif = 1
-exec abandon.txt
-continue
+exec avertir.txt
+continuer
+suite = 123
 negatif = -1
-exec abandon.txt
-continue
+exec avertir.txt
+continuer
 ensuite = 0

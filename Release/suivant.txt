@@ -1,22 +1,19 @@
 # Ce fichier de commandes suivant.txt
 # calcule le nombre premier suivant
-# du nombre n entier connu et positif ou nul.
-modif = oui
-# Avec delta et suivant actuellement inconnus
+# du nombre n connu entier et positif ou nul.
+redef = oui
+# Avec delta actuellement inconnu
 ilyatil delta
 last < 1
-continue
-ilyatil suivant
-last < 1
-continue
-# Pour n entier connu positif ou nul
+continuer
+# Pour n connu entier positif ou nul
 ilyatil n
-continue
+continuer
 frac n
 1+(last<0)*(last>0)
-continue
+continuer
 n + 1 > 0
-continue
+continuer
 # Calcul et affichage de suivant
 delta = 1
 0 < 1
@@ -27,8 +24,8 @@ boucle
 n
 delta
 suivant
-liste
-abandon
+lister
+quitter
 retour
 delta = delta + 1
 retour

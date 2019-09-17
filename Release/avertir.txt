@@ -1,0 +1,3 @@
+quitter
+# ATTENTION # Actuellement l'instruction : continuer
+# qui suit va abandonner ce fichier de commandes.

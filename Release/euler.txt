@@ -1,5 +1,5 @@
 # Approximation de la constante d'Euler : e = somme{n=0 à l'infini}( 1/n! )
-modif = oui
+redef = oui
 fn = 1
 e = 1
 n = 0

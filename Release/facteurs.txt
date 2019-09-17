@@ -1,14 +1,14 @@
 # Ce fichier de commandes facteurs.txt
 # calcule les np facteurs premiers p1, p2, ...
-# du nombre n entier connu et positif ou nul.
-modif = oui
+# du nombre n connu entier et positif ou nul.
+redef = oui
 # Avec nb et np actuellement inconnus
 ilyatil nb
 last < 1
-continue
+continuer
 ilyatil np
 last < 1
-continue
+continuer
 # Pour supprimer les anciens p[i]
 nb = 0
 np = 0
@@ -24,30 +24,29 @@ nb = 0
 last = 0
 retour
 retour
-# Pour n entier connu et positif 
-np = 0
+# Pour n connu entier
 ilyatil n
-continue
+continuer
 frac n
 1+(last<0)*(last>0)
-continue
-n > 0
-continue
+continuer
 # Calcul et affichage des nouveaux p[i]
+np = 0
 nb = n
 nb > 1
-continue
+continuer
 np = 1
 0 < 1
 boucle
 ndiv nb
 p[np] = last
+# si ndiv en échec : last = 0
 last < 1
-abandon
+quitter
 p[np] > nb - 1
 boucle
-liste
-abandon
+lister
+quitter
 retour
 nb = nb/p[np]
 np = np+1

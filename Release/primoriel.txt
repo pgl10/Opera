@@ -1,18 +1,18 @@
 # Ce fichier de commandes primoriel.txt
 # calcule primoriel[n] = n#
-# du nombre n entier connu et positif ou nul
-modif = oui
+# du nombre n connu entier et positif ou nul
+redef = oui
 ilyatil n
-continue
+continuer
 frac n
 1+(last>0)*(last<0)
-continue
+continuer
 primoriel[n] = 0
 n > 1
-continue
+continuer
 primoriel[n] = 2
 n > 2
-continue
+continuer
 primit = 2
 primit < n
 boucle

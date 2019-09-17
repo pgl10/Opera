@@ -333,13 +333,13 @@ bool isEnti(bigRa a) {
 // Inverser un bigRa
 bigRa inverser(bigRa a) {
     bigRa r;
-	if(a.getNum() < 0) {
-    r.setDen(-a.getNum());
-    r.setNum(-a.getDen());
+    if(a.getNum() < 0) {
+        r.setDen(-a.getNum());
+        r.setNum(-a.getDen());
     }
-	else {
-    r.setDen(a.getNum());
-    r.setNum(a.getDen());
+    else {
+        r.setDen(a.getNum());
+        r.setNum(a.getDen());
     }
     r.simplifier();
     return r;
@@ -386,6 +386,7 @@ double root(bigRa x, int n, int k) {
     double n1 = n-1, r = 1.0, rn = 1.0, dif;
     do {
         double rn1 = rn/r;
+        // [(n-1)*r+a/r^(n-1)]/n
         r = (n1*r+a/rn1)/double(n);
         rn = 1.0;
         for(int i=0; i<n; i++) rn=rn*r;

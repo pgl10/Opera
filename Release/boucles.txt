@@ -1,5 +1,5 @@
 # Exemple simple de boucles imbriquées
-modif = oui
+redef = oui
 m = 0      
 m < 3      
 boucle     

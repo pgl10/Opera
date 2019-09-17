@@ -1,6 +1,6 @@
 # Approximation de pi avec la formule suivante :
 # pi = 4 / (1 + 1² / (3 + 2² / (5 + 3² / (7 + 4² / (9 + ... )))))
-modif = oui
+redef = oui
 n = 21
 # le 21-ième dénominateur : 41+21²/43
 d =  (2*n-1)+n^2/(2*n+1)
