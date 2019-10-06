@@ -39,14 +39,19 @@ p2 = f6/p1
 prem p2
 n = 12040983850797527
 ndiv n
-m = last
-prem m
-p = n/m
-prem p
-yz = 961958186090139713862109
-ndiv yz
-y = last
-z = yz/y
+n1 = last
+prem n1
+n2 = n/n1
+prem n2
+pq = 961958186090139713862109
+ndiv pq
+p = last
+q = pq/p
 pgcd 1234, 8765
 ppcm 1234, 8765
 pgcd 50594, 124634
+y = 1/2
+# Pour calculer : 0 si y = 0 et -1 si non
+(y<0)*(y>0)
+z = 0
+(z<0)*(z>0)

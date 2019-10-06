@@ -63,5 +63,6 @@ bigRa inverser(bigRa a);
 double reel(bigRa a);
 double ra2d(bigRa x);
 double root(bigRa x, int n, int k);
+bigRa dbl2ra(double x);
 
 #endif // BIGRA_HPP

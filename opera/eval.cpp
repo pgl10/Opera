@@ -2,6 +2,25 @@
 
 #include "eval.hpp"
 
+// Calcul de la partie entière de
+// la racine n-ième de l'entier x > 0
+Integer nroot(int n, Integer x) {
+    if(x == 0 || x == 1) return x;
+    Integer a = 1, b = x, r;    
+    while (a <= b) {         
+        Integer m = (a + b) / 2; 
+        Integer mn = 1;
+        for(Integer i=0; i<n; i++) mn = mn * m;
+        if(mn == x) return m; 
+        if(mn < x) { 
+            a = m + 1;  
+            r = m; 
+        }  
+        else b = m-1;         
+    } 
+    return r; 
+}
+
 // Pour obtenir la valeur d'une variable dans listera
 bool vval(std::string& name, bigRa& r) {
     bigRa z;
@@ -113,6 +132,11 @@ bool parentheses(std::string& ligne) {
     return true;
 }
 
+void irrationnel() {
+    aout("Avec cet exposant le résultat est un nombre irrationnel\n");
+    aout("dont la valeur obtenue est nécessairement une approximation.\n");
+}
+
 // Pour calculer la valeur d'une instruction définie
 bool eval(std::string ligne, bigRa& r) {
     if(ligne.size() == 0) return false;
@@ -171,22 +195,61 @@ bool eval(std::string ligne, bigRa& r) {
         if(!eval(right, r2)) return false;
     // calcul final du résultat
     if(ligne[pos] == '^') {
-        if(r2.getDen() != 1) {
-            aout("l'exposant doit être un entier.\n");
+		if(r2.getDen() > INT_MAX) {
+            std::cout << "exponentiation hors limites" << std::endl;
             return false;
-		}
+        }
+        int n2d = r2.getDen();
+        if(n2d > 1) {
+            int sr1 = 1;
+            if(cmpRa(r1, 0) < 0) {
+                if((n2d&1) == 0) {
+                    aout("ce calcul est impossible.\n");
+                    return false;
+                }
+                sr1 = -1; 
+            }
+            bool good = true;
+            Integer rr1n = nroot(n2d, sr1*r1.getNum());
+            Integer r1n = sr1;
+            for(int i=0; i<n2d; i++) r1n = r1n*rr1n;
+            if(r1n == r1.getNum()) r1.setNum(sr1*rr1n);
+            else {
+                irrationnel();
+                good = false;
+            }
+            Integer rr1d = nroot(n2d, r1.getDen());
+            Integer r1d = 1;
+            for(int i=0; i<n2d; i++) r1d = r1d*rr1d;
+            if(r1d == r1.getDen()) r1.setDen(rr1d);
+            else {
+                if(good) irrationnel();
+                good = false;
+            }
+            if(!good) {
+                int nn2d = n2d;
+                double d2r1;
+                if(cmpRa(r1, 0) < 0) d2r1 = -root(-r1, nn2d, 10);
+				else d2r1 = root(r1, nn2d, 10);
+				if(d2r1 > pow(2.0, 32.0)) {
+                    std::cout << "exponentiation excessive" << std::endl;
+                    return false;
+                }
+                r1 = dbl2ra(d2r1);
+            }
+        }
         Integer num = r2.getNum();
-        int n2;
+        int n2n;
         if(num > INT_MAX) {
             aout("l'exposant est modifié : il est mis à la limite maximum admise.\n");
-            n2 = INT_MAX;
+            n2n = INT_MAX;
         }
         else if (num < -INT_MAX) {
             aout("l'exposant est modifié : il est mis à la limite minimum admise.\n");
-            n2 = -INT_MAX;
+            n2n = -INT_MAX;
         }
-        else n2 = num;
-        r=r1.puissance(n2);
+        else n2n = num;
+        r=r1.puissance(n2n);
     }
     if(ligne[pos] == '/') r=r1.diviser(r2);
     if(ligne[pos] == '*') r=r1.multiplier(r2);
@@ -204,7 +267,7 @@ bool rval(std::string& name, double& r) {
     bigRa x;
     bool good = eval(name, x);
     if(!good) return false;
-    r = double(x.getNum())/double(x.getDen());
+    r = ra2d(x);
     return true;                  
 }
 

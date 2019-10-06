@@ -70,7 +70,7 @@ class Integer {
 //
 // Simple access functions
 //
-    int		getbase(void);
+    int	getbase(void);
     void	setbase(int b);
 //
 // Casting	(changing Integer to another type)
@@ -158,8 +158,8 @@ class Integer {
     friend bool operator >=(int a, Integer b);        // (c >= a)?
     friend std::ostream& operator <<(std::ostream &s, Integer a);   // cout << a;
     friend std::istream& operator >>(std::istream &s, Integer &a);  // cin >> a;
-    friend Integer operator <<(Integer a, int b);	     // a << b;
-    friend Integer operator >>(Integer a, int b);	     // a >> b;
+    friend Integer operator <<(Integer a, int b);     // a << b;
+    friend Integer operator >>(Integer a, int b);     // a >> b;
 //
 // These functions are friendly to speed up access to the class'
 //  private parts.

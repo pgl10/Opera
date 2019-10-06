@@ -20,6 +20,12 @@ void outspaces(std::string& line) {
     delete [] chrs;
 }
 
+// Pour supprimer un éventuel commentaire en fin de ligne
+void delcom(std::string& ligne) {
+    std::size_t found = ligne.find("#");
+    if(found != std::string::npos) ligne = ligne.substr(0, found);
+}
+
 // Ce nom est-il valide ?
 bool isname(const char* nom) {
     char alfa[64] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789";

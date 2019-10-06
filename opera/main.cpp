@@ -73,6 +73,7 @@ int main(int argc, char *argv[]) {
         espaces(line);
         outspaces(ligne);
         if(ligne[0] == '#') continue;
+        delcom(ligne);
         // Pour supprimer les variables auxiliaires
         elemra* emra = listera;
         while(emra != NULL) { 
@@ -143,6 +144,7 @@ int main(int argc, char *argv[]) {
                 do {
                     std::getline(filesin[lect], ligne);
                     outspaces(ligne);
+                    delcom(ligne);
                     if(!filesin[lect].good()) {
                         aout("Le retour est absent : abandon du fichier\n");
                         filesin[lect].close();
@@ -199,6 +201,7 @@ int main(int argc, char *argv[]) {
                 std::stringstream ss;
                 ss << n;
                 int r = ss.str().size();
+                if(n < 0) r = r-1;
                 std::cout << r << std::endl;
                 modifierra("last", bigRa(r));
             }

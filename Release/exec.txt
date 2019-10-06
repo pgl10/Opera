@@ -3,10 +3,10 @@
 # anticiper et expliquer l'instruction : continuer
 # qui suit quand elle va abandonner le fichier utilisé.
 positif = 1
-exec avertir.txt
+exec avertir.txt  # ici pas d'avertissement
 continuer
 suite = 123
 negatif = -1
-exec avertir.txt
+exec avertir.txt  # l'avertissement va être affiché
 continuer
 ensuite = 0

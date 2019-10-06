@@ -375,7 +375,7 @@ double ra2d(bigRa x) {
 }
 
 // Pour calculer en double une approximation r 
-// de la n-ième racine de x telle que : |x-r^n| < x/10^k
+// de la n-ième racine de x > 0 telle que : |x-r^n| < x/10^k
 double root(bigRa x, int n, int k) {
     double a = ra2d(x);
     if(a <= 0.0) return 0.0;
@@ -383,7 +383,7 @@ double root(bigRa x, int n, int k) {
     if(k < 1) return 0.0;
     double dk = 1.0;
     for(int i=0; i<k; i++) dk=dk*10.0;
-    double n1 = n-1, r = 1.0, rn = 1.0, dif;
+    double eps = a/dk, n1 = n-1, r = 1.0, rn = 1.0, dif;
     do {
         double rn1 = rn/r;
         // [(n-1)*r+a/r^(n-1)]/n
@@ -391,6 +391,34 @@ double root(bigRa x, int n, int k) {
         rn = 1.0;
         for(int i=0; i<n; i++) rn=rn*r;
         dif = abs(a - rn);
-    }while(dif > a/dk);
+    }while(dif > eps);
+    return r;
+}
+
+// Pour convertir un double en bigRa
+// avec la condition : abs(val) < 2^32
+bigRa dbl2ra(double val) {
+    bool sgn = false;
+    Integer num = 0;
+    Integer den = 1;
+    if (val < 0) {
+        val = -val;
+        sgn = true;
+    }
+    while (val > 0) {
+        unsigned int uiv = (unsigned int)val;
+        val -= uiv;
+        num += uiv;
+        val *= 2;
+        num *= 2;
+        den *= 2;
+    }
+    Integer g = gcd(num, den);
+    num /= g;
+    den /= g;
+    if(sgn) num = -num;
+    bigRa r;
+    r.setNum(num);
+    r.setDen(den);
     return r;
 }
