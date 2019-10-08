@@ -353,31 +353,20 @@ double reel(bigRa a) {
 }
 
 // Pour convertir un bigRa en double
-double ra2d(bigRa x) {
-    int lim = 32;
-    Integer num = x.getNum();
-    Integer den = x.getDen();
-    std::stringstream sn;
-    sn << num;
-    std::stringstream sd;
-    sd << den;
-    int nn = sn.str().size();
-    int nd = sd.str().size();
-    if(nn<lim && nd<lim) return double(num)/double(den);
-    int mn = nn - lim;
-    if(mn > nd - lim) mn = nd - lim;
-    if(mn < 0) mn = 0;
-    nn = nn - mn;
-    nd = nd - mn;
-    num = sn.str().substr(0, nn).c_str();
-    den = sd.str().substr(0, nd).c_str();
-    return double(num)/double(den);
+double ra2dbl(bigRa x) {
+    std::stringstream st;
+    st << x;
+    mpq_t q;
+    mpq_init(q);
+    int i = mpq_set_str(q, st.str().c_str(), 10);
+    double d = mpq_get_d(q);
+    return d;
 }
 
 // Pour calculer en double une approximation r 
 // de la n-ième racine de x > 0 telle que : |x-r^n| < x/10^k
 double root(bigRa x, int n, int k) {
-    double a = ra2d(x);
+    double a = ra2dbl(x);
     if(a <= 0.0) return 0.0;
     if(n < 2) return 0.0;
     if(k < 1) return 0.0;
@@ -396,29 +385,17 @@ double root(bigRa x, int n, int k) {
 }
 
 // Pour convertir un double en bigRa
-// avec la condition : abs(val) < 2^32
-bigRa dbl2ra(double val) {
-    bool sgn = false;
-    Integer num = 0;
-    Integer den = 1;
-    if (val < 0) {
-        val = -val;
-        sgn = true;
-    }
-    while (val > 0) {
-        unsigned int uiv = (unsigned int)val;
-        val -= uiv;
-        num += uiv;
-        val *= 2;
-        num *= 2;
-        den *= 2;
-    }
-    Integer g = gcd(num, den);
-    num /= g;
-    den /= g;
-    if(sgn) num = -num;
-    bigRa r;
-    r.setNum(num);
-    r.setDen(den);
+bigRa dbl2ra(double d) {
+    mpq_t q;
+    mpq_init(q);
+    mpq_set_d(q, d);
+    mpz_t num, den;
+    mpz_init(num);
+    mpz_init(den);
+    mpq_get_num(num, q);
+    mpq_get_den(den, q);
+    Integer inum = num;
+    Integer iden = den;
+    bigRa r = bigRa(inum, iden);
     return r;
 }

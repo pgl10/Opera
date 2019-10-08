@@ -9,5 +9,5 @@ Each number of this class has a name and its value. These numbers are members of
 <br>
 The code is able to perform the five basic operations. The user can enter commands on the keyboard but he can also use a file of commands. The syntax of these commands is very simple. And here i = 1/0 = infinity can be used as other rational numbers.<br>
 <br>
-You may have a look at the file : Opera.pdf <br>
+You may have a look at the file : Opera.pdf<br>
 <br>

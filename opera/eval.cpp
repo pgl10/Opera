@@ -195,7 +195,7 @@ bool eval(std::string ligne, bigRa& r) {
         if(!eval(right, r2)) return false;
     // calcul final du résultat
     if(ligne[pos] == '^') {
-		if(r2.getDen() > INT_MAX) {
+        if(r2.getDen() > INT_MAX) {
             std::cout << "exponentiation hors limites" << std::endl;
             return false;
         }
@@ -227,28 +227,17 @@ bool eval(std::string ligne, bigRa& r) {
                 good = false;
             }
             if(!good) {
-                int nn2d = n2d;
                 double d2r1;
-                if(cmpRa(r1, 0) < 0) d2r1 = -root(-r1, nn2d, 10);
-				else d2r1 = root(r1, nn2d, 10);
-				if(d2r1 > pow(2.0, 32.0)) {
-                    std::cout << "exponentiation excessive" << std::endl;
-                    return false;
-                }
+                if(cmpRa(r1, 0) < 0) d2r1 = -root(-r1, n2d, 10);
+                else d2r1 = root(r1, n2d, 10);
                 r1 = dbl2ra(d2r1);
             }
         }
-        Integer num = r2.getNum();
-        int n2n;
-        if(num > INT_MAX) {
-            aout("l'exposant est modifié : il est mis à la limite maximum admise.\n");
-            n2n = INT_MAX;
+        if(r2.getNum() > INT_MAX) {
+            std::cout << "exponentiation hors limites" << std::endl;
+            return false;
         }
-        else if (num < -INT_MAX) {
-            aout("l'exposant est modifié : il est mis à la limite minimum admise.\n");
-            n2n = -INT_MAX;
-        }
-        else n2n = num;
+        int n2n = r2.getNum();
         r=r1.puissance(n2n);
     }
     if(ligne[pos] == '/') r=r1.diviser(r2);
@@ -267,7 +256,7 @@ bool rval(std::string& name, double& r) {
     bigRa x;
     bool good = eval(name, x);
     if(!good) return false;
-    r = ra2d(x);
+    r = ra2dbl(x);
     return true;                  
 }
 

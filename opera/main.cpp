@@ -176,7 +176,7 @@ int main(int argc, char *argv[]) {
             bool good = eval(ligne, x);
             if(!good) aout("conversion impossible.\n");
             else {
-                std::cout << std::setprecision(10) << ra2d(x) << std::endl;
+                std::cout << std::setprecision(10) << ra2dbl(x) << std::endl;
                 modifierra("last", x);
             }
             continue;
