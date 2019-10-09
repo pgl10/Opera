@@ -209,6 +209,7 @@ bool eval(std::string ligne, bigRa& r) {
                 }
                 sr1 = -1; 
             }
+            bigRa t1 = r1;
             bool good = true;
             Integer rr1n = nroot(n2d, sr1*r1.getNum());
             Integer r1n = sr1;
@@ -227,6 +228,7 @@ bool eval(std::string ligne, bigRa& r) {
                 good = false;
             }
             if(!good) {
+                r1 = t1;
                 double d2r1;
                 if(cmpRa(r1, 0) < 0) d2r1 = -root(-r1, n2d, 10);
                 else d2r1 = root(r1, n2d, 10);
