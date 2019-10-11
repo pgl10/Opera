@@ -4,13 +4,13 @@
 
 // Calcul de la partie entière de
 // la racine n-ième de l'entier x > 0
-Integer nroot(int n, Integer x) {
+Integer racine(int n, Integer x) {
     if(x == 0 || x == 1) return x;
     Integer a = 1, b = x, r;    
     while (a <= b) {         
         Integer m = (a + b) / 2; 
         Integer mn = 1;
-        for(Integer i=0; i<n; i++) mn = mn * m;
+        for(int i=0; i<n; i++) mn = mn * m;
         if(mn == x) return m; 
         if(mn < x) { 
             a = m + 1;  
@@ -211,7 +211,7 @@ bool eval(std::string ligne, bigRa& r) {
             }
             bigRa t1 = r1;
             bool good = true;
-            Integer rr1n = nroot(n2d, sr1*r1.getNum());
+            Integer rr1n = racine(n2d, sr1*r1.getNum());
             Integer r1n = sr1;
             for(int i=0; i<n2d; i++) r1n = r1n*rr1n;
             if(r1n == r1.getNum()) r1.setNum(sr1*rr1n);
@@ -219,7 +219,7 @@ bool eval(std::string ligne, bigRa& r) {
                 irrationnel();
                 good = false;
             }
-            Integer rr1d = nroot(n2d, r1.getDen());
+            Integer rr1d = racine(n2d, r1.getDen());
             Integer r1d = 1;
             for(int i=0; i<n2d; i++) r1d = r1d*rr1d;
             if(r1d == r1.getDen()) r1.setDen(rr1d);
@@ -229,10 +229,8 @@ bool eval(std::string ligne, bigRa& r) {
             }
             if(!good) {
                 r1 = t1;
-                double d2r1;
-                if(cmpRa(r1, 0) < 0) d2r1 = -root(-r1, n2d, 10);
-                else d2r1 = root(r1, n2d, 10);
-                r1 = dbl2ra(d2r1);
+                if(sr1 > 0) r1 = nroot(r1, n2d, 15);
+                else r1 = -nroot(-r1, n2d, 15);
             }
         }
         if(r2.getNum() > INT_MAX) {

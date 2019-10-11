@@ -367,9 +367,11 @@ double ra2dbl(bigRa x) {
 // de la n-ième racine de x > 0 telle que : |x-r^n| < x/10^k
 double root(bigRa x, int n, int k) {
     double a = ra2dbl(x);
+    if(n < 0)  return 0.0;
+    if(n == 1) return a;
+    if(k < 1)  return 0.0;
     if(a <= 0.0) return 0.0;
-    if(n < 2) return 0.0;
-    if(k < 1) return 0.0;
+    if(a == 1.0) return 1.0;
     double dk = 1.0;
     for(int i=0; i<k; i++) dk=dk*10.0;
     double eps = a/dk, n1 = n-1, r = 1.0, rn = 1.0, dif;
@@ -381,6 +383,39 @@ double root(bigRa x, int n, int k) {
         for(int i=0; i<n; i++) rn=rn*r;
         dif = abs(a - rn);
     }while(dif > eps);
+    return r;
+}
+
+// Pour calculer en bigRa une approximation r 
+// de la n-ième racine de x > 0 telle que : |x-r^n| < x/10^k
+bigRa nroot(bigRa x, int n, int k) {
+    if(n < 0)  return bigRa(0);
+    if(n == 1) return x;
+    if(k < 1)  return bigRa(0);
+    if(cmpRa(x, 0) <= 0) return bigRa(0);
+    if(cmpRa(x, 1) == 0) return bigRa(1);
+    bigRa a, b;
+    if(cmpRa(x, 1) < 0) {
+        a=x;
+        b=bigRa(1);
+	}
+	else {
+        a=bigRa(1);
+        b=x;
+    }
+    bigRa dk = bigRa(10).puissance(k);
+    bigRa eps = x/dk;
+    bigRa r, rn, dif;
+    do {
+        r = (a+b)/bigRa(2);
+        rn = bigRa(1);
+        for(int i=0; i<n; i++) rn = rn*r;
+        if(cmpRa(rn, x) == 0) return r;
+        else if(cmpRa(rn, x) < 0) a = r;
+        else b = r;
+        dif = rn-x;
+        if(cmpRa(dif, bigRa(0)) < 0) dif = -dif;
+    }while(cmpRa(dif, eps) > 0);
     return r;
 }
 
