@@ -200,6 +200,7 @@ bool eval(std::string ligne, bigRa& r) {
             return false;
         }
         int n2d = r2.getDen();
+        if(n2d == 0) return false;
         if(n2d > 1) {
             int sr1 = 1;
             if(cmpRa(r1, 0) < 0) {

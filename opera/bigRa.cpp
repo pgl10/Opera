@@ -368,7 +368,7 @@ double ra2dbl(bigRa x) {
 double root(bigRa x, int n, int k) {
     double a = ra2dbl(x);
     if(n < 0)  return 0.0;
-    if(n == 0) return 1.0;
+    if(n == 0) return 0.0;
     if(n == 1) return a;
     if(k < 1)  return 0.0;
     if(a <= 0.0) return 0.0;
@@ -391,7 +391,7 @@ double root(bigRa x, int n, int k) {
 // de la n-ième racine de x > 0 telle que : |x-r^n| < x/10^k
 bigRa nroot(bigRa x, int n, int k) {
     if(n < 0)  return bigRa(0);
-    if(n == 0) return bigRa(1);
+    if(n == 0) return bigRa(0);
     if(n == 1) return x;
     if(k < 1)  return bigRa(0);
     if(cmpRa(x, 0) <= 0) return bigRa(0);
