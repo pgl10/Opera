@@ -3,10 +3,14 @@
 #include "utils.hpp"
 
 // Pour supprimer les ' ' au début de cette instruction
+// et conserver les caractères jusqu'au 1-er ' ' seulement.
 void espaces(std::string& line) {
     unsigned int i=0;
     while(i < line.size() && line[i] == ' ') ++i;
     line = line.substr(i);
+    i = 0;
+    while(i < line.size() && line[i] != ' ') ++i;
+    line = line.substr(0, i+1);
 }
 
 // Pour supprimer les ' ' dans cette instruction

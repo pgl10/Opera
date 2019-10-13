@@ -20,6 +20,13 @@ void aide() {
     aout("Avec des entiers : > pgcd e1,e2 | > ppcm e1,e2 | > prem e | > ndiv e\n");
 }    
 
+// Pour valider le mot-clé de l'instruction
+bool instr(std::string line, std::string ligne, std::size_t n, std::string keyw) {
+  if(!(line.size() > n && ligne.size() > n)) return false;
+  if(!(line[n] == ' ' && ligne.substr(0, n).compare(keyw) == 0)) return false;
+  return true;
+}
+
 int main(int argc, char *argv[]) {
     aout("\nCalculs arithmétiques avec des nombres rationnels de grande taille\n");
     // filesin[i] utilisable avec i de 1 à 9
@@ -87,7 +94,7 @@ int main(int argc, char *argv[]) {
             aide();
             continue;
         }
-        if(line[3] == ' ' && ligne.size() > 3 && ligne.substr(0, 3) == "del") {
+        if(instr(line, ligne, 3, "del")) {
             supprimerra(ligne.substr(3));
             continue;
         }
@@ -95,11 +102,11 @@ int main(int argc, char *argv[]) {
             lister();
             continue;
         }
-        if(line[3] == ' ' && ligne.size() > 3 && ligne.substr(0, 3) == "out") {
+        if(instr(line, ligne, 3, "out")) {
             sauvegarder(ligne.substr(3));
             continue;
         }    
-        if(line[4] == ' ' && ligne.size() > 4 && ligne.substr(0, 4) == "exec") {
+        if(instr(line, ligne, 4, "exec")) {
             ligne = ligne.substr(4);
             if(lect == 9) {
                 std::cout << "Le fichier de commandes actuel ne peut pas en utiliser un autre.\n";
@@ -163,14 +170,14 @@ int main(int argc, char *argv[]) {
             filesin[lect].seekg(ret.back());
             continue;
         }
-        if(line[5] == ' ' && ligne.size() > 5 && ligne.substr(0, 5) == "redef") {
+        if(instr(line, ligne, 5, "redef")) {
             ligne = ligne.substr(5);
             if(ligne == "=oui") redef = true;
             else if(ligne == "=non") redef = false;
             else aout("instruction non reconnue.\n");
             continue;
         }
-        if(line[6] == ' ' && ligne.size() > 6 && ligne.substr(0, 6) == "convrt") {
+        if(instr(line, ligne, 6, "convrt")) {
             ligne = ligne.substr(6);
             bigRa x;
             bool good = eval(ligne, x);
@@ -181,7 +188,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(line[4] == ' ' && ligne.size() > 4 && ligne.substr(0, 4) == "enti") {
+        if(instr(line, ligne, 4, "enti")) {
             ligne = ligne.substr(4);
             Integer n;
             bool good = nval(ligne, n);
@@ -192,7 +199,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(line[4] == ' ' && ligne.size() > 4 && ligne.substr(0, 4) == "nbch") {
+        if(instr(line, ligne, 4, "nbch")) {
             ligne = ligne.substr(4);
             Integer n;
             bool good = nval(ligne, n);
@@ -207,7 +214,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(line[4] == ' ' && ligne.size() > 4 && ligne.substr(0, 4) == "frac") {
+        if(instr(line, ligne, 4, "frac")) {
             ligne = ligne.substr(4);
             Integer n;
             bool good = nval(ligne, n);
@@ -221,7 +228,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(line[3] == ' ' && ligne.size() > 3 && ligne.substr(0, 3) == "num") {
+        if(instr(line, ligne, 3, "num")) {
             ligne = ligne.substr(3);
             bigRa p;
             bool good = eval(ligne, p);
@@ -232,7 +239,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(line[3] == ' ' && ligne.size() > 3 && ligne.substr(0, 3) == "den") {
+        if(instr(line, ligne, 3, "den")) {
             ligne = ligne.substr(3);
             bigRa q;
             bool good = eval(ligne, q);
@@ -243,7 +250,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(line[7] == ' ' && ligne.size() > 7 && ligne.substr(0, 7) == "ilyatil") {
+        if(instr(line, ligne, 7, "ilyatil")) {
             ligne = ligne.substr(7);
             char* nom = new char[1+ligne.size()];
             strcpy(nom, ligne.c_str());
@@ -259,7 +266,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(line[4] == ' ' && ligne.size() > 4 && ligne.substr(0, 4) == "pgcd") {
+        if(instr(line, ligne, 4, "pgcd")) {
             ligne = ligne.substr(4);
             std::size_t fv = ligne.find(",");
             if(fv == std::string::npos || fv==(ligne.size()-1) || fv==0) {
@@ -283,7 +290,7 @@ int main(int argc, char *argv[]) {
             modifierra("last", bigRa(r));
             continue;
         }
-        if(line[4] == ' ' && ligne.size() > 4 && ligne.substr(0, 4) == "ppcm") {
+        if(instr(line, ligne, 4, "ppcm")) {
             ligne = ligne.substr(4);
             std::size_t fv = ligne.find(",");
             if(fv == std::string::npos || fv==(ligne.size()-1) || fv==0) {
@@ -316,7 +323,7 @@ int main(int argc, char *argv[]) {
             modifierra("last", bigRa(r));
             continue;
         }
-        if(line[4] == ' ' && ligne.size() > 4 && ligne.substr(0, 4) == "prem") {
+        if(instr(line, ligne, 4, "prem")) {
             ligne = ligne.substr(4);
             bigRa x;
             if(!eval(ligne, x)) {
@@ -335,7 +342,7 @@ int main(int argc, char *argv[]) {
             modifierra("last", bigRa(r));
             continue;
         }
-        if(line[4] == ' ' && ligne.size() > 4 && ligne.substr(0, 4) == "ndiv") {
+        if(instr(line, ligne, 4, "ndiv")) {
             ligne = ligne.substr(4);
             bigRa x;
             if(!eval(ligne, x)) {
