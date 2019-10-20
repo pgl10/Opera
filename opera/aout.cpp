@@ -1,4 +1,4 @@
-// aout.cpp 
+// aout.cpp
 
 #include <iostream>
 #include <windows.h>
