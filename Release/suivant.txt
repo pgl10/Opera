@@ -1,7 +1,7 @@
 # Ce fichier de commandes suivant.txt
 # calcule le nombre premier suivant
 # du nombre n connu entier et positif ou nul.
-redef = oui
+redef oui
 # Avec delta actuellement inconnu
 ilyatil delta
 last < 1

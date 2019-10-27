@@ -1,7 +1,7 @@
 # Ce fichier de commandes facteurs.txt
 # calcule les np facteurs premiers p1, p2, ...
 # du nombre n connu entier et positif ou nul.
-redef = oui
+redef oui
 # Avec nb et np actuellement inconnus
 ilyatil nb
 last < 1

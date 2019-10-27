@@ -1,5 +1,5 @@
 # Exemple simple de boucles imbriquées
-redef = oui     # pour autoriser les redéfinitions des variables
+redef oui       # pour autoriser les redéfinitions des variables
 m = 0           # valeur initiale de m
 m < 3           # valeur finale de m et condition relative à m
 boucle          # boucle sur m : selon la condition précédente

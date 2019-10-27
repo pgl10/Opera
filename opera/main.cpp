@@ -20,13 +20,6 @@ void aide() {
     aout("Avec des entiers : > pgcd e1,e2 | > ppcm e1,e2 | > prem e | > ndiv e\n");
 }    
 
-// Pour valider le mot-clé de l'instruction
-bool instr(std::string line, std::string ligne, std::size_t n, std::string keyw) {
-  if(!(line.size() > n && ligne.size() > n)) return false;
-  if(!(line[n] == ' ' && ligne.substr(0, n).compare(keyw) == 0)) return false;
-  return true;
-}
-
 int main(int argc, char *argv[]) {
     aout("\nCalculs arithmétiques avec des nombres rationnels de grande taille\n");
     // filesin[i] utilisable avec i de 1 à 9
@@ -76,11 +69,12 @@ int main(int argc, char *argv[]) {
             std::cout << "\n> ";
             std::getline(std::cin, ligne);
         }
+        if(ligne[0] == '#') continue;
+        delcom(ligne);
+        std::string cmde = ligne;
         std::string line = ligne;
         espaces(line);
         outspaces(ligne);
-        if(ligne[0] == '#') continue;
-        delcom(ligne);
         // Pour supprimer les variables auxiliaires
         elemra* emra = listera;
         while(emra != NULL) { 
@@ -89,24 +83,37 @@ int main(int argc, char *argv[]) {
             emra = emra->suiv;
         }
         if(!renommer(ligne)) continue;
-        if(ligne == "exit") break;
-        if(ligne == "aide") {
+        if(instr(cmde, ligne, "exit")) break;
+        if(instr(cmde, ligne, "aide")) {
             aide();
             continue;
         }
-        if(instr(line, ligne, 3, "del")) {
+        if(keywd(line, ligne, "del")) {
+            if(cmde.find("[") == std::string::npos)
+              if(cmde.find(ligne.substr(3)) == std::string::npos) {
+                aout("variable inconnue\n");
+                continue;
+            }
             supprimerra(ligne.substr(3));
             continue;
         }
-        if(ligne == "lister") {
+        if(instr(cmde, ligne, "lister")) {
             lister();
             continue;
         }
-        if(instr(line, ligne, 3, "out")) {
+        if(keywd(line, ligne, "out")) {
+            if(cmde.find(ligne.substr(3)) == std::string::npos) {
+                aout("nom de fichier invalide\n");
+                continue;
+            }
             sauvegarder(ligne.substr(3));
             continue;
         }    
-        if(instr(line, ligne, 4, "exec")) {
+        if(keywd(line, ligne, "exec")) {
+            if(cmde.find(ligne.substr(4)) == std::string::npos) {
+                aout("nom de fichier invalide\n");
+                continue;
+            }
             ligne = ligne.substr(4);
             if(lect == 9) {
                 std::cout << "Le fichier de commandes actuel ne peut pas en utiliser un autre.\n";
@@ -120,7 +127,7 @@ int main(int argc, char *argv[]) {
             lect = lect + 1;
             continue;
         }   
-        if(ligne == "continuer") {
+        if(instr(cmde, ligne, "continuer")) {
             if(lect == 0) continue;
             elemra* era = chercherra("last");
             if(cmpRa(*era->ra, bigRa(0)) > 0) continue;
@@ -128,7 +135,7 @@ int main(int argc, char *argv[]) {
             lect = lect - 1;
             continue;
         }
-        if(ligne == "quitter") {
+        if(instr(cmde, ligne, "quitter")) {
             if(lect == 0) continue;
             elemra* era = chercherra("last");
             if(cmpRa(*era->ra, bigRa(0)) > 0) {
@@ -137,7 +144,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(ligne == "boucle") {
+        if(instr(cmde, ligne, "boucle")) {
             if(lect == 0) continue;
             // si cette boucle n'est pas déjà notée : on la note
             if((ret.size() == 0) || (ret.size() != 0 && ret[ret.size()-1] != back)) ret.push_back(back);
@@ -164,20 +171,20 @@ int main(int argc, char *argv[]) {
                 continue;
             }
         }
-        if(ligne == "retour") {
+        if(instr(cmde, ligne, "retour")) {
             if(lect == 0) continue;
             if(ret.size() == 0) continue;
             filesin[lect].seekg(ret.back());
             continue;
         }
-        if(instr(line, ligne, 5, "redef")) {
+        if(keywd(line, ligne, "redef")) {
             ligne = ligne.substr(5);
-            if(ligne == "=oui") redef = true;
-            else if(ligne == "=non") redef = false;
+            if(ligne == "oui") redef = true;
+            else if(ligne == "non") redef = false;
             else aout("instruction non reconnue.\n");
             continue;
         }
-        if(instr(line, ligne, 6, "convrt")) {
+        if(keywd(line, ligne, "convrt")) {
             ligne = ligne.substr(6);
             bigRa x;
             bool good = eval(ligne, x);
@@ -188,7 +195,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(instr(line, ligne, 4, "enti")) {
+        if(keywd(line, ligne, "enti")) {
             ligne = ligne.substr(4);
             Integer n;
             bool good = nval(ligne, n);
@@ -199,7 +206,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(instr(line, ligne, 4, "nbch")) {
+        if(keywd(line, ligne, "nbch")) {
             ligne = ligne.substr(4);
             Integer n;
             bool good = nval(ligne, n);
@@ -214,7 +221,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(instr(line, ligne, 4, "frac")) {
+        if(keywd(line, ligne, "frac")) {
             ligne = ligne.substr(4);
             Integer n;
             bool good = nval(ligne, n);
@@ -228,7 +235,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(instr(line, ligne, 3, "num")) {
+        if(keywd(line, ligne, "num")) {
             ligne = ligne.substr(3);
             bigRa p;
             bool good = eval(ligne, p);
@@ -239,7 +246,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(instr(line, ligne, 3, "den")) {
+        if(keywd(line, ligne, "den")) {
             ligne = ligne.substr(3);
             bigRa q;
             bool good = eval(ligne, q);
@@ -250,7 +257,12 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(instr(line, ligne, 7, "ilyatil")) {
+        if(keywd(line, ligne, "ilyatil")) {
+            if(cmde.find("[") == std::string::npos)
+              if(cmde.find(ligne.substr(7)) == std::string::npos) {
+                aout("variable inconnue\n");
+                continue;
+            }
             ligne = ligne.substr(7);
             char* nom = new char[1+ligne.size()];
             strcpy(nom, ligne.c_str());
@@ -266,7 +278,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        if(instr(line, ligne, 4, "pgcd")) {
+        if(keywd(line, ligne, "pgcd")) {
             ligne = ligne.substr(4);
             std::size_t fv = ligne.find(",");
             if(fv == std::string::npos || fv==(ligne.size()-1) || fv==0) {
@@ -290,7 +302,7 @@ int main(int argc, char *argv[]) {
             modifierra("last", bigRa(r));
             continue;
         }
-        if(instr(line, ligne, 4, "ppcm")) {
+        if(keywd(line, ligne, "ppcm")) {
             ligne = ligne.substr(4);
             std::size_t fv = ligne.find(",");
             if(fv == std::string::npos || fv==(ligne.size()-1) || fv==0) {
@@ -323,7 +335,7 @@ int main(int argc, char *argv[]) {
             modifierra("last", bigRa(r));
             continue;
         }
-        if(instr(line, ligne, 4, "prem")) {
+        if(keywd(line, ligne, "prem")) {
             ligne = ligne.substr(4);
             bigRa x;
             if(!eval(ligne, x)) {
@@ -342,7 +354,7 @@ int main(int argc, char *argv[]) {
             modifierra("last", bigRa(r));
             continue;
         }
-        if(instr(line, ligne, 4, "ndiv")) {
+        if(keywd(line, ligne, "ndiv")) {
             ligne = ligne.substr(4);
             bigRa x;
             if(!eval(ligne, x)) {

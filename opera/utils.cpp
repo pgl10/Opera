@@ -90,3 +90,18 @@ bool isdecim(const char* nbr) {
     if(np<=0 || np==strlen(nbr)-1) return false;
     return true;
 }
+
+// Pour valider une instruction comportant uniquement un mot-clé
+bool instr(std::string cmde, std::string ligne, std::string keyw) {
+    if(ligne == keyw) 
+        if(cmde.find(keyw) != std::string::npos) return true;
+    return false;
+}
+
+// Pour valider seulement le mot-clé de l'instruction ayant une suite
+bool keywd(std::string line, std::string ligne, std::string keyw) {
+    std::size_t n = keyw.size();
+    if(!(line.size() > n && ligne.size() > n)) return false;
+    if(!(line[n] == ' ' && ligne.substr(0, n).compare(keyw) == 0)) return false;
+    return true;
+}
