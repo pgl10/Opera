@@ -45,7 +45,7 @@ bigRa::bigRa(char* nume) {
     _den = 1;
 }
 
-// septième constructeur
+// septiÃ¨me constructeur
 bigRa::bigRa(char* nume, char* deno) {
     _num = nume;
     _den = deno;
@@ -132,7 +132,7 @@ bigRa bigRa::operator = (int n) {
 
 void bigRa::simplifier() {
     if(_num == 0) {
-        // simplifier : 0/d  =>  0/1 (c'est à dire : 0)
+        // simplifier : 0/d  =>  0/1 (c'est Ã  dire : 0)
         // si d = 0 on fait aussi 0/1 arbitrairement
         // sans aucun message d'avertissement !
         _den = 1;
@@ -145,7 +145,7 @@ void bigRa::simplifier() {
     if(_den != 1) {
         Integer x;
         x = gcd(_num, _den);
-        // ce calcul est toujours correct même
+        // ce calcul est toujours correct mÃªme
         // si : _den = 0 (ici _num est non nul)
         _num = _num/x;
         _den = _den/x;
@@ -289,7 +289,7 @@ std::istream& operator >> (std::istream& ist, bigRa& a) {
     return ist;
 }
 
-// Partie entière de a
+// Partie entiÃ¨re de a
 Integer entier(bigRa a) {
     a.simplifier();
     Integer n, d = a.getDen();
@@ -353,8 +353,8 @@ bigRa inverser(bigRa a) {
     return r;
 }
 
-// Pour convertir en double un bigRa ayant son numérateur 
-// et son dénominateur plus petits que 10^308
+// Pour convertir en double un bigRa ayant son numÃ©rateur 
+// et son dÃ©nominateur plus petits que 10^308
 double reel(bigRa a) {
     double r = double(a.getNum())/double(a.getDen());
     return r;
@@ -372,7 +372,7 @@ double ra2dbl(bigRa x) {
 }
 
 // Pour calculer en double une approximation r 
-// de la n-ième racine de x > 0 telle que : |x-r^n| < x/10^k
+// de la n-iÃ¨me racine de x > 0 telle que : |x-r^n| < x/10^k
 double root(bigRa x, int n, int k) {
     double a = ra2dbl(x), z = 0.0;
     if(a <= 0.0) return 0.0;
@@ -397,7 +397,7 @@ double root(bigRa x, int n, int k) {
 }
 
 // Pour calculer en bigRa une approximation r 
-// de la n-ième racine de x > 0 telle que : |x-r^n| < x/10^k
+// de la n-iÃ¨me racine de x > 0 telle que : |x-r^n| < x/10^k
 bigRa nroot(bigRa x, int n, int k) {
     if(cmpRa(x, 0) <= 0) return bigRa(0);
     if(cmpRa(x, 1) == 0) return bigRa(1);

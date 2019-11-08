@@ -1,0 +1,18 @@
+# Exemple simple de boucles imbriquées
+redef oui       # pour autoriser les redéfinitions des variables
+m = 0           # valeur initiale de m
+m < 3           # valeur finale de m et condition relative à m
+boucle          # boucle sur m : selon la condition précédente
+  m = m+1       # incrémentation interne de m
+  c = m*m       # boucle sur m : instruction interne
+  n = 0         # valeur initiale de n
+  n < 2         # valeur finale de n et condition relative à n
+  boucle        # boucle sur n : selon la condition précédente
+    n = n+1     # incrémentation interne de n
+    d = n+n     # boucle sur n : instruction interne
+  retour        # boucle sur n : instruction finale
+  a = m         # boucle sur m : instruction interne
+retour          # boucle sur m : instruction finale
+t = m*n         # instruction séquentielle de ce fichier
+x = m           # instruction séquentielle de ce fichier
+y = n           # instruction séquentielle de ce fichier

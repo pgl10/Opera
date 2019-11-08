@@ -2,8 +2,8 @@
 
 #include "utils.hpp"
 
-// Pour supprimer les ' ' au début de cette instruction
-// et conserver les caractères jusqu'au 1-er ' ' seulement.
+// Pour supprimer les ' ' au dÃ©but de cette instruction
+// et conserver les caractÃ¨res jusqu'au 1-er ' ' seulement.
 void espaces(std::string& line) {
     unsigned int i=0;
     while(i < line.size() && line[i] == ' ') ++i;
@@ -24,7 +24,7 @@ void outspaces(std::string& line) {
     delete [] chrs;
 }
 
-// Pour supprimer un éventuel commentaire en fin de ligne
+// Pour supprimer un Ã©ventuel commentaire en fin de ligne
 void delcom(std::string& ligne) {
     std::size_t found = ligne.find("#");
     if(found != std::string::npos) ligne = ligne.substr(0, found);
@@ -66,9 +66,9 @@ bool isnumb(const char* nbr) {
     return true;
 }
 
-// Ce nombre décimal est-il valide ?
+// Ce nombre dÃ©cimal est-il valide ?
 // Un '.' et un seul est obligatoire 
-// mais ni au début ni à la fin.
+// mais ni au dÃ©but ni Ã  la fin.
 bool isdecim(const char* nbr) {
     if(strlen(nbr) == 0) return false;
     char alfa[11] = "0123456789";
@@ -91,14 +91,14 @@ bool isdecim(const char* nbr) {
     return true;
 }
 
-// Pour valider une instruction comportant uniquement un mot-clé
+// Pour valider une instruction comportant uniquement un mot-clÃ©
 bool instr(std::string cmde, std::string ligne, std::string keyw) {
     if(ligne == keyw) 
         if(cmde.find(keyw) != std::string::npos) return true;
     return false;
 }
 
-// Pour valider seulement le mot-clé de l'instruction ayant une suite
+// Pour valider seulement le mot-clÃ© de l'instruction ayant une suite
 bool keywd(std::string line, std::string ligne, std::string keyw) {
     std::size_t n = keyw.size();
     if(!(line.size() > n && ligne.size() > n)) return false;

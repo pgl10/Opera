@@ -1,28 +1,29 @@
 /*******************************************************************************
-*  Opera : calculs arithmétiques avec des nombres rationnels de grande taille  *
-*  On a ici les 5 opérations de base  -  par : pgl10  -   utilisation : opera  *
+*  Opera : calculs arithmÃ©tiques avec des nombres rationnels de grande taille  *
+*  On a ici les 5 opÃ©rations de base  -  par : pgl10  -   utilisation : opera  *
 *******************************************************************************/
 
 #include "main.hpp"
 
 void pause() {
     std::cout << std::endl;
-    system("pause");    
+    std::cout << "Press enter to continue ...";
+    std::cin.get(); 
 }
 
 void aide() {
-    aout("\nOpera utilise les 7 opérateurs binaires :  ^  /  *  -  +  <  >   \n");
-    aout("avec cet ordre de priorité et l'opérateur - ayant un seul opérande.\n");
-    aout("Les instructions admises sont : > e ou bien : > v = e où e : entier,\n");
-    aout(" ou nombre décimal, ou variable, ou expression arithmétique valide.\n");
+    aout("\nOpera utilise les 7 opÃ©rateurs binaires :  ^  /  *  -  +  <  >   \n");
+    aout("avec cet ordre de prioritÃ© et l'opÃ©rateur - ayant un seul opÃ©rande.\n");
+    aout("Les instructions admises sont : > e ou bien : > v = e oÃ¹ e : entier,\n");
+    aout(" ou nombre dÃ©cimal, ou variable, ou expression arithmÃ©tique valide.\n");
     aout("> ilyatil v | > del v | > out sauv.txt | > exec fic.txt | > convrt e \n");
     aout("> nbch e | > enti e | > frac e | > num e | > den e | > lister | > exit\n");
     aout("Avec des entiers : > pgcd e1,e2 | > ppcm e1,e2 | > prem e | > ndiv e\n");
 }    
 
 int main(int argc, char *argv[]) {
-    aout("\nCalculs arithmétiques avec des nombres rationnels de grande taille\n");
-    // filesin[i] utilisable avec i de 1 à 9
+    aout("\nCalculs arithmÃ©tiques avec des nombres rationnels de grande taille\n");
+    // filesin[i] utilisable avec i de 1 Ã  9
     std::ifstream filesin[10];
     int lect = 0;
     if(argc == 2) {
@@ -41,7 +42,7 @@ int main(int argc, char *argv[]) {
     }
     if(lect == 0) {
         aout("Pour le mode d'emploi consultez le fichier Opera.pdf\n");
-        aout("Pour une aide immédiate entrez : aide\n");
+        aout("Pour une aide immÃ©diate entrez : aide\n");
     }
     initra();
     bigRa b0 = bigRa(0);
@@ -148,7 +149,7 @@ int main(int argc, char *argv[]) {
         }
         if(instr(cmde, ligne, "boucle")) {
             if(lect == 0) continue;
-            // si cette boucle n'est pas déjà notée : on la note
+            // si cette boucle n'est pas dÃ©jÃ  notÃ©e : on la note
             if((ret.size() == 0) || (ret.size() != 0 && ret[ret.size()-1] != back)) {
                 if(back == -1) {
                     aout("Instruction boucle invalide : fin de session\n");
@@ -157,10 +158,10 @@ int main(int argc, char *argv[]) {
                 }
                 ret.push_back(back);
             }
-            // si l'instruction précédente est une condition positive : on continue
+            // si l'instruction prÃ©cÃ©dente est une condition positive : on continue
             elemra* era = chercherra((char*)"last");
             if(cmpRa(*era->ra, bigRa(0)) > 0) continue;
-            // si non : on efface la note et on va après son retour correspondant
+            // si non : on efface la note et on va aprÃ¨s son retour correspondant
             else {
                 ret.pop_back();
                 int nret = 1;

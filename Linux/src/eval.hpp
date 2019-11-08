@@ -8,6 +8,7 @@
 #include "listera.hpp"
 #include "bigRa.hpp"
 #include "utils.hpp"
+#include "aout.hpp"
 
 bool vval(std::string& name, bigRa& r);
 bool eval(std::string ligne, bigRa& r);

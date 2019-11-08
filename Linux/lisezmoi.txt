@@ -1,0 +1,7 @@
+
+Ce répertoire contient Opera pour Linux.
+
+Le sous-répertoire src contient le source et le makefile.
+
+Le sous-répertoire exe contient l'exécutable et les fichiers de commandes.
+

@@ -1,0 +1,7 @@
+
+Pour installer la bibliothèque gmp dans le system Linux :
+
+  sudo  apt-get install libgmp-dev
+
+---------------------------------------------------------
+  
