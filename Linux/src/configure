@@ -1,0 +1,92 @@
+#!/bin/sh
+
+LOGIN=pgl10
+PROJ=opera
+EXE=$PROJ
+
+flag_debug=0
+flag_efence=0
+flag_help=0
+
+for i in $@ ; do
+    case $1 in
+	--with-debug )
+	    flag_debug=1
+	    ;;
+	--with-efence )
+	    flag_efence=1
+	    ;;
+	--help )
+	    flag_help=1
+	    ;;
+	--with-debugmax )
+	    flag_debug=1
+	    flag_efence=1
+	    ;;
+	* )
+	    flag_help=1
+	    ;;
+    esac
+    shift 1
+done
+
+if [ $flag_help -ne 0 ]; then
+    echo "Usage:
+  --with-debug: Will add '-g' and remove '-DNDEBUG' in the CXXFLAGS.
+  --with-efence: Will link $PROJ with efence library.
+  --with-debugmax: Active '--with-debug' and '--with-efence'.
+  --help: show this usage."
+    exit 1
+fi
+if [ $flag_debug -ne 0 ]; then
+    DNDEBUG="-g3 -O0"
+else
+    DNDEBUG="-Werror -DNDEBUG -O3 -pedantic-errors"
+fi
+if [ $flag_efence -ne 0 ]; then
+    EFENCE="-L/usr/pkg/lib -lefence"
+else
+    EFENCE=""
+fi
+
+OS=`uname -s`
+echo "OS=$OS" > Makefile.rules
+
+case $OS in
+    NetBSD ) # i386 NetBSD 3.0.1
+	CXX=/usr/bin/g++
+        CXXFLAGS="-Wall -W -Wextra -Wabi -pedantic"
+        ;;
+    Linux )  # i386 Debian Etch
+	CXX=/usr/bin/g++
+        CXXFLAGS="-Wall -W -Wextra -Wabi -pedantic"
+	;;
+    Darwin ) # PowerPC MacOS X
+	CXX=/usr/bin/g++
+        CXXFLAGS="-Wall -W -Werror -Wextra -Wabi -pedantic"
+        ;;
+    * )
+	CXX=/usr/bin/g++
+	CXXFLAGS="-Wall -W -Wextra -Wabi -pedantic"
+	;;
+esac
+
+CXXFLAGS="$CXXFLAGS $DNDEBUG"
+LDFLAGS="$CXXFLAGS $EFENCE"
+echo "CXXFLAGS=$CXXFLAGS" >> Makefile.rules
+echo "LDFLAGS=$LDFLAGS" >> Makefile.rules
+echo "CXX=$CXX" >> Makefile.rules
+echo "PROJ=$PROJ" >> Makefile.rules
+echo "LOGIN=$LOGIN" >> Makefile.rules
+echo "EXE=$EXE" >> Makefile.rules
+
+# Display some information
+echo "Login:                $LOGIN"
+echo "Project name:         $PROJ"
+echo "Executable name:      $EXE"
+echo "Operating system:     $OS"
+echo "Compilation flags:    $CXXFLAGS"
+echo "Compilation linking:  $LDFLAGS"
+echo "Compilator:           $CXX"
+
+exit 0

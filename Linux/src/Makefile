@@ -1,35 +1,35 @@
-CC=g++
-CFLAGS=-W -Wall -ansi -pedantic
+include Makefile.rules
 
-all: aout.o utils.o factor.o eval.o bigRa.o listera.o Integer.o main.o opera clean
+SRC=	integer.cpp	\
+	aout.cpp	\
+	bigRa.cpp	\
+	eval.cpp	\
+	factor.cpp	\
+	listera.cpp	\
+	utils.cpp	\
+	main.cpp
 
-aout.o: aout.cpp
-	$(CC) -c $< $(CFLAGS)
+HEADER=$(SRC:.cpp=.hpp)
 
-utils.o: utils.cpp 
-	$(CC) -c $< $(CFLAGS)
+EXTRAHEADER=
 
-factor.o: factor.cpp 
-	$(CC) -c $< $(CFLAGS)
+TARGET=$(EXE)
 
-eval.o: eval.cpp 
-	$(CC) -c $< $(CFLAGS)
+OBJ=$(SRC:.cpp=.o)
 
-bigRa.o: bigRa.cpp 
-	$(CC) -c $< $(CFLAGS)
+all: $(TARGET)
 
-listera.o: listera.cpp 
-	$(CC) -c $< $(CFLAGS)
+$(TARGET): $(OBJ) Makefile.deps
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(OBJ) -o $(TARGET) -lgmp
 
-Integer.o: Integer.cpp 
-	$(CC) -c $< $(CFLAGS)
-
-main.o: main.cpp 
-	$(CC) -c $< $(CFLAGS)
-
-opera:
-	g++ -o opera aout.o utils.o factor.o eval.o bigRa.o listera.o Integer.o main.o -lgmp
+Makefile.deps: $(SRC) $(HEADER) #$(EXTRAHEADER)
+	$(CXX) -MM $(SRC) > Makefile.deps
 
 clean:
-	rm -rf *.o
+	rm -f *.o *.~ *.core *.Dstore *.log *.ml *.err *\#*
 
+distclean:
+	rm -f $(EXE)
+	rm -f Makefile.deps Makefile.rules
+
+-include Makefile.deps

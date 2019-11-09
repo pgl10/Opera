@@ -5,7 +5,7 @@
 #include <iostream>
 #include <sstream> 
 #include <string>
-#include "Integer.h"
+#include "integer.hpp"
 
 class bigRa {
   private :

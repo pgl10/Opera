@@ -1,7 +1,7 @@
 #ifndef FACTOR_HPP
 #define FACTOR_HPP
 
-#include "Integer.h"
+#include "integer.hpp"
 
 Integer get_factor(Integer n);
 

@@ -1,7 +1,7 @@
 /***************************** BEGIN ********************************/
 
 #include <stdlib.h>
-#include "Integer.h"
+#include "integer.hpp"
 
 //
 // Constructors

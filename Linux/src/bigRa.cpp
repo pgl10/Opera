@@ -1,6 +1,7 @@
 // bigRa.cpp
 
 #include "bigRa.hpp"
+#include <cmath>
 
 // premier constructeur
 bigRa::bigRa() {
