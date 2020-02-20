@@ -7,15 +7,17 @@ continuer
 frac n
 1+(last>0)*(last<0)
 continuer
-factoriel[n] = 0
+factoriel[0] = 0
 n > 0
 continuer
-factoriel[n] = 1
+del factoriel[0]
+i = 1
+factoriel[i] = 1
 n > 1
 continuer
-factit = 0
-factit < n
+i < n
 boucle
-factit = factit + 1
-factoriel[n] = factoriel[n]*factit
+i = i + 1
+factoriel[i] = factoriel[i-1]*i
 retour
+lister

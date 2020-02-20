@@ -271,3 +271,17 @@ bool nval(std::string& name, Integer& r) {
     return true;                  
 }
 
+// Pour calculer la valeur entière positive ou nulle
+// d'une variable ou d'une expression arithmétique.
+bool ival(std::string& name, int& r) {
+    bigRa x;
+    bool good = eval(name, x);
+    if(!good) return false;
+    if(x.getDen() != 1) return false;
+    Integer n = x.getNum();
+    if(n < 0) return false;
+    r = int(n);
+    return true;                  
+}
+
+

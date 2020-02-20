@@ -14,5 +14,6 @@ bool vval(std::string& name, bigRa& r);
 bool eval(std::string ligne, bigRa& r);
 bool rval(std::string& name, double& r);
 bool nval(std::string& name, Integer& r);
+bool ival(std::string& name, int& r);
 
 #endif // EVAL_HPP

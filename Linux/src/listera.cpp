@@ -84,8 +84,8 @@ void supprimerra(std::string st) {       // pour supprimer une variable
 
 bool renommer(std::string& ligne) {    // pour renommer les variables ayant
     bool good;                         // actuellement pour suffixe une variable
-    do {                               // dont la valeur est un entier positif ou nul
-        good = true;
+    do {                               // ou une expression arithmétique ayant
+        good = true;                   // pour valeur un entier positif ou nul
         std::size_t f1 = ligne.find("[");
         if(f1 == std::string::npos) continue;
         good = false;
@@ -94,21 +94,13 @@ bool renommer(std::string& ligne) {    // pour renommer les variables ayant
         std::string front = ligne.substr(0, f1);
         std::string back = ligne.substr(f2+1);
         std::string ind = ligne.substr(f1+1, f2-f1-1);
-        char* nom = new char[1+ind.size()];
-        strcpy(nom, ind.c_str());
-        elemra* era = chercherra(nom);
-        delete [] nom;
-        if(era == NULL) {
-            aout("il y a un suffixe dont la variable est inconnue\n");
-            return false;
-        }
-        bigRa ra = *era->ra;
-        if(ra.getDen() != 1 || ra.getNum() < 0) {
-            aout("il y a un suffixe dont la variable est invalide\n");
+        int n;
+        if(!ival(ind, n)) {
+            aout("il y a un suffixe dont la valeur est invalide\n");
             return false;
         }
         std::stringstream ss;
-        ss << ra.getNum();
+        ss << n;
         ligne = front + ss.str() + back;
     }while(!good);
     return true;
