@@ -1,4 +1,4 @@
-# Ce fichier de commandes factoriel.txt
+# Ce fichier de commandes factoriel.txt  
 # calcule factoriel[i] = i! pour i = 1 à n
 # avec n connu entier et positif ou nul
 redef oui
