@@ -101,7 +101,7 @@ bool renommer(std::string& ligne) {    // pour renommer les variables ayant
         }
         std::stringstream ss;
         ss << n;
-        ligne = front + ss.str() + back;
+        ligne = front + "_" + ss.str() + back;
     }while(!good);
     return true;
 }

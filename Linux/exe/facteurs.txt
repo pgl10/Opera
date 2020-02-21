@@ -1,5 +1,5 @@
 # Ce fichier de commandes facteurs.txt
-# calcule les np facteurs premiers p1, p2, ...
+# calcule les np facteurs premiers p_1, p_2, ...
 # du nombre n connu entier et positif ou nul.
 redef oui
 # Avec nb et np actuellement inconnus
@@ -51,3 +51,4 @@ retour
 nb = nb/p[np]
 np = np+1
 retour
+lister

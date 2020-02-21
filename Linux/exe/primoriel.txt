@@ -23,3 +23,4 @@ primoriel[n] = primoriel[n]*primit
 primit = primit + 1
 retour
 retour
+lister

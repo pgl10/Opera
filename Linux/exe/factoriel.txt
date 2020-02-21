@@ -1,6 +1,6 @@
 # Ce fichier de commandes factoriel.txt
-# calcule factoriel[n] = n!
-# du nombre n connu entier et positif ou nul
+# calcule factoriel[i] = i! pour i = 1 à n
+# avec n connu entier et positif ou nul
 redef oui
 ilyatil n
 continuer
