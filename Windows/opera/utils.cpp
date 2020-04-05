@@ -2,7 +2,7 @@
 
 #include "utils.hpp"
 
-// Pour supprimer un Ã©ventuel commentaire en fin de ligne
+// Pour supprimer un éventuel commentaire en fin de ligne
 void delcom(std::string& ligne) {
     std::size_t found = ligne.find("#");
     if(found != std::string::npos) ligne = ligne.substr(0, found);
@@ -19,15 +19,15 @@ void outspaces(std::string& line) {
     delete [] chrs;
 }
 
-// Pour supprimer les ' ' au dÃ©but de cette instruction
+// Pour supprimer les ' ' au début de cette instruction
 void firstspaces(std::string& line) {
     unsigned int i=0;
     while(i < line.size() && line[i] == ' ') ++i;
     line = line.substr(i);
 }
 
-// Pour supprimer les ' ' au dÃ©but de cette instruction
-// et conserver les caractÃ¨res avant le ' ' suivant.
+// Pour supprimer les ' ' au début de cette instruction
+// et conserver les caractères avant le ' ' suivant.
 void premiermot(std::string& line) {
     unsigned int i=0;
     while(i < line.size() && line[i] == ' ') ++i;
@@ -57,7 +57,7 @@ bool isname0(const std::string& nom) {
     return true;
 }
 
-// Pour valider un nom de variable ayant Ã©ventuellement plusieurs indices
+// Pour valider un nom de variable ayant éventuellement plusieurs indices
 bool isname(const std::string& nom) {
     char alfa[66] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789[]";
     bool good = false;
@@ -95,9 +95,9 @@ bool isnumb(const std::string& nbr) {
     return true;
 }
 
-// Pour valider un nombre dÃ©cimal positif ou nul
+// Pour valider un nombre décimal positif ou nul
 // Un '.' et un seul est obligatoire 
-// mais ni au dÃ©but ni Ã  la fin.
+// mais ni au début ni à la fin.
 bool isdecim(const std::string& nbr) {
     if(nbr.size() == 0) return false;
     char alfa[11] = "0123456789";
@@ -120,14 +120,14 @@ bool isdecim(const std::string& nbr) {
     return true;
 }
 
-// Pour valider une instruction comportant uniquement un mot-clÃ©
+// Pour valider une instruction comportant uniquement un mot-clé
 bool instr(std::string& cmde, std::string& ligne, std::string keyw) {
     if(ligne == keyw) 
         if(cmde.find(keyw) != std::string::npos) return true;
     return false;
 }
 
-// Pour valider seulement le mot-clÃ© de l'instruction ayant une suite
+// Pour valider seulement le mot-clé de l'instruction ayant une suite
 bool keywd(std::string& line, std::string& ligne, std::string keyw) {
     std::size_t n = keyw.size();
     if(!(line.size() == n && ligne.size() > n)) return false;

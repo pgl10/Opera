@@ -5,18 +5,20 @@ s0 = 2
 s1 = (s0+2/s0)/2
 s2 = (s1+2/s1)/2
 s3 = (s2+2/s2)/2
-convrt s3
+valeur s3
 enti s3*10^5
-# La valeur de s3 a 6 chiffres décimaux exacts !
+# La valeur de s3 a 5 décimales exactes !
 s4 = (s3+2/s3)/2
-convrt s4
-enti s4*10^12
-# La valeur de s4 a 12 chiffres décimaux exacts !
+valeur s4
+enti s4*10^11
+# La valeur de s4 a 11 décimales exactes !
 s5 = (s4+2/s4)/2
-convrt s5
-enti s5*10^24
-# La valeur de s5 a 24 chiffres décimaux exacts !
+valeur s5
+enti s5*10^23
+# La valeur de s5 a 23 décimales exactes !
 s6 = (s5+2/s5)/2
-convrt s6
+valeur s6
 enti s6*10^47
-# La valeur de s6 a 48 chiffres décimaux exacts !
+# La valeur de s6 a 47 décimales exactes !
+garder sqrt2
+# Pour obtenir les variables archivées faire : lire sqrt2

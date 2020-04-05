@@ -1,5 +1,5 @@
 # Approximation de la constante d'Euler 
-# e = 1 + somme{n=1 Ã  l'infini}( 1/n! )
+# e = 1 + somme{n=1 à l'infini}( 1/n! )
 n = 0
 fn = 1
 e = 1
@@ -11,5 +11,5 @@ e = e + 1/fn
 retour
 valeur e
 enti e*10^157
-# (1 + 1/1! + 1/2! + 1/3! + ... + 1/99!) : 157 dÃ©cimales exactes.
+# (1 + 1/1! + 1/2! + 1/3! + ... + 1/99!) : 157 décimales exactes.
 envoyer e e

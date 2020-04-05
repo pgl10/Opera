@@ -2,7 +2,7 @@
 
 #include "factor.hpp"
 
-// Des divisions successives pour chercher un Ã©ventuel facteur premier de n plus petit que 1000.
+// Des divisions successives pour chercher un éventuel facteur premier de n plus petit que 1000.
 bool divisions(Integer& n, int& d) {
     int primes[170] = {
        2,      3,      5,      7,     11,    13,    17,    19,    23,    29,
@@ -65,7 +65,7 @@ Integer get_factor(Integer n) {
    }
    // on choisit : f(x) = (x^2) + c
    // avec c = 1 ou 3 ou ... ou 13
-   // Ã  partir de x0 = 2
+   // à partir de x0 = 2
    Integer p, x = 2;
    int a = 1, i = 0;
    do {
@@ -73,6 +73,6 @@ Integer get_factor(Integer n) {
       if(p > 0) return p;
       i = i+2;
    }while(i < 13);
-   // en cas d'Ã©chec
+   // en cas d'échec
    return 0;
 }

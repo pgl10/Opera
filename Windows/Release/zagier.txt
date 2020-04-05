@@ -1,10 +1,10 @@
 # Ce fichier de commandes zagier.txt montre que 157 est congruent.
 # Un nombre entier n est congruent s'il existe 3 nombres 
-# rationnels a, b et c tels que aÂ² + bÂ² = cÂ² et n = ab/2
+# rationnels a, b et c tels que a² + b² = c² et n = ab/2
 # Voir : https://fr.wikipedia.org/wiki/Nombre_congruent
-# Zagier a dÃ©montrÃ© que 157 est congruent. 
+# Zagier a démontré que 157 est congruent. 
 # Voir : http://serge.mehl.free.fr/chrono/Zagier.html
-# Le triplet (a, b, c) appropriÃ© pour n = 157 est : 
+# Le triplet (a, b, c) approprié pour n = 157 est : 
 a = 6803298487826435051217540/411340519227716149383203
 b = 411340519227716149383203/21666555693714761309610
 c = 224403517704336969924557513090674863160948472041/8912332268928859588025535178967163570016480830 
@@ -13,4 +13,4 @@ b2 = b*b
 c2 = c*c
 d2 = (a2 + b2) - c2
 n = (a*b)/2
-# Comme prÃ©vu on a bien obtenu : d2 = 0 et n = 157
+# Comme prévu on a bien obtenu : d2 = 0 et n = 157

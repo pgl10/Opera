@@ -91,8 +91,8 @@ bool supprimerra(int nv, std::string st) {
 }
 
 // Pour renommer les variables ayant pour indice une constante ou une variable
-// ou une expression arithmÃ©tique dont la valeur actuelle est un entier positif ou nul
-// Au k-iÃ¨me tour du for(;;){} on effectue le traitement du k-iÃ¨me [...]
+// ou une expression arithmétique dont la valeur actuelle est un entier positif ou nul
+// Au k-ième tour du for(;;){} on effectue le traitement du k-ième [...]
 bool renommer(std::string& ligne) {
     ligne = "a" + ligne;
     for(int k=1;;k++) {

@@ -2,8 +2,8 @@
 
 #include "eval.hpp"
 
-// Calcul de la partie entiÃ¨re de
-// la racine n-iÃ¨me de l'entier x > 0
+// Calcul de la partie entière de
+// la racine n-ième de l'entier x > 0
 Integer racine(int n, Integer x) {
     if(x == 0 || x == 1) return x;
     Integer a = 1, b = x, r;    
@@ -46,7 +46,7 @@ bigRa decimal(std::string str) {
 }
 
 // Pour obtenir la valeur d'un entier ou 
-// d'un nombre dÃ©cimal ou d'une variable
+// d'un nombre décimal ou d'une variable
 bool cval(std::string str, bigRa& r) {
     int s = 1;
     if(str.size() > 0 && str[0] == '-') {
@@ -72,14 +72,14 @@ bool cval(std::string str, bigRa& r) {
     return false;    
 }
 
-// Pour calculer le contenu des parenthÃ¨ses
+// Pour calculer le contenu des parenthèses
 bool parentheses(std::string& ligne) {
     std::string ops = "^/*-+<>";
     bool pars;
     do {
         pars = false;
         std::size_t found = ligne.find('(');
-        // S'il y a encore des parenthÃ¨ses dans ligne
+        // S'il y a encore des parenthèses dans ligne
         if(found != std::string::npos) {
             pars = true;
             std::string front, back;
@@ -101,14 +101,14 @@ bool parentheses(std::string& ligne) {
                 suiv = suiv + 1;
             }
             if(last == std::string::npos) return false;
-            // ligne[found] = '(' correspond Ã  ligne[last] = ')'
+            // ligne[found] = '(' correspond à ligne[last] = ')'
             if(last == ligne.size()-1) back = "";
             else {
                 back = ligne.substr(last+1);
                 if(ops.find(back[0]) == std::string::npos) return false;
             }
             std::string subligne = ligne.substr(found+1, last-found-1);
-            // S'il faut effectuer le mÃªme traitement Ã  subligne 
+            // S'il faut effectuer le même traitement à subligne 
             if(subligne.find('(') != std::string::npos) parentheses(subligne);
             bigRa subval;
             if(eval(subligne, subval)) {
@@ -129,21 +129,21 @@ bool parentheses(std::string& ligne) {
 }
 
 void irrationnel() {
-    aout("Avec cet exposant le rÃ©sultat est un nombre irrationnel\n");
-    aout("dont la valeur obtenue est nÃ©cessairement une approximation.\n");
+    aout("Avec cet exposant le résultat est un nombre irrationnel\n");
+    aout("dont la valeur obtenue est nécessairement une approximation.\n");
 }
 
-// Pour calculer la valeur d'une instruction dÃ©finie
+// Pour calculer la valeur d'une instruction définie
 bool eval(std::string ligne, bigRa& r) {
     if(ligne.size() == 0) return false;
     std::string ops = "^/*-+<>";
     std::size_t found;
     found = ops.find(ligne[ligne.size()-1]);
-    // le dernier caractÃ¨re de ligne ne doit pas Ãªtre un opÃ©rateur
+    // le dernier caractère de ligne ne doit pas être un opérateur
     if(found != std::string::npos) return false;
     if(!parentheses(ligne)) return false;
     if(cval(ligne, r)) return true;
-    // ligne[pos] est-il un opÃ©rateur ayant 2 opÃ©randes ?
+    // ligne[pos] est-il un opérateur ayant 2 opérandes ?
     std::size_t pos=std::string::npos;
     found = ligne.find_last_of("^");
     if(found != std::string::npos) pos=found;
@@ -166,8 +166,8 @@ bool eval(std::string ligne, bigRa& r) {
             ligne = "0" + ligne;
             pm = pm+1;
         }
-        // bon = true  pour l'opÃ©rateur - Ã  deux opÃ©randes
-        // bon = false pour l'opÃ©rateur - Ã  un seul argument
+        // bon = true  pour l'opérateur - à deux opérandes
+        // bon = false pour l'opérateur - à un seul argument
         if(bon) pos = pm;
     }
     found = ligne.find_last_of("+");
@@ -176,20 +176,20 @@ bool eval(std::string ligne, bigRa& r) {
     if(found != std::string::npos) pos=found;
     found = ligne.find_last_of(">");
     if(found != std::string::npos) pos=found;
-    // s'il n'y a ici aucun opÃ©rateur : instruction non reconnue
+    // s'il n'y a ici aucun opérateur : instruction non reconnue
     if(pos == std::string::npos) return false;
-    // si un opÃ©rateur binaire est au dÃ©but ou Ã  la fin de ligne
+    // si un opérateur binaire est au début ou à la fin de ligne
     // l'instruction ne sera pas reconnue
     if(pos==(ligne.size()-1) || pos==0) return false;
     std::string left = ligne.substr(0, pos);
     std::string right = ligne.substr(pos+1);
-    // r1 et r2 seront les deux opÃ©randes
+    // r1 et r2 seront les deux opérandes
     bigRa r1, r2;
     if(!cval(left, r1)) 
         if(!eval(left, r1)) return false;
     if(!cval(right, r2)) 
         if(!eval(right, r2)) return false;
-    // calcul final du rÃ©sultat
+    // calcul final du résultat
     if(ligne[pos] == '^') {
         if(r2.getDen() > INT_MAX) {
             std::cout << "exponentiation hors limites" << std::endl;
@@ -247,7 +247,7 @@ bool eval(std::string ligne, bigRa& r) {
     return true;
 }
 
-// Pour convertir en nombre rÃ©el le rÃ©sultat obtenu
+// Pour convertir en nombre réel le résultat obtenu
 bool rval(std::string& name, double& r) {
     r = 0.0;
     bigRa x;
@@ -257,8 +257,8 @@ bool rval(std::string& name, double& r) {
     return true;                  
 }
 
-// Pour calculer la partie entiÃ¨re d'une variable
-// ou d'une expression arithmÃ©tique.
+// Pour calculer la partie entière d'une variable
+// ou d'une expression arithmétique.
 bool nval(std::string& name, Integer& r) {
     bigRa x;
     bool good = eval(name, x);
@@ -267,8 +267,8 @@ bool nval(std::string& name, Integer& r) {
     return true;                  
 }
 
-// Pour calculer la valeur entiÃ¨re positive ou nulle
-// d'une variable ou d'une expression arithmÃ©tique.
+// Pour calculer la valeur entière positive ou nulle
+// d'une variable ou d'une expression arithmétique.
 bool ival(std::string& name, int& r) {
     bigRa x;
     bool good = eval(name, x);

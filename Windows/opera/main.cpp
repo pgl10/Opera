@@ -1,5 +1,5 @@
 /*******************************************************************************
-*  Opera : calculs arithmÃ©tiques avec des nombres rationnels de grande taille  *
+*  Opera : calculs arithmétiques avec des nombres rationnels de grande taille  *
 *       par : pgl10   -   utilisation : opera  ou : opera fichier.txt          *
 *******************************************************************************/
 
@@ -9,14 +9,14 @@ int lect = 0;
 std::list<Var> listera;
 std::list<Trans> listetrv;
 // listetrv est une liste de Trans. 
-// La premiÃ¨re pour le niveau 1 de fonctionnement ... La derniÃ¨re pour le
+// La première pour le niveau 1 de fonctionnement ... La dernière pour le
 // niveau actuel de fonctionnement. En mode conversationnel listetrv est vide.
 
 void aide() {
-    aout("\nOpera utilise les 7 opÃ©rateurs binaires :  ^  /  *  -  +  <  >   \n");
-    aout("avec cet ordre de prioritÃ©s et l'opÃ©rateur - ayant un seul opÃ©rande.\n");
-    aout("Les constantes admises sont les nombres entiers et les nombres dÃ©cimaux.\n");
-    aout("Opera effectue des expressions arithmÃ©tiques et les commandes suivantes :\n");
+    aout("\nOpera utilise les 7 opérateurs binaires :  ^  /  *  -  +  <  >   \n");
+    aout("avec cet ordre de priorités et l'opérateur - ayant un seul opérande.\n");
+    aout("Les constantes admises sont les nombres entiers et les nombres décimaux.\n");
+    aout("Opera effectue des expressions arithmétiques et les commandes suivantes :\n");
     aout("exec, copier, renvoyer, recevoir, envoyer, supprimer, aide, pause, lister,\n");
     aout("noter, garder, lire, valeur, nbch, enti, frac, num, den, continuer, quitter,\n");
     aout("boucle, retour, exit, pgcd, ppcm, facteur, prem.\n");
@@ -41,8 +41,8 @@ void fermeture() {
 }
 
 int main(int argc, char *argv[]) {
-    aout("\nCalculs arithmÃ©tiques avec des nombres rationnels de grande taille\n");
-    // filesin[i] utilisable avec i de 1 Ã  9 pour les niveaux 1 Ã  9 de fonctionnement.
+    aout("\nCalculs arithmétiques avec des nombres rationnels de grande taille\n");
+    // filesin[i] utilisable avec i de 1 à 9 pour les niveaux 1 à 9 de fonctionnement.
     std::ifstream filesin[10];
     // copier = true par l'instruction "exec" pour autoriser l'instruction "copier"
     // copier = false par l'instruction "copier" pour "copier" en premier uniquement.
@@ -69,7 +69,7 @@ int main(int argc, char *argv[]) {
     }
     if(lect == 0) {
         aout("Pour le mode d'emploi consultez le fichier Opera.pdf\n");
-        aout("Pour une aide immÃ©diate entrez : aide\n");
+        aout("Pour une aide immédiate entrez : aide\n");
     }
     std::vector<std::streamoff> ret;
     std::streamoff back, here=-1;
@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
         if(ligne[0] == '#') continue;
         delcom(ligne);
         if(!renommer(ligne)) {
-            aout("Cette instruction n'est pas effectuÃ©e : indice invalide.\n");
+            aout("Cette instruction n'est pas effectuée : indice invalide.\n");
             continue;
         }
         // cmde : l'instruction actuelle sans les premiers ' ' et sans commentaire
@@ -120,7 +120,7 @@ int main(int argc, char *argv[]) {
                 }
             if(!done) listera.erase(vt);
         }
-        // L'instruction "copier" est nÃ©cessairement la premiÃ¨re d'un fichier de commandes
+        // L'instruction "copier" est nécessairement la première d'un fichier de commandes
         if(copier && keywd(line, ligne, "copier")) {
             if(lect == 0) continue;
             char* chrs = new char[1+cmde.size()];
@@ -161,7 +161,7 @@ int main(int argc, char *argv[]) {
                     archiverra(lect, tr.getNew()[i], x);
                 else {
                     aout("L'une des variables qu'il fallait copier\n");
-                    aout("n'a pas Ã©tÃ© trouvÃ©e : fin de session.\n");
+                    aout("n'a pas été trouvée : fin de session.\n");
                     pause();
                     return 1;
                 }
@@ -214,17 +214,17 @@ int main(int argc, char *argv[]) {
             here = -1;
             copier = true;
             lect = lect + 1;
-            // Pour crÃ©er last dans le fichier appelÃ©
+            // Pour créer last dans le fichier appelé
             archiverra(lect, "last", br0);
             continue;
         }
-        // La commande "renvoyer var" met Ã  jour dans le fichier appelant
-        // la variable associÃ©e Ã  la variable locale var du fichier appelÃ©.
+        // La commande "renvoyer var" met à jour dans le fichier appelant
+        // la variable associée à la variable locale var du fichier appelé.
         if(keywd(line, ligne, "renvoyer")) {
             if(lect == 0) continue;
             std::string name = ligne.substr(8);
             if(name == "last" ) {
-                aout("La variable last ne peut pas Ãªtre renvoyÃ©e.\n");
+                aout("La variable last ne peut pas être renvoyée.\n");
                 continue;
             }
             Trans tr = listetrv.back();
@@ -243,9 +243,9 @@ int main(int argc, char *argv[]) {
             if(!done) std::cout << "Renvoyer " << name << " est impossible." << std::endl;
             continue;
         }
-        // La commande "prochain res" permet de crÃ©er dans le fichier de commandes appelant 
-        // une variable indicÃ©e ayant la valeur actuelle de last et le nom associÃ© Ã  l'argument res
-        // avec l'indice associÃ© Ã  res incrÃ©mentÃ© Ã  chaque utilisation.
+        // La commande "prochain res" permet de créer dans le fichier de commandes appelant 
+        // une variable indicée ayant la valeur actuelle de last et le nom associé à l'argument res
+        // avec l'indice associé à res incrémenté à chaque utilisation.
         if(keywd(line, ligne, "prochain")) {
             if(lect == 0) continue;
             std::string name = ligne.substr(8);
@@ -258,8 +258,8 @@ int main(int argc, char *argv[]) {
                     vui = tr.getIndic();
                     unsigned int ui = vui[i];
                     ++ui;
-                    // Pour supprimer un ancien rÃ©sultat analogue Ã©ventuel
-                    // dont la suite a le mÃªme nom avant chaque indice.
+                    // Pour supprimer un ancien résultat analogue éventuel
+                    // dont la suite a le même nom avant chaque indice.
                     if(ui == 1) {
                         std::list<Var>::iterator vt;
                         bool fini = false;
@@ -285,7 +285,7 @@ int main(int argc, char *argv[]) {
                     std::cout << var << " = " << x << std::endl;
                     vui[i] = ui;
                     tr.setIndic(vui);
-                    // Mise Ã  jour de listetrv
+                    // Mise à jour de listetrv
                     listetrv.pop_back();
                     listetrv.push_back(tr);
                     done = true;
@@ -294,7 +294,7 @@ int main(int argc, char *argv[]) {
             if(!done) std::cout << "Prochain " << name << " est impossible." << std::endl;
             continue;
         }
-        // La commande "recevoir var don" permet de crÃ©er ou de modifier 
+        // La commande "recevoir var don" permet de créer ou de modifier 
         // la variable locale var avec la valeur de la variable principale don
         if(keywd(line, ligne, "recevoir")) {
             if(lect == 0) continue;
@@ -316,9 +316,9 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        // La commande "envoyer var res" permet de crÃ©er la variable principale res 
+        // La commande "envoyer var res" permet de créer la variable principale res 
         // si elle n'existe pas encore avec la valeur de la variable locale var 
-        // Si non on crÃ©e une nouvelle variable principale nommÃ©e var[2] ou var[3] ou etc. 
+        // Si non on crée une nouvelle variable principale nommée var[2] ou var[3] ou etc. 
         if(keywd(line, ligne, "envoyer")) {
             if(lect == 0) continue;
             std::stringstream ss(cmde);
@@ -374,7 +374,7 @@ int main(int argc, char *argv[]) {
             continue;
         }
         // Pour noter toutes les variables du niveau actuel
-        // Si le fichier filename existe dÃ©jÃ  l'archivage est refusÃ©.
+        // Si le fichier filename existe déjà l'archivage est refusé.
         if(keywd(line, ligne, "noter")) {
             std::string filename = ligne.substr(5);
             std::ifstream filein(filename.c_str(), std::ifstream::in);
@@ -385,7 +385,7 @@ int main(int argc, char *argv[]) {
             }  
             std::ofstream fileout(filename.c_str(), std::ofstream::out);
             if(!fileout.good()) {
-                aout("Le fichier d'archivage n'a pas pu Ãªtre crÃ©Ã©.\n");
+                aout("Le fichier d'archivage n'a pas pu être créé.\n");
                 continue;
             }  
             for(std::list<Var>::iterator it=listera.begin(); it!=listera.end(); ++it)
@@ -400,7 +400,7 @@ int main(int argc, char *argv[]) {
             continue;
         }
         // Pour garder toutes les variables du niveau actuel
-        // Si le fichier filename existe dÃ©jÃ  : il est remplacÃ©
+        // Si le fichier filename existe déjà : il est remplacé
         if(keywd(line, ligne, "garder")) {
             std::string filename = ligne.substr(6);
             bool newfile = true;
@@ -411,7 +411,7 @@ int main(int argc, char *argv[]) {
             }  
             std::ofstream fileout(filename.c_str(), std::ofstream::out);
             if(!fileout.good()) {
-                aout("Le fichier dÃ©signÃ© n'a pas pu Ãªtre crÃ©Ã©.\n");
+                aout("Le fichier désigné n'a pas pu être créé.\n");
                 continue;
             }  
             for(std::list<Var>::iterator it=listera.begin(); it!=listera.end(); ++it)
@@ -428,12 +428,12 @@ int main(int argc, char *argv[]) {
             }
             else {
                 std::cout << "Le fichier " << filename;
-                aout(" est remplacÃ©.\n");
+                aout(" est remplacé.\n");
                 continue;
             }
         }
-        // Pour crÃ©er ou mettre Ã  jour au niveau actuel toutes les variables qui sont disponibles
-        // dans un fichier obtenu prÃ©cÃ©demment avec la commande "noter" ou la commande "garder"
+        // Pour créer ou mettre à jour au niveau actuel toutes les variables qui sont disponibles
+        // dans un fichier obtenu précédemment avec la commande "noter" ou la commande "garder"
         if(keywd(line, ligne, "lire")) {
             std::string filename = ligne.substr(4);
             std::ifstream filein(filename.c_str(), std::ifstream::in);
@@ -472,8 +472,8 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        // Pour afficher le nombre de chiffres dÃ©cimaux significatifs
-        // de la partie entiÃ¨re d'une variable ou d'une expression
+        // Pour afficher le nombre de chiffres décimaux significatifs
+        // de la partie entière d'une variable ou d'une expression
         if(keywd(line, ligne, "nbch")) {
             std::string st = ligne.substr(4);
             Integer n;
@@ -495,7 +495,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        // Pour calculer de la partie entiÃ¨re d'une variable ou d'une expression
+        // Pour calculer de la partie entière d'une variable ou d'une expression
         if(keywd(line, ligne, "enti")) {
             std::string st = ligne.substr(4);
             Integer n;
@@ -530,7 +530,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        // Pour calculer le numÃ©rateur d'une variable ou d'une expression
+        // Pour calculer le numérateur d'une variable ou d'une expression
         if(keywd(line, ligne, "num")) {
             std::string st = ligne.substr(3);
             bigRa x;
@@ -545,7 +545,7 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        // Pour calculer le dÃ©nominateur d'une variable ou d'une expression
+        // Pour calculer le dénominateur d'une variable ou d'une expression
         if(keywd(line, ligne, "den")) {
             std::string st = ligne.substr(3);
             bigRa x;
@@ -621,7 +621,7 @@ int main(int argc, char *argv[]) {
             modifierra(lect, "last", brr);
             continue;
         }
-        // Pour calculer la primalitÃ© d'une variable ou d'une expression
+        // Pour calculer la primalité d'une variable ou d'une expression
         // ayant pour valeur un entier
         if(keywd(line, ligne, "prem")) {
             std::string st = ligne.substr(4);
@@ -658,7 +658,7 @@ int main(int argc, char *argv[]) {
             Integer r = x.getNum();
             if(r < 0) r = -r;
             if(!isprime(r)) r = get_factor(r);
-            if(r == 0) aout("Algorithme rho en Ã©chec.\n");
+            if(r == 0) aout("Algorithme rho en échec.\n");
             else std::cout << r << std::endl;
             bigRa brr = bigRa(r);
             modifierra(lect, "last", brr);
@@ -691,20 +691,20 @@ int main(int argc, char *argv[]) {
         // Pour effectuer l'instruction : "boucle"
         if(instr(cmde, ligne, "boucle")) {
             if(lect == 0) continue;
-            // si cette boucle n'est pas encore dÃ©jÃ  notÃ©e : on la note
+            // si cette boucle n'est pas encore déjà notée : on la note
             if((ret.size() == 0) || (ret.size() != 0 && ret[ret.size()-1] != back)) {
-                if(back == -1) { // si l'instruction prÃ©cÃ©dente n'existe pas
+                if(back == -1) { // si l'instruction précédente n'existe pas
                     aout("Instruction boucle invalide : fin de session.\n");
                     pause();
                     return 1;
                 }
                 ret.push_back(back);
             }
-            // si l'instruction prÃ©cÃ©dente est une condition positive : on continue
+            // si l'instruction précédente est une condition positive : on continue
             bigRa x;
             chercherra(lect, "last", x);
             if(cmpRa(x, br0) > 0) continue;
-            // si non : on efface la note et on va aprÃ¨s son retour correspondant
+            // si non : on efface la note et on va après son retour correspondant
             else {
                 ret.pop_back();
                 int nret = 1;
@@ -738,19 +738,19 @@ int main(int argc, char *argv[]) {
         if(keywd(line, ligne, "supprimer")) {
             std::string var = ligne.substr(9);
             if(var == "last" ) {
-                aout("La variable last ne peut pas Ãªtre supprimÃ©e.\n");
+                aout("La variable last ne peut pas être supprimée.\n");
                 continue;
             }
             if(supprimerra(lect, var)) {
                 std::cout << var;
-                aout(" est supprimÃ©.\n");
+                aout(" est supprimé.\n");
             }
             else std::cout << "Variable inconnue." << std::endl;
             continue;
         }
         // Pour terminer cette session
         if(instr(cmde, ligne, "exit")) break;
-        // Pour Ã©valuer une expression arithmÃ©tique
+        // Pour évaluer une expression arithmétique
         std::size_t found = ligne.find("=");
         if(found == std::string::npos) {
             if(ligne.size() == 0) continue;
@@ -778,7 +778,7 @@ int main(int argc, char *argv[]) {
                 continue;
             }
             if(res == "last" ) {
-                aout("La variable last n'est modifiable que par un rÃ©sultat qui la prÃ©cÃ¨de.\n");
+                aout("La variable last n'est modifiable que par un résultat qui la précède.\n");
                 continue;
             }
             bigRa v;
