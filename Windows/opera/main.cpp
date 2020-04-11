@@ -17,9 +17,9 @@ void aide() {
     aout("avec cet ordre de priorités et l'opérateur - ayant un seul opérande.\n");
     aout("Les constantes admises sont les nombres entiers et les nombres décimaux.\n");
     aout("Opera effectue des expressions arithmétiques et les commandes suivantes :\n");
-    aout("exec, copier, renvoyer, recevoir, envoyer, supprimer, aide, pause, lister,\n");
-    aout("noter, garder, lire, valeur, nbch, enti, frac, num, den, continuer, quitter,\n");
-    aout("boucle, retour, exit, pgcd, ppcm, facteur, prem.\n");
+    aout("exec, copier, renvoyer, prochain, recevoir, envoyer, supprimer, aide, pause,\n");
+    aout("lister, noter, garder, lire, valeur, nbch, enti, frac, num, den, continuer,\n");
+    aout("quitter, si, boucle, retour, exit, pgcd, ppcm, facteur, prem.\n");
 }    
 
 void fermeture() {
@@ -73,12 +73,19 @@ int main(int argc, char *argv[]) {
     }
     std::vector<std::streamoff> ret;
     std::streamoff back, here=-1;
+    bool jump = false;
     for(;;) {
         std::string ligne;
         if(lect > 0) {
             back = here;
             here = filesin[lect].tellg();
             std::getline(filesin[lect], ligne);
+            if(jump) {
+                back = here;
+                here = filesin[lect].tellg();
+                std::getline(filesin[lect], ligne);
+                jump = false;
+            }
             if(!filesin[lect].good()) {
                 filesin[lect].close();
                 fermeture();
@@ -687,6 +694,19 @@ int main(int argc, char *argv[]) {
                 continue;
             }
             else continue;
+        }
+        // Exemple : si expr
+        // Pour sauter une instruction si expr est nulle ou négative
+        if(keywd(line, ligne, "si")) {
+            if(lect == 0) continue;
+            std::string st = ligne.substr(2);
+            bigRa x;
+            if(!eval(st, x)) {
+                aout("Instruction non reconnue.\n");
+                continue;
+            }
+            if(cmpRa(x, br0) > 0) continue;
+            else {jump = true; continue;}
         }
         // Pour effectuer l'instruction : "boucle"
         if(instr(cmde, ligne, "boucle")) {

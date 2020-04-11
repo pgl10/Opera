@@ -9,7 +9,7 @@ Each number of this class has a name and its value. These numbers may be defined
 <br>
 The code is able to perform seven arithmetic operations. The user can enter commands on the keyboard but he can also use files of commands. The syntax of these commands is very simple. And here i = 1/0 = infinity can be used as other rational numbers.<br>
 <br>
-Opera is available on Windows and Linux : source, project, executable, examples, documentation<br>
+Opera is available on Windows and Linux : source, project, executable, examples, documentation.<br>
 <br>
-You may have a look at the file : Opera.pdf<br>
+You may have a look at the file : Opera.pdf <br>
 <br>

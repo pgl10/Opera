@@ -1,0 +1,9 @@
+# Ce fichier de commandes racine.txt
+# calcule la racine carrée r de la valeur absolue de n
+# Exemple avec x=10201 et s=0 : exec racine.txt x,s
+# C'est aussi une démonstration de la commande "si"
+copier n,r
+si n < 0
+n = -n
+r = n^(1/2)
+renvoyer r

@@ -9,11 +9,8 @@ n > 1
 continuer
 p = n + 1
 den p/2
-last < 2
-boucle
+si last < 2
 p = p + 1
-2
-retour
 0 < 1
 boucle
 prem p
