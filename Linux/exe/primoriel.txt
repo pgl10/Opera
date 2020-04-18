@@ -13,10 +13,7 @@ i < n
 boucle
 i = i + 1
 prem i
-last > 0
-boucle
+si last > 0
 p = p*i
-0
-retour
 retour
 renvoyer p

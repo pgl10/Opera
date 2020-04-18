@@ -406,25 +406,18 @@ bigRa nroot(bigRa x, int n, int k) {
         if(cmpRa(x, 1) < 0) return bigRa(0); else return bigRa(1, 0);}
     if(n == 1) return x;
     if(k < 1)  return bigRa(0);
-    bigRa a, b;
-    if(cmpRa(x, 1) < 0) {
-        a=x;
-        b=bigRa(1);
-	}
-	else {
-        a=bigRa(1);
-        b=x;
-    }
     bigRa dk = bigRa(10).puissance(k);
     bigRa eps = x/dk;
-    bigRa r, rn, dif;
+    bigRa r = x, dif;
     do {
-        r = (a+b)/bigRa(2);
-        rn = bigRa(1);
+        // r = [(n-1)*r+x/r^(n-1)]/n
+        bigRa rn1 = bigRa(1);
+        for(int i=0; i<n-1; i++) rn1 = rn1*r;
+        bigRa n1 = bigRa(n-1);
+        r = (n1*r + x/rn1)/bigRa(n);
+        bigRa rn = bigRa(1);
         for(int i=0; i<n; i++) rn = rn*r;
         if(cmpRa(rn, x) == 0) return r;
-        else if(cmpRa(rn, x) < 0) a = r;
-        else b = r;
         dif = rn-x;
         if(cmpRa(dif, bigRa(0)) < 0) dif = -dif;
     }while(cmpRa(dif, eps) > 0);
