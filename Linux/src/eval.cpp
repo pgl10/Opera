@@ -226,8 +226,8 @@ bool eval(std::string ligne, bigRa& r) {
             }
             if(!good) {
                 r1 = t1;
-                if(sr1 > 0) r1 = nroot(r1, n2d, 15);
-                else r1 = -nroot(-r1, n2d, 15);
+                if(sr1 > 0) r1 = nroot(r1, n2d, 16);
+                else r1 = -nroot(-r1, n2d, 16);
             }
         }
         if(r2.getNum() > INT_MAX) {

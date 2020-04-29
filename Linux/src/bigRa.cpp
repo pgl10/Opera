@@ -396,7 +396,36 @@ double root(bigRa x, int n, int k) {
     return r;
 }
 
-// Pour calculer en bigRa une approximation r 
+// Approximation par dichotomie de la racine n-ième de x
+// où x > 0 et n > 1 pour servir de valeur initiale dans nroot()
+bigRa iniroot(bigRa x, int n) {
+    bigRa b1 = bigRa(1);
+    bigRa dif = x/100000000;
+    bigRa a, b, r;    
+    if(cmpRa(x, b1) > 0) {
+        a = b1;
+        b = x;
+    }
+    else {
+        a = x;
+        b = b1;
+    }
+    do {         
+        r = (a + b) / 2; 
+        bigRa rn = r.puissance(n);
+        if(cmpRa(rn, x) < 0) {
+            if(cmpRa(x-rn, dif) < 0) return r; 
+            a = r;
+        }
+        else {
+            if(cmpRa(rn-x, dif) < 0) return r; 
+            b = r; 
+        }        
+    }while(cmpRa(a, b) < 0);
+    return r; 
+}
+
+// Méthode de Newton pour calculer en bigRa une approximation r 
 // de la n-ième racine de x > 0 telle que : |x-r^n| < x/10^k
 bigRa nroot(bigRa x, int n, int k) {
     if(cmpRa(x, 0) <= 0) return bigRa(0);
@@ -408,19 +437,19 @@ bigRa nroot(bigRa x, int n, int k) {
     if(k < 1)  return bigRa(0);
     bigRa dk = bigRa(10).puissance(k);
     bigRa eps = x/dk;
-    bigRa r = x, dif;
+    bigRa r = iniroot(x, n);
+    bigRa b0=bigRa(0), b1=bigRa(1), bn=bigRa(n), bn1=bigRa(n-1);
+    bigRa rn, rn1, dif;
     do {
         // r = [(n-1)*r+x/r^(n-1)]/n
-        bigRa rn1 = bigRa(1);
-        for(int i=0; i<n-1; i++) rn1 = rn1*r;
-        bigRa n1 = bigRa(n-1);
-        r = (n1*r + x/rn1)/bigRa(n);
-        bigRa rn = bigRa(1);
-        for(int i=0; i<n; i++) rn = rn*r;
-        if(cmpRa(rn, x) == 0) return r;
+        rn1 = r.puissance(n-1);
+        r = (bn1*r + x/rn1)/bn;
+        rn = r.puissance(n);
         dif = rn-x;
-        if(cmpRa(dif, bigRa(0)) < 0) dif = -dif;
+        if(cmpRa(dif, b0) < 0) dif = -dif;
     }while(cmpRa(dif, eps) > 0);
+    rn1 = rn/r;
+    r = (bn1*r + x/rn1)/bn;
     return r;
 }
 

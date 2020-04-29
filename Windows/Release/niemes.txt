@@ -1,0 +1,16 @@
+# Des exemples de racines n-ièmes approximées 
+x1 = 1234567890123456789012345678901234567/77
+n1 = 5
+r1 = x1^(1/n1)
+valeur r1
+valeur (r1^n1-x1)/x1
+xi = 1/x1
+ni = 7
+ri = xi^(1/ni)
+valeur ri
+valeur (ri^ni-xi)/xi
+x2 = x1*x1
+n2 = 9
+r2 = x2^(1/n2)
+valeur r2
+valeur (r2^n2-x2)/x2
