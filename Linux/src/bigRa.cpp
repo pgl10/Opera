@@ -396,60 +396,37 @@ double root(bigRa x, int n, int k) {
     return r;
 }
 
-// Approximation par dichotomie de la racine n-ième de x
-// où x > 0 et n > 1 pour servir de valeur initiale dans nroot()
-bigRa iniroot(bigRa x, int n) {
-    bigRa b1 = bigRa(1);
-    bigRa dif = x/100000000;
-    bigRa a, b, r;    
-    if(cmpRa(x, b1) > 0) {
-        a = b1;
-        b = x;
-    }
-    else {
-        a = x;
-        b = b1;
-    }
-    do {         
-        r = (a + b) / 2; 
-        bigRa rn = r.puissance(n);
-        if(cmpRa(rn, x) < 0) {
-            if(cmpRa(x-rn, dif) < 0) return r; 
-            a = r;
-        }
-        else {
-            if(cmpRa(rn-x, dif) < 0) return r; 
-            b = r; 
-        }        
-    }while(cmpRa(a, b) < 0);
-    return r; 
-}
-
-// Méthode de Newton pour calculer en bigRa une approximation r 
+// Pour calculer en bigRa une approximation r 
 // de la n-ième racine de x > 0 telle que : |x-r^n| < x/10^k
 bigRa nroot(bigRa x, int n, int k) {
-    if(cmpRa(x, 0) <= 0) return bigRa(0);
-    if(cmpRa(x, 1) == 0) return bigRa(1);
-    if(n < 0)  return bigRa(0);
+    bigRa br0=bigRa(0), br1=bigRa(1), br2=bigRa(2);
+    if(cmpRa(x, 0) <= 0) return br0;
+    if(cmpRa(x, 1) == 0) return br1;
+    if(n < 0)  return br0;
     if(n == 0) {
-        if(cmpRa(x, 1) < 0) return bigRa(0); else return bigRa(1, 0);}
+        if(cmpRa(x, 1) < 0) return br0; else return bigRa(1, 0);}
     if(n == 1) return x;
-    if(k < 1)  return bigRa(0);
+    if(k < 1)  return br0;
+    bigRa a, b;
+    if(cmpRa(x, br1) < 0) {
+        a=x;
+        b=br1;
+	}
+	else {
+        a=br1;
+        b=x;
+    }
     bigRa dk = bigRa(10).puissance(k);
     bigRa eps = x/dk;
-    bigRa r = iniroot(x, n);
-    bigRa b0=bigRa(0), b1=bigRa(1), bn=bigRa(n), bn1=bigRa(n-1);
-    bigRa rn, rn1, dif;
+    bigRa r, rn, dif;
     do {
-        // r = [(n-1)*r+x/r^(n-1)]/n
-        rn1 = r.puissance(n-1);
-        r = (bn1*r + x/rn1)/bn;
+        r = (a+b)/br2;
         rn = r.puissance(n);
+        if(cmpRa(rn, x) < 0) a = r;
+        else b = r;
         dif = rn-x;
-        if(cmpRa(dif, b0) < 0) dif = -dif;
+        if(cmpRa(dif, br0) < 0) dif = -dif;
     }while(cmpRa(dif, eps) > 0);
-    rn1 = rn/r;
-    r = (bn1*r + x/rn1)/bn;
     return r;
 }
 

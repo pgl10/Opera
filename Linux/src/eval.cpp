@@ -192,7 +192,7 @@ bool eval(std::string ligne, bigRa& r) {
     // calcul final du résultat
     if(ligne[pos] == '^') {
         if(r2.getDen() > INT_MAX) {
-            std::cout << "exponentiation hors limites" << std::endl;
+            std::cout << "Exponentiation hors limites" << std::endl;
             return false;
         }
         int n2d = r2.getDen();
@@ -201,7 +201,7 @@ bool eval(std::string ligne, bigRa& r) {
             int sr1 = 1;
             if(cmpRa(r1, 0) < 0) {
                 if((n2d&1) == 0) {
-                    aout("ce calcul est impossible.\n");
+                    aout("Ce calcul est impossible.\n");
                     return false;
                 }
                 sr1 = -1; 
@@ -226,12 +226,12 @@ bool eval(std::string ligne, bigRa& r) {
             }
             if(!good) {
                 r1 = t1;
-                if(sr1 > 0) r1 = nroot(r1, n2d, 16);
-                else r1 = -nroot(-r1, n2d, 16);
+                if(sr1 > 0) r1 = nroot(r1, n2d, 64);
+                else r1 = -nroot(-r1, n2d, 64);
             }
         }
         if(r2.getNum() > INT_MAX) {
-            std::cout << "exponentiation hors limites" << std::endl;
+            std::cout << "Exponentiation hors limites" << std::endl;
             return false;
         }
         int n2n = r2.getNum();
