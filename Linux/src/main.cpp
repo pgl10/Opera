@@ -37,6 +37,7 @@ void fermeture() {
     }
     // Pour supprimer la transmission de variables devenue inutile
     listetrv.pop_back();
+    // Pour aller au niveau précédent
     if(lect > 0) lect = lect - 1;
 }
 
@@ -62,7 +63,7 @@ int main(int argc, char *argv[]) {
         Trans tr0(file);
         tr0.setNiv(1);
         listetrv.push_back(tr0);    }
-    if(argc > 2) {
+        if(argc > 2) {
         std::cout << "\nFaire : opera.exe ou bien : opera fichier.txt\n";
         pause();
         return 1;

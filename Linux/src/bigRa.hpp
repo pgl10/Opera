@@ -29,8 +29,8 @@ class bigRa {
     void setNum(char* nume);
     void setDen(char* deno);
 
-    Integer getNum();
-    Integer getDen();
+    Integer getNum() const;
+    Integer getDen() const;
 
     bigRa operator - () const;
     bigRa operator = (const bigRa& a);
@@ -52,7 +52,7 @@ bigRa operator / (const bigRa& l, const bigRa& r);
 bigRa operator ^ (const bigRa& l, const bigRa& r);
 bigRa operator ^ (const bigRa& l, int r);
 
-std::ostream& operator << (std::ostream& ost, bigRa& a);
+std::ostream& operator << (std::ostream& ost, const bigRa& a);
 std::istream& operator >> (std::istream& ist, bigRa& a);
 
 Integer entier(bigRa a);

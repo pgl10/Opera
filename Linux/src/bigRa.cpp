@@ -97,11 +97,11 @@ void bigRa::setDen(char* deno) {
     }
 }
 
-Integer bigRa::getNum() {
+Integer bigRa::getNum() const {
     return _num;
 }
 
-Integer bigRa::getDen() {
+Integer bigRa::getDen() const {
     return _den;
 }
 
@@ -257,10 +257,11 @@ bigRa operator ^ (const bigRa& l, int r) {
   return t;
 }
 
-std::ostream& operator << (std::ostream& ost, bigRa& a) {
-    a.simplifier();
-    if(a.getDen() == 1) ost << a.getNum();
-    else ost << a.getNum() << "/" << a.getDen();
+std::ostream& operator << (std::ostream& ost, const bigRa& a) {
+    bigRa b = a;
+    b.simplifier();
+    if(b.getDen() == 1) ost << b.getNum();
+    else ost << b.getNum() << "/" << b.getDen();
     return ost;
 }
 
