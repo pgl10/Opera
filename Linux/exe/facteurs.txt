@@ -1,30 +1,24 @@
 # Ce fichier de commandes facteurs.txt calcule
 # les np facteurs premiers p[1], p[2], ... du nombre entier n > 1
 # C'est aussi une démonstration de la commande "prochain"
-# Exemple avec x=2323 et f=0 : exec facteurs.txt x,f
+# Exemple avec n=2323 et f=0 : exec facteurs.txt n,f
 copier n,p
 frac n
 1+(last<0)*(last>0)
 continuer
-np = 0
 nm = n
 nm > 1
 continuer
-np = 1
 0 < 1
 boucle
-facteur nm
-p[np] = last
-prochain p
-# si facteur en échec : last = 0
-last < 1
-quitter
-# si p[np] = nm : p[np] est un facteur premier
-p[np] > nm - 1
-boucle
-supprimer nm
-quitter
-retour
-nm = nm/p[np]
-np = np+1
+   facteur nm
+   p = last
+   prochain p
+   # si facteur en échec : last = 0
+   si last < 1
+   quitter
+   # si p = nm : c'est le dernier facteur premier
+   si p > nm - 1
+   quitter
+   nm = nm/p
 retour
