@@ -782,6 +782,11 @@ int main(int argc, char *argv[]) {
                 continue;
             }
             else {
+                std::string setapprox ("setapprox");
+				if(ligne.compare(setapprox) == 0) {
+                    std::cout << approxim(0) << std::endl;
+                    continue;
+                }
                 std::cout << "Variable ou expression invalide." << std::endl;
                 continue;
             }
@@ -800,6 +805,10 @@ int main(int argc, char *argv[]) {
             }
             if(res == "last" ) {
                 aout("La variable last n'est modifiable que par un résultat qui la précède.\n");
+                continue;
+            }
+            if(res == "setapprox") {
+                setapprox(ligne);
                 continue;
             }
             bigRa v;

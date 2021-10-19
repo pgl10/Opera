@@ -1,4 +1,3 @@
-copier c
 # Ce programme en langage Opera calcule une approximation de pi
 # ayant c décimales exactes avec la formule suivante.
 # pi = 4 / (1 + 1² / (3 + 2² / (5 + 3² / (7 + 4² / (9 + ... )))))
@@ -11,6 +10,7 @@ copier c
 #    valeur f[i]
 # Ce qui affiche la dernière valeur de chaque variable utilisée.
 # Et on vérifie que l'approximation finale a 16 décimales exactes.
+copier c
 f[1] = 3
 f[2] = 19/6
 delta = f[2]-f[1]

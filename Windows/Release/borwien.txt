@@ -1,0 +1,24 @@
+# Approximation pi selon Borwien
+# Voir https://en.wikipedia.org/wiki/Borwein's_algorithm
+# 1/pi = 12*(somme(k=0,1,2,...){(-1)^k*((6*k)!*(a+b*k)/(((3*k)!)*(k!)^3*(c^(3*k+3/2))}
+# Le nombre p0 a 24 chiffres exacts, p1 en a 49, p2 en a 74 et p3 en a 99.
+# Pour obtenir une bonne valeur de x3 et p3 il faut une bonne valeur de r61.
+setapprox = 128
+r61 = 61^(1/2)
+envoyer r61 r61
+a = 1657145277365+212175710912*r61
+b = 107578229802750+13773980892672*r61
+c = 5280*(236674+30303*r61)
+x0 = a/(c^(3/2))
+p0 = 1/(12*x0)
+envoyer p0 p0
+x1 = (6*5*4*3*2*(a+b))/(3*2*c^(3+3/2))
+p1 = 1/(12*(x0-x1))
+envoyer p1 p1
+x2 = (12*11*10*9*8*7*6*5*4*3*2*(a+b*2))/(6*5*4*3*2*(2^3)*c^(6+3/2))
+p2 = 1/(12*(x0-x1+x2))
+envoyer p2 p2
+x3 = (18*17*16*15*14*13*12*11*10*9*8*7*6*5*4*3*2*(a+b*3))/(9*8*7*6*5*4*3*2*((3*2)^3)*c^(9+3/2))
+p3 = 1/(12*(x0-x1+x2-x3))
+envoyer p3 p3
+enti p3*10^100

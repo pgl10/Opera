@@ -1,5 +1,5 @@
 # Ce fichier de commandes facteurs.txt calcule
-# les np facteurs premiers p[1], p[2], ... du nombre entier n > 1
+# les facteurs premiers f[1], f[2], ... du nombre entier n > 1
 # C'est aussi une démonstration de la commande "prochain"
 # Exemple avec n=2323 et f=0 : exec facteurs.txt n,f
 copier n,p

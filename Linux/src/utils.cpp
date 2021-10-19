@@ -135,3 +135,47 @@ bool keywd(std::string& line, std::string& ligne, std::string keyw) {
     return true;
 }
 
+// Pour obtenir le niveau actuel de la précision utilisable
+// pour une approximation d'une racine n-ième irrationnelle
+// faire : k = approxim(0);  (par défaut : k = 64)
+// Si n > 0 on archive un nouveau niveau actuel utilisable.
+int approxim(int n) {
+    static int k = 64;
+    if(n > 0) {
+        k = n;
+        return k;
+    }
+    else return k;
+} 
+
+// Pour mettre à jour le niveau de la précison utilisable
+// pour une approximation d'une racine n-ième irrationnelle
+void setapprox(std::string ligne){	
+    if(isnumb(ligne)) {
+        char alfa[11] = "0123456789";
+        int n = 0;
+        for(unsigned int k=0; k<ligne.size(); k++)
+            n = n*10 + (ligne[k]-alfa[0]);
+        if(n < 4) {
+            std::cout << "il faut un entier plus grand que 3" << std::endl;
+            return;
+        }
+        int u = approxim(n);
+        std::cout << u << std::endl;
+        return;
+    }
+    bigRa x;
+    chercherra(lect, ligne, x);
+    // Si le nombre x n'est pas trouvé on a ici : x = 0/1
+    Integer xn=x.getNum(), xd=x.getDen();
+    if(xd != 1 || xn <= 0) {
+        std::cout << "il faut un entier positif" << std::endl;
+        return;
+    }
+    if(xn < 4) {
+        std::cout << "il faut un entier plus grand que 3" << std::endl;
+        return;
+    }
+    int v = approxim((int)xn);
+    std::cout << v << std::endl;
+} 
