@@ -1,0 +1,19 @@
+# Ce fichier de commandes essai.txt
+# est simplement un exemple pouvant 
+# être commode en phase de mise au point.
+# On peut essayer divers formules avec
+# des constantes ou des variables qui utilisent
+# des entiers, des décimaux ou des rationnels.
+a = 7
+b = 1
+c = 5
+d = 2
+e = c*d
+v = a-b*-c
+w = a-b*-c+d
+x = a-b*-e
+y = a-b*-c*d
+# a-b*-c*d : a-(b*(-c))*d
+z = a-b*-c^d
+# a-b*-c^d : a-b*((-c)^d)
+lister

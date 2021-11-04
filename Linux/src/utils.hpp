@@ -19,5 +19,8 @@ bool instr(std::string& cmde, std::string& ligne, std::string keyw);
 bool keywd(std::string& line, std::string& ligne, std::string keyw);
 int approxim(int n);
 void setapprox(std::string ligne);
+int64_t xrand(void); 
+Integer invMod(Integer a, Integer m);
+Integer expMod(Integer x, Integer e, Integer m);
 
 #endif // UTILS_HPP

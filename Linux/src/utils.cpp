@@ -179,3 +179,50 @@ void setapprox(std::string ligne){
     int v = approxim((int)xn);
     std::cout << v << std::endl;
 } 
+
+// comme rand() mais sur 30 bits
+int64_t xrand(void) {
+    static bool done = false;
+    if(!done) {srand(static_cast<unsigned int>(time(NULL))); done=true;}
+    const int64_t rmx64 = static_cast<int64_t>(RAND_MAX);
+    return (rmx64 + 1) * rand() + rand ();
+}
+
+// Algorithme d'Euclide étendu
+Integer gcdExtended(Integer a, Integer b, Integer* x, Integer* y) {
+    if (a == 0) {
+        *x = 0, *y = 1;
+        return b;
+    }
+    Integer x1, y1;
+    Integer gcd = gcdExtended(b % a, a, &x1, &y1);
+    *x = y1 - (b / a) * x1;
+    *y = x1;
+    return gcd;
+}
+
+// Inverse modulaire (0 < a < m)
+Integer invMod(Integer a, Integer m) {
+    Integer x, y;
+    Integer g = gcdExtended(a, m, &x, &y);
+    // si l'inverse modulaire n'existe pas 
+    if (g != 1) return 0;
+    else {    
+        // on ajoute m si x est négatif
+        Integer res = (x % m + m) % m;
+        return res;
+    }
+}
+
+// Exponentiation modulaire : x^e mod(m)
+Integer expMod(Integer x, Integer e, Integer m) {
+    if(e < 0) return 0;
+    if(e == 0) return 1;
+    if(e == 1) return x%m;
+    Integer xm, r;
+    xm = x%m;
+    r = expMod(xm, e/2, m);
+    r = (r*r)%m;
+    if((e/2)*2 == e) return r;
+    return (r*xm)%m;
+}

@@ -13,10 +13,10 @@ continuer
 boucle
    facteur nm
    p = last
-   prochain p
    # si facteur en échec : last = 0
    si last < 1
    quitter
+   prochain p
    # si p = nm : c'est le dernier facteur premier
    si p > nm - 1
    quitter

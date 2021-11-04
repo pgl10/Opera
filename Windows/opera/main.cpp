@@ -19,7 +19,8 @@ void aide() {
     aout("Opera effectue des expressions arithmétiques et les commandes suivantes :\n");
     aout("exec, copier, renvoyer, prochain, recevoir, envoyer, supprimer, aide, pause,\n");
     aout("lister, noter, garder, lire, valeur, nbch, enti, frac, num, den, continuer,\n");
-    aout("quitter, si, boucle, retour, exit, pgcd, ppcm, facteur, prem.\n");
+    aout("quitter, si, boucle, retour, exit, reste, pgcd, ppcm, hasard, facteur, prem,\n");
+    aout("invmod, expmod, pnps.\n");
 }    
 
 void fermeture() {
@@ -62,7 +63,8 @@ int main(int argc, char *argv[]) {
         std::string file = argv[1];
         Trans tr0(file);
         tr0.setNiv(1);
-        listetrv.push_back(tr0);    }
+        listetrv.push_back(tr0);
+	}
         if(argc > 2) {
         std::cout << "\nFaire : opera.exe ou bien : opera fichier.txt\n";
         pause();
@@ -207,16 +209,14 @@ int main(int argc, char *argv[]) {
             listetrv.push_back(tr);
             if(lect == 9) {
                 std::cout << "Ce fichier de commandes est au niveau maximum de fonctionnement.\n";
-                std::cout << "Il ne peut pas en utiliser un autre. Fin de session.\n";
+                std::cout << "Opera ne peut pas en utiliser un autre. Fin de session.\n";
                 pause();
                 return 1;
             }
             filesin[lect+1].open(file.c_str());
             if(!filesin[lect+1].good()) {
                 std::cout << "Le fichier " << file << " n'est pas disponible.\n";
-                std::cout << "Fin de session." << std::endl;
-                pause();
-                return 1;
+                continue;
             }
             ret.clear();
             here = -1;
@@ -568,20 +568,47 @@ int main(int argc, char *argv[]) {
             }
             continue;
         }
-        // Pour calculer le pgcd de deux variables ou expressions
+        // Pour calculer le reste de deux variables ou expressions
         // ayant pour valeurs deux entiers
-        if(keywd(line, ligne, "pgcd")) {
-            std::string st = ligne.substr(4);
+        if(keywd(line, ligne, "reste")) {
+            std::string st = ligne.substr(5);
             std::size_t fv = st.find(",");
             if(fv == std::string::npos || fv==0 || fv==st.size()-1) {
-                aout("Instruction non reconnue.\n");
+                aout("reste n,d : instruction non reconnue.\n");
                 continue;
             }
             std::string left = st.substr(0, fv);
             std::string right = st.substr(fv+1);
             bigRa r1, r2;
             if(!(eval(left, r1) && eval(right, r2))) {
-                aout("Instruction non reconnue.\n");
+                aout("reste n,d : instruction non reconnue.\n");
+                continue;
+            }
+            if(!(isEnti(r1) && isEnti(r2))) {
+                aout("Il faut deux entiers : instruction invalide.\n");
+                continue;
+            }
+            Integer r = r1.getNum()/r2.getNum();
+            r = r1.getNum() - r*r2.getNum();
+            std::cout << r << std::endl;
+            bigRa brr = bigRa(r);
+            modifierra(lect, "last", brr);
+            continue;
+        }
+        // Pour calculer le pgcd de deux variables ou expressions
+        // ayant pour valeurs deux entiers
+        if(keywd(line, ligne, "pgcd")) {
+            std::string st = ligne.substr(4);
+            std::size_t fv = st.find(",");
+            if(fv == std::string::npos || fv==0 || fv==st.size()-1) {
+                aout("pgcd a,b : instruction non reconnue.\n");
+                continue;
+            }
+            std::string left = st.substr(0, fv);
+            std::string right = st.substr(fv+1);
+            bigRa r1, r2;
+            if(!(eval(left, r1) && eval(right, r2))) {
+                aout("pgcd a,b : instruction non reconnue.\n");
                 continue;
             }
             if(!(isEnti(r1) && isEnti(r2))) {
@@ -600,14 +627,14 @@ int main(int argc, char *argv[]) {
             std::string st = ligne.substr(4);
             std::size_t fv = st.find(",");
             if(fv == std::string::npos || fv==0 || fv==st.size()-1) {
-                aout("Instruction non reconnue.\n");
+                aout("ppcm a,b : instruction non reconnue.\n");
                 continue;
             }
             std::string left = st.substr(0, fv);
             std::string right = st.substr(fv+1);
             bigRa r1, r2;
             if(!(eval(left, r1) && eval(right, r2))) {
-                aout("Instruction non reconnue.\n");
+                aout("ppcm a,b : instruction non reconnue.\n");
                 continue;
             }
             if(!(isEnti(r1) && isEnti(r2))) {
@@ -629,13 +656,133 @@ int main(int argc, char *argv[]) {
             modifierra(lect, "last", brr);
             continue;
         }
-        // Pour calculer la primalité d'une variable ou d'une expression
-        // ayant pour valeur un entier
-        if(keywd(line, ligne, "prem")) {
+        // Pour calculer un entier au hasard entre deux variables ou expressions
+        // ayant pour valeurs deux entiers
+        if(keywd(line, ligne, "hasard")) {
+            std::string st = ligne.substr(6);
+            std::size_t fv = st.find(",");
+            if(fv == std::string::npos || fv==0 || fv==st.size()-1) {
+                aout("hasard a,b : instruction non reconnue.\n");
+                continue;
+            }
+            std::string left = st.substr(0, fv);
+            std::string right = st.substr(fv+1);
+            bigRa r1, r2;
+            if(!(eval(left, r1) && eval(right, r2))) {
+                aout("hasard a,b : instruction non reconnue.\n");
+                continue;
+            }
+            if(!(isEnti(r1) && isEnti(r2))) {
+                aout("Il faut deux entiers : instruction invalide.\n");
+                continue;
+            }
+            Integer i1, i2;
+            i1 = r1.getNum();
+            i2 = r2.getNum();
+            const int64_t rmx64 = static_cast<int64_t>(RAND_MAX);
+            // (2^30-1)=(2^15-1)(2^15+1)=(2^15-1)((2^15-1)+2)
+            const int64_t xrand_max = rmx64 * (rmx64 + 2);
+            // r = i1 + (i2 - i1)*xrand()/xrand_max
+            double x = double(i2 - i1)*double(xrand())/double(xrand_max);
+            Integer r = i1 + entier(dbl2ra(x));
+            std::cout << r << std::endl;
+            bigRa brr = bigRa(r);
+            modifierra(lect, "last", brr);
+            continue;
+        }
+        // Pour calculer l'inverse modulaire r d'un entier a modulo un entier m
+        // Il faut pgcd(a, m) = 1 si non : r = 0 et de plus : 0 < a < m
+        if(keywd(line, ligne, "invmod")) {
+            std::string st = ligne.substr(6);
+            std::size_t fv = st.find(",");
+            if(fv == std::string::npos || fv==0 || fv==st.size()-1) {
+                aout("invmod a,m : instruction non reconnue.\n");
+                continue;
+            }
+            std::string left = st.substr(0, fv);
+            std::string right = st.substr(fv+1);
+            bigRa r1, r2;
+            if(!(eval(left, r1) && eval(right, r2))) {
+                aout("invmod a,m : instruction non reconnue.\n");
+                continue;
+            }
+            if(!(isEnti(r1) && isEnti(r2))) {
+                aout("Il faut deux entiers : instruction invalide.\n");
+                continue;
+            }
+            Integer a, m;
+            a = r1.getNum();
+            m = r2.getNum();
+            if(a <= 0 || a >= m) {
+                aout("Pour invmod a,m : il faut 0 < a < m\n");
+                continue;
+            }
+            Integer r = invMod(a, m);
+            std::cout << r << std::endl;
+            bigRa brr = bigRa(r);
+            modifierra(lect, "last", brr);
+            continue;
+        }
+        // Pour calculer l'exponentiation modulaire : x^e mod(m)
+        if(keywd(line, ligne, "expmod")) {
+            std::string st = ligne.substr(6);
+            std::size_t fv = st.find(",");
+            if(fv == std::string::npos || fv==0 || fv==st.size()-1) {
+                aout("expmod x,e,m : instruction non reconnue.\n");
+                continue;
+            }
+            std::string left = st.substr(0, fv);
+            bigRa r1;
+            if(!(eval(left, r1))) {
+                aout("expmod x,e,m : instruction non reconnue.\n");
+                continue;
+            }
+            if(!(isEnti(r1))) {
+                aout("Il faut trois entiers : instruction invalide.\n");
+                continue;
+            }
+            st = st.substr(fv+1);
+            fv = st.find(",");
+            if(fv == std::string::npos || fv==0 || fv==st.size()-1) {
+                aout("expmod x,e,m : instruction non reconnue.\n");
+                continue;
+            }
+			left = st.substr(0, fv);
+            std::string right = st.substr(fv+1);
+            bigRa r2, r3;
+            if(!(eval(left, r2) && eval(right, r3))) {
+                aout("expmod x,e,m : instruction non reconnue.\n");
+                continue;
+            }
+            if(!(isEnti(r2) && isEnti(r3))) {
+                aout("Il faut trois entiers : instruction invalide.\n");
+                continue;
+            }
+            Integer x, e, m;
+            x = r1.getNum();
+            e = r2.getNum();
+            m = r3.getNum();
+            if(x < 0 || e < 0 || m < 0) {
+                aout("expmod x,e,m : les entiers négatifs sont invalides\n");
+                continue;
+            }
+            if(!(x < m)) {
+                aout("expmod x,e,m : il faut x < m\n");
+                continue;
+            }
+            Integer r = expMod(x, e, m);
+            std::cout << r << std::endl;
+            bigRa brr = bigRa(r);
+            modifierra(lect, "last", brr);
+            continue;
+        }        
+        // Pour calculer le premier nombre premier suivant un entier
+        // ou une expression ayant pour valeur un entier
+        if(keywd(line, ligne, "pnps")) {
             std::string st = ligne.substr(4);
             bigRa x;
             if(!eval(st, x)) {
-                aout("Instruction non reconnue.\n");
+                aout("pnps n : instruction non reconnue.\n");
                 continue;
             }
             if(!isEnti(x)) {
@@ -643,8 +790,12 @@ int main(int argc, char *argv[]) {
                 continue;
             }
             Integer n = x.getNum();
-            int r = 1;
-            if(!isprime(n)) r = 0;
+            if(n < 0) {
+                aout("Il faut un entier positif ou nul.\n");
+                continue;
+            }
+            Integer r = n + 1;
+			while(!isprime(r)) {r = r + 1;}
             std::cout << r << std::endl;
             bigRa brr = bigRa(r);
             modifierra(lect, "last", brr);
@@ -656,7 +807,7 @@ int main(int argc, char *argv[]) {
             std::string st = ligne.substr(7);
             bigRa x;
             if(!eval(st, x)) {
-                aout("Instruction non reconnue.\n");
+                aout("facteur n : instruction non reconnue.\n");
                 continue;
             }
             if(!isEnti(x)) {
@@ -668,6 +819,27 @@ int main(int argc, char *argv[]) {
             if(!isprime(r)) r = get_factor(r);
             if(r == 0) aout("Algorithme rho en échec.\n");
             else std::cout << r << std::endl;
+            bigRa brr = bigRa(r);
+            modifierra(lect, "last", brr);
+            continue;
+        }
+        // Pour calculer la primalité d'une variable ou d'une expression
+        // ayant pour valeur un entier
+        if(keywd(line, ligne, "prem")) {
+            std::string st = ligne.substr(4);
+            bigRa x;
+            if(!eval(st, x)) {
+                aout("prem n : instruction non reconnue.\n");
+                continue;
+            }
+            if(!isEnti(x)) {
+                aout("Il faut un entier : instruction invalide.\n");
+                continue;
+            }
+            Integer n = x.getNum();
+            int r = 1;
+            if(!isprime(n)) r = 0;
+            std::cout << r << std::endl;
             bigRa brr = bigRa(r);
             modifierra(lect, "last", brr);
             continue;
@@ -703,7 +875,7 @@ int main(int argc, char *argv[]) {
             std::string st = ligne.substr(2);
             bigRa x;
             if(!eval(st, x)) {
-                aout("Instruction non reconnue.\n");
+                aout("si expr : instruction non reconnue.\n");
                 continue;
             }
             if(cmpRa(x, br0) > 0) continue;

@@ -153,22 +153,25 @@ bool eval(std::string ligne, bigRa& r) {
     if(found != std::string::npos) pos=found;
     found = ligne.find_last_of("-");
     if(found != std::string::npos) {
-        std::size_t pm=found;
-        bool bon = true;
-        if(pm > 0 && ligne[pm-1] == '^') bon = false;
-        if(pm > 0 && ligne[pm-1] == '*') bon = false;
-        if(pm > 0 && ligne[pm-1] == '/') bon = false;
-        if(pm > 0 && ligne[pm-1] == '+') bon = false;
-        while(pm > 0 && ligne[pm-1] == '-') pm = pm-1;
-        if(pm > 0 && ligne[pm-1] == '<') bon = false;
-        if(pm > 0 && ligne[pm-1] == '>') bon = false;
-        if(pm == 0) {
+        if(found == 0) {
             ligne = "0" + ligne;
-            pm = pm+1;
+            found = 1;
         }
-        // bon = true  pour l'opérateur - à deux opérandes
-        // bon = false pour l'opérateur - à un seul argument
-        if(bon) pos = pm;
+        pos = found;
+        std::size_t opb1 = ops.find(ligne[found-1]);
+		if(opb1 != std::string::npos) {
+            unsigned int k;
+            bool op = false;
+			for(k=found+1; k < ligne.size(); k++) {
+                std::size_t nop = ops.find(ligne[k]);
+                if(nop != std::string::npos) {op=true; break;}
+            }
+            if(op) ligne = ligne.substr(0, found) + "(" + ligne.substr(found, k-found) + ")" + ligne.substr(k);
+            else ligne = ligne.substr(0, found) + "(" + ligne.substr(found, k-found) + ")";	
+            if(!eval(ligne, r)) return false;
+            r.simplifier();
+            return true;
+        }
     }
     found = ligne.find_last_of("+");
     if(found != std::string::npos) pos=found;
@@ -267,18 +270,4 @@ bool nval(std::string& name, Integer& r) {
     r = entier(x);
     return true;                  
 }
-
-// Pour calculer la valeur entière positive ou nulle
-// d'une variable ou d'une expression arithmétique.
-bool ival(std::string& name, int& r) {
-    bigRa x;
-    bool good = eval(name, x);
-    if(!good) return false;
-    if(x.getDen() != 1) return false;
-    Integer n = x.getNum();
-    if(n < 0) return false;
-    r = int(n);
-    return true;                  
-}
-
 

@@ -1,4 +1,5 @@
 # Des exemples de racines n-ièmes approximées 
+setapprox = 100
 x1 = 1234567890123456789012345678901234567/77
 n1 = 5
 r1 = x1^(1/n1)

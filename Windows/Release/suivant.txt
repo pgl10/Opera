@@ -1,22 +1,25 @@
 # Ce fichier de commandes suivant.txt
 # calcule le nombre premier p suivant le nombre entier n > 1
-# Exemple avec x=12345678 et s=0 : exec suivant.txt x,s
+# Exemple avec x=1234567 et s=0 : exec suivant.txt x,s
 copier n,p
 frac n
 1+(last<0)*(last>0)
 continuer
 n > 1
 continuer
-p = n + 1
+p = n - 1
 den p/2
 si last < 2
 p = p + 1
-0 < 1
+i = 0
+i < 1
 boucle
-prem p
-boucle
+   p = p + 2
+   prem p
+   si last
+   i = 1
+retour
 renvoyer p
-quitter
-retour
-p = p + 2
-retour
+# vérification
+pnps n
+last - p

@@ -1,0 +1,45 @@
+# Ce programme en langage Opera est un prototype de
+# chiffrement et de déchiffrement selon la méthode RSA.
+# En utilisant un alphabet arbitraire on peut toujours 
+# convertir un message en nombre entier.
+# Ici x est le message initial, y le message chiffré
+# et z le message déchiffré. Et on vérifie que z = x.
+# {n, e} est la clef publique. On peut la communiquer.
+# {n, d} est la clef secrète. Il faut la conserver.
+a = 10000
+b = 20000
+hasard a,b
+pnps last
+p = last
+hasard a,b
+pnps last
+q = last
+n = p*q
+p1 = p-1
+q1 = q-1
+m = p1*q1
+hasard 1000,2000
+e = last
+pgcd e,m
+x = last
+# m et e doivent être premiers entre eux
+# c'est à dire : x = 1
+x > 1
+boucle
+   hasard 1000,2000
+   e = last
+   pgcd e,m
+   x = last
+retour
+invmod e,m
+d = last
+# message initial
+x = 1234567
+# chiffrement
+expmod x,e,n
+y = last
+# déchiffrement
+expmod y,d,n
+z = last
+# et pour vérifier que z = x
+z - x
