@@ -252,8 +252,9 @@ int main(int argc, char *argv[]) {
             continue;
         }
         // La commande "prochain res" permet de créer dans le fichier de commandes appelant 
-        // une variable indicée ayant la valeur actuelle de last et le nom associé à l'argument res
-        // avec l'indice associé à res incrémenté à chaque utilisation.
+        // une variable indicée ayant la valeur actuelle de last et le nom associé à l'argument res.
+        // L'indice utilisé commence à 1 et il est incrémenté à chaque utilisation. 
+        // Mais, si cette variable indicée existe déjà, l'indice utilisé commence ensuite.
         if(keywd(line, ligne, "prochain")) {
             if(lect == 0) continue;
             std::string name = ligne.substr(8);
@@ -265,29 +266,19 @@ int main(int argc, char *argv[]) {
                 if(tr.getNew()[i] == name) {
                     vui = tr.getIndic();
                     unsigned int ui = vui[i];
-                    ++ui;
-                    // Pour supprimer un ancien résultat analogue éventuel
-                    // dont la suite a le même nom avant chaque indice.
-                    if(ui == 1) {
-                        std::list<Var>::iterator vt;
-                        bool fini = false;
-                        while(!fini) {
-                            fini = true;
-                            for(std::list<Var>::iterator it=listera.begin(); it!=listera.end(); ++it) 
-                                if((*it).getNiv() == lect-1) {
-                                    std::size_t found = (*it).getNom().find_last_of("[");
-                                    if(found == std::string::npos) continue;
-                                    if((*it).getNom().substr(0, found) != tr.getOld()[i]) continue;
-                                    vt = it;
-                                    fini = false;
-                                }
-                            if(!fini) listera.erase(vt);
-                        }
-                    }
-                    std::stringstream sstr;
-                    sstr << ui;
-                    std::string var = tr.getOld()[i] + "[" + sstr.str() + "]";
+                    std::string var;
                     bigRa x;
+                    // Si la variable souhaitée existe déjà
+                    // on incrémente l'indice utilisable.
+                    do{
+                        ++ui;
+                        std::stringstream sstr;
+                        sstr << ui;
+                        var = tr.getOld()[i] + "[" + sstr.str() + "]";
+                    }while(chercherra(lect-1, var, x));
+                    std::stringstream ststr;
+                    ststr << ui;
+                    var = tr.getOld()[i] + "[" + ststr.str() + "]";
                     chercherra(lect, "last", x);
                     archiverra(lect-1, var, x);
                     std::cout << var << " = " << x << std::endl;
@@ -491,6 +482,8 @@ int main(int argc, char *argv[]) {
             }
             else if(n == 0) {
                 std::cout << "0" << std::endl;
+                bigRa br0;
+                modifierra(lect, "last", br0);
             }
             else {
                 std::stringstream ss;

@@ -159,10 +159,10 @@ bool eval(std::string ligne, bigRa& r) {
         }
         pos = found;
         std::size_t opb1 = ops.find(ligne[found-1]);
-		if(opb1 != std::string::npos) {
+            if(opb1 != std::string::npos) {
             unsigned int k;
             bool op = false;
-			for(k=found+1; k < ligne.size(); k++) {
+                for(k=found+1; k < ligne.size(); k++) {
                 std::size_t nop = ops.find(ligne[k]);
                 if(nop != std::string::npos) {op=true; break;}
             }
