@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
         Trans tr0(file);
         tr0.setNiv(1);
         listetrv.push_back(tr0);
-	}
+    }
         if(argc > 2) {
         std::cout << "\nFaire : opera.exe ou bien : opera fichier.txt\n";
         pause();
@@ -740,7 +740,7 @@ int main(int argc, char *argv[]) {
                 aout("expmod x,e,m : instruction non reconnue.\n");
                 continue;
             }
-			left = st.substr(0, fv);
+            left = st.substr(0, fv);
             std::string right = st.substr(fv+1);
             bigRa r2, r3;
             if(!(eval(left, r2) && eval(right, r3))) {
@@ -788,7 +788,7 @@ int main(int argc, char *argv[]) {
                 continue;
             }
             Integer r = n + 1;
-			while(!isprime(r)) {r = r + 1;}
+            while(!isprime(r)) {r = r + 1;}
             std::cout << r << std::endl;
             bigRa brr = bigRa(r);
             modifierra(lect, "last", brr);
@@ -871,6 +871,7 @@ int main(int argc, char *argv[]) {
                 aout("si expr : instruction non reconnue.\n");
                 continue;
             }
+            modifierra(lect, "last", x);
             if(cmpRa(x, br0) > 0) continue;
             else {jump = true; continue;}
         }
@@ -934,6 +935,11 @@ int main(int argc, char *argv[]) {
             else std::cout << "Variable inconnue." << std::endl;
             continue;
         }
+        // Pour afficher la version actuelle du logiciel Opera
+        if(instr(cmde, ligne, "version")) {
+            std::cout << "Opera version 1.5" << std::endl;
+            continue;
+        }
         // Pour terminer cette session
         if(instr(cmde, ligne, "exit")) break;
         // Pour évaluer une expression arithmétique
@@ -948,7 +954,7 @@ int main(int argc, char *argv[]) {
             }
             else {
                 std::string setapprox ("setapprox");
-				if(ligne.compare(setapprox) == 0) {
+                if(ligne.compare(setapprox) == 0) {
                     std::cout << approxim(0) << std::endl;
                     continue;
                 }
