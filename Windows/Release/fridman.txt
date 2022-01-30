@@ -1,0 +1,16 @@
+# De : https://en.wikipedia.org/wiki/Formula_for_primes
+# et : https://oeis.org/A249270 - Avec 36 décimales pour u
+# on obtient les 25 premiers nombres premiers.
+# initialement u = (p[1]-1) + sum{k>1}{(p[k]-1)/(p[1]*p[2]*...p[k-1])}
+u = 2.920050977316134712092562917112019468
+i = 1
+i < 26
+boucle
+   enti u
+   v = last
+   p[i] = v
+   u = v*(u-v+1)
+   i = i+1
+retour
+supprimer u
+lister

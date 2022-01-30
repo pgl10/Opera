@@ -1,0 +1,29 @@
+# Calcul d'une approximation de la constante de Fridman : u = 2.9200509773...
+# u = (p[1]-1) + sum{k>1}{(p[k]-1)/(p[1]*p[2]*...p[k-1])}
+# d : le dénominateur actuel
+# p : le nombre premier précédent
+# n : le nombre premier actuel
+# t : le nombre de termes utilisés
+n = 2
+d = 1
+u = n-1
+t = 1
+p = n
+t < 28
+boucle
+   n = n+1
+   prem n
+   last > 0
+   boucle
+      d*p
+      d = last
+      u + (n-1)/d
+      u = last
+      t = t+1
+      p = n
+      i = 0
+   retour
+retour
+lister
+valeur u
+enti u*10^38

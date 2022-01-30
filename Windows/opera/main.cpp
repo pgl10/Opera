@@ -20,7 +20,7 @@ void aide() {
     aout("exec, copier, renvoyer, prochain, recevoir, envoyer, supprimer, aide, pause,\n");
     aout("lister, noter, garder, lire, valeur, nbch, enti, frac, num, den, continuer,\n");
     aout("quitter, si, boucle, retour, exit, reste, pgcd, ppcm, hasard, facteur, prem,\n");
-    aout("invmod, expmod, pnps.\n");
+    aout("invmod, expmod, pnps, version.\n");
 }    
 
 void fermeture() {
@@ -937,7 +937,7 @@ int main(int argc, char *argv[]) {
         }
         // Pour afficher la version actuelle du logiciel Opera
         if(instr(cmde, ligne, "version")) {
-            std::cout << "Opera version 1.5" << std::endl;
+            std::cout << "Opera version 1.51" << std::endl;
             continue;
         }
         // Pour terminer cette session
