@@ -23,3 +23,5 @@ n = 10
 r = (a+5)/(n+1)  # pour effectuer la division après les additions
 g = 3^(3^3)      # 3^27 et sans les parenthèses : 3^3^3 = 27^3 = 19683
 k = ((1+1)*3-2)^(0.5+3/2)    # 4^2 = 16
+garder expressions
+# Pour obtenir les variables archivées faire : lire expressions

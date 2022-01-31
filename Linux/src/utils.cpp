@@ -127,18 +127,17 @@ bool instr(std::string& cmde, std::string& ligne, std::string keyw) {
     return false;
 }
 
-// Pour valider seulement le mot-clé de l'instruction ayant une suite
+// Pour valider seulement le mot-clé de l'instruction
 bool keywd(std::string& line, std::string& ligne, std::string keyw) {
     std::size_t n = keyw.size();
-    if(!(line.size() == n && ligne.size() > n)) return false;
-    if(!(ligne.substr(0, n).compare(keyw) == 0)) return false;
+    if(line.size() != n) return false;
+    if(ligne.substr(0, n).compare(keyw) != 0) return false;
     return true;
 }
 
-// Pour obtenir le niveau actuel de la précision utilisable
-// pour une approximation d'une racine n-ième irrationnelle
-// faire : k = approxim(0);  (par défaut : k = 64)
-// Si n > 0 on archive un nouveau niveau actuel utilisable.
+// approxim(0) (par défaut : k = 64) permet d'obtenir le niveau actuel de la 
+// précision utilisable pour une approximation d'une racine n-ième irrationnelle.
+// Et si n > 0 : on archive le nouveau niveau actuel utilisable.
 int approxim(int n) {
     static int k = 64;
     if(n > 0) {

@@ -132,6 +132,10 @@ int main(int argc, char *argv[]) {
         }
         // L'instruction "copier" est nécessairement la première d'un fichier de commandes
         if(copier && keywd(line, ligne, "copier")) {
+            if(instr(cmde, ligne, "copier")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             if(lect == 0) continue;
             char* chrs = new char[1+cmde.size()];
             unsigned int i;
@@ -181,6 +185,10 @@ int main(int argc, char *argv[]) {
         copier = false;
         // Pour effectuer l'intruction "exec" (exemple : exec a,b,c)
         if(keywd(line, ligne, "exec")) {
+            if(instr(cmde, ligne, "exec")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             char* chrs = new char[1+cmde.size()];
             unsigned int i;
             for(i=0; i<cmde.size(); i++) {
@@ -229,6 +237,10 @@ int main(int argc, char *argv[]) {
         // La commande "renvoyer var" met à jour dans le fichier appelant
         // la variable associée à la variable locale var du fichier appelé.
         if(keywd(line, ligne, "renvoyer")) {
+            if(instr(cmde, ligne, "renvoyer")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             if(lect == 0) continue;
             std::string name = ligne.substr(8);
             if(name == "last" ) {
@@ -256,6 +268,10 @@ int main(int argc, char *argv[]) {
         // L'indice utilisé commence à 1 et il est incrémenté à chaque utilisation. 
         // Mais, si cette variable indicée existe déjà, l'indice utilisé commence ensuite.
         if(keywd(line, ligne, "prochain")) {
+            if(instr(cmde, ligne, "prochain")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             if(lect == 0) continue;
             std::string name = ligne.substr(8);
             Trans tr = listetrv.back();
@@ -296,6 +312,10 @@ int main(int argc, char *argv[]) {
         // La commande "recevoir var don" permet de créer ou de modifier 
         // la variable locale var avec la valeur de la variable principale don
         if(keywd(line, ligne, "recevoir")) {
+            if(instr(cmde, ligne, "recevoir")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             if(lect == 0) continue;
             std::stringstream ss(cmde);
             std::string verbe, var, don;
@@ -319,6 +339,10 @@ int main(int argc, char *argv[]) {
         // si elle n'existe pas encore avec la valeur de la variable locale var 
         // Si non on crée une nouvelle variable principale nommée var[2] ou var[3] ou etc. 
         if(keywd(line, ligne, "envoyer")) {
+            if(instr(cmde, ligne, "envoyer")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             if(lect == 0) continue;
             std::stringstream ss(cmde);
             std::string verbe, var, res;
@@ -351,18 +375,30 @@ int main(int argc, char *argv[]) {
             }
         }
         // Pour afficher l'aide
-        if(instr(cmde, ligne, "aide")) {
+        if(keywd(line, ligne, "aide")) {
+            if(!instr(cmde, ligne, "aide")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             aide();
             continue;
         }
         // Pour faire une pause dans un fichier de commandes (faire : <enter>)
-        if(instr(cmde, ligne, "pause")) {
+        if(keywd(line, ligne, "pause")) {
+            if(!instr(cmde, ligne, "pause")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             if(lect == 0) continue;
             int car = getchar();
             if(car == 0) continue; else continue;
         }
         // Pour afficher toutes les variables du niveau actuel (sauf last)
-        if(instr(cmde, ligne, "lister")) {
+        if(keywd(line, ligne, "lister")) {
+            if(!instr(cmde, ligne, "lister")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             for(std::list<Var>::iterator it=listera.begin(); it!=listera.end(); ++it) {
                 if((*it).getNiv() != lect) continue;
                 if((*it).getNom() == "last") continue;
@@ -375,6 +411,10 @@ int main(int argc, char *argv[]) {
         // Pour noter toutes les variables du niveau actuel
         // Si le fichier filename existe déjà l'archivage est refusé.
         if(keywd(line, ligne, "noter")) {
+            if(instr(cmde, ligne, "noter")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             std::string filename = ligne.substr(5);
             std::ifstream filein(filename.c_str(), std::ifstream::in);
             if(filein.good()) {
@@ -401,6 +441,10 @@ int main(int argc, char *argv[]) {
         // Pour garder toutes les variables du niveau actuel
         // Si le fichier filename existe déjà : il est remplacé
         if(keywd(line, ligne, "garder")) {
+            if(instr(cmde, ligne, "garder")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             std::string filename = ligne.substr(6);
             bool newfile = true;
             std::ifstream filein(filename.c_str(), std::ifstream::in);
@@ -434,6 +478,10 @@ int main(int argc, char *argv[]) {
         // Pour créer ou mettre à jour au niveau actuel toutes les variables qui sont disponibles
         // dans un fichier obtenu précédemment avec la commande "noter" ou la commande "garder"
         if(keywd(line, ligne, "lire")) {
+            if(instr(cmde, ligne, "lire")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             std::string filename = ligne.substr(4);
             std::ifstream filein(filename.c_str(), std::ifstream::in);
             if(filein.good()) {
@@ -459,6 +507,10 @@ int main(int argc, char *argv[]) {
         }
         // Pour afficher en format scientifique la valeur d'une variable ou d'une expression
         if(keywd(line, ligne, "valeur")) {
+            if(instr(cmde, ligne, "valeur")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             std::string st = ligne.substr(6);
             bigRa x;
             bool good = eval(st, x);
@@ -474,6 +526,10 @@ int main(int argc, char *argv[]) {
         // Pour afficher le nombre de chiffres décimaux significatifs
         // de la partie entière d'une variable ou d'une expression
         if(keywd(line, ligne, "nbch")) {
+            if(instr(cmde, ligne, "nbch")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             std::string st = ligne.substr(4);
             Integer n;
             bool good = nval(st, n);
@@ -498,6 +554,10 @@ int main(int argc, char *argv[]) {
         }
         // Pour calculer de la partie entière d'une variable ou d'une expression
         if(keywd(line, ligne, "enti")) {
+            if(instr(cmde, ligne, "enti")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             std::string st = ligne.substr(4);
             Integer n;
             bool good = nval(st, n);
@@ -516,6 +576,10 @@ int main(int argc, char *argv[]) {
         }
         // Pour calculer de la partie fractionaire d'une variable ou d'une expression
         if(keywd(line, ligne, "frac")) {
+            if(instr(cmde, ligne, "frac")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             std::string st = ligne.substr(4);
             Integer n;
             bool good = nval(st, n);
@@ -533,6 +597,10 @@ int main(int argc, char *argv[]) {
         }
         // Pour calculer le numérateur d'une variable ou d'une expression
         if(keywd(line, ligne, "num")) {
+            if(instr(cmde, ligne, "num")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             std::string st = ligne.substr(3);
             bigRa x;
             bool good = eval(st, x);
@@ -548,6 +616,10 @@ int main(int argc, char *argv[]) {
         }
         // Pour calculer le dénominateur d'une variable ou d'une expression
         if(keywd(line, ligne, "den")) {
+            if(instr(cmde, ligne, "den")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             std::string st = ligne.substr(3);
             bigRa x;
             bool good = eval(st, x);
@@ -564,6 +636,10 @@ int main(int argc, char *argv[]) {
         // Pour calculer le reste de deux variables ou expressions
         // ayant pour valeurs deux entiers
         if(keywd(line, ligne, "reste")) {
+            if(instr(cmde, ligne, "reste")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             std::string st = ligne.substr(5);
             std::size_t fv = st.find(",");
             if(fv == std::string::npos || fv==0 || fv==st.size()-1) {
@@ -591,6 +667,10 @@ int main(int argc, char *argv[]) {
         // Pour calculer le pgcd de deux variables ou expressions
         // ayant pour valeurs deux entiers
         if(keywd(line, ligne, "pgcd")) {
+            if(instr(cmde, ligne, "pgcd")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             std::string st = ligne.substr(4);
             std::size_t fv = st.find(",");
             if(fv == std::string::npos || fv==0 || fv==st.size()-1) {
@@ -617,6 +697,10 @@ int main(int argc, char *argv[]) {
         // Pour calculer le ppcm de deux variables ou expressions
         // ayant pour valeurs deux entiers
         if(keywd(line, ligne, "ppcm")) {
+            if(instr(cmde, ligne, "ppcm")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             std::string st = ligne.substr(4);
             std::size_t fv = st.find(",");
             if(fv == std::string::npos || fv==0 || fv==st.size()-1) {
@@ -652,6 +736,10 @@ int main(int argc, char *argv[]) {
         // Pour calculer un entier au hasard entre deux variables ou expressions
         // ayant pour valeurs deux entiers
         if(keywd(line, ligne, "hasard")) {
+            if(instr(cmde, ligne, "hasard")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             std::string st = ligne.substr(6);
             std::size_t fv = st.find(",");
             if(fv == std::string::npos || fv==0 || fv==st.size()-1) {
@@ -686,6 +774,10 @@ int main(int argc, char *argv[]) {
         // Pour calculer l'inverse modulaire r d'un entier a modulo un entier m
         // Il faut pgcd(a, m) = 1 si non : r = 0 et de plus : 0 < a < m
         if(keywd(line, ligne, "invmod")) {
+            if(instr(cmde, ligne, "invmod")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             std::string st = ligne.substr(6);
             std::size_t fv = st.find(",");
             if(fv == std::string::npos || fv==0 || fv==st.size()-1) {
@@ -718,6 +810,10 @@ int main(int argc, char *argv[]) {
         }
         // Pour calculer l'exponentiation modulaire : x^e mod(m)
         if(keywd(line, ligne, "expmod")) {
+            if(instr(cmde, ligne, "expmod")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             std::string st = ligne.substr(6);
             std::size_t fv = st.find(",");
             if(fv == std::string::npos || fv==0 || fv==st.size()-1) {
@@ -772,6 +868,10 @@ int main(int argc, char *argv[]) {
         // Pour calculer le premier nombre premier suivant un entier
         // ou une expression ayant pour valeur un entier
         if(keywd(line, ligne, "pnps")) {
+            if(instr(cmde, ligne, "pnps")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             std::string st = ligne.substr(4);
             bigRa x;
             if(!eval(st, x)) {
@@ -797,6 +897,10 @@ int main(int argc, char *argv[]) {
         // Pour calculer un facteur premier d'une variable ou d'une expression
         // ayant pour valeur un entier
         if(keywd(line, ligne, "facteur")) {
+            if(instr(cmde, ligne, "facteur")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             std::string st = ligne.substr(7);
             bigRa x;
             if(!eval(st, x)) {
@@ -819,6 +923,10 @@ int main(int argc, char *argv[]) {
         // Pour calculer la primalité d'une variable ou d'une expression
         // ayant pour valeur un entier
         if(keywd(line, ligne, "prem")) {
+            if(instr(cmde, ligne, "prem")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             std::string st = ligne.substr(4);
             bigRa x;
             if(!eval(st, x)) {
@@ -838,7 +946,11 @@ int main(int argc, char *argv[]) {
             continue;
         }
         // Pour continuer si last est positif ou si non abandonner
-        if(instr(cmde, ligne, "continuer")) {
+        if(keywd(line, ligne, "continuer")) {
+            if(!instr(cmde, ligne, "continuer")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             if(lect == 0) continue;
             bigRa x; 
             chercherra(lect, "last", x);
@@ -850,7 +962,11 @@ int main(int argc, char *argv[]) {
             }
         }
         // Pour quitter si last est positif ou si non continuer
-        if(instr(cmde, ligne, "quitter")) {
+        if(keywd(line, ligne, "quitter")) {
+            if(!instr(cmde, ligne, "quitter")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             if(lect == 0) continue;
             bigRa x;
             chercherra(lect, "last", x);
@@ -864,6 +980,10 @@ int main(int argc, char *argv[]) {
         // Exemple : si expr
         // Pour sauter une instruction si expr est nulle ou négative
         if(keywd(line, ligne, "si")) {
+            if(instr(cmde, ligne, "si")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             if(lect == 0) continue;
             std::string st = ligne.substr(2);
             bigRa x;
@@ -876,7 +996,11 @@ int main(int argc, char *argv[]) {
             else {jump = true; continue;}
         }
         // Pour effectuer l'instruction : "boucle"
-        if(instr(cmde, ligne, "boucle")) {
+        if(keywd(line, ligne, "boucle")) {
+            if(!instr(cmde, ligne, "boucle")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             if(lect == 0) continue;
             // si cette boucle n'est pas encore déjà notée : on la note
             if((ret.size() == 0) || (ret.size() != 0 && ret[ret.size()-1] != back)) {
@@ -911,7 +1035,11 @@ int main(int argc, char *argv[]) {
             }
         }
         // Pour effectuer l'instruction : "retour"
-        if(instr(cmde, ligne, "retour")) {
+        if(keywd(line, ligne, "retour")) {
+            if(!instr(cmde, ligne, "retour")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             if(lect == 0) continue;
             if(ret.size() == 0) {
                 aout("Instruction retour invalide : fin de session.\n");
@@ -923,6 +1051,10 @@ int main(int argc, char *argv[]) {
         }
         // Pour supprimer une variable du niveau actuel
         if(keywd(line, ligne, "supprimer")) {
+            if(instr(cmde, ligne, "supprimer")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
             std::string var = ligne.substr(9);
             if(var == "last" ) {
                 aout("La variable last ne peut pas être supprimée.\n");
@@ -936,12 +1068,22 @@ int main(int argc, char *argv[]) {
             continue;
         }
         // Pour afficher la version actuelle du logiciel Opera
-        if(instr(cmde, ligne, "version")) {
-            std::cout << "Opera version 1.51" << std::endl;
+        if(keywd(line, ligne, "version")) {
+            if(!instr(cmde, ligne, "version")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
+            std::cout << "Opera version 1.55" << std::endl;
             continue;
         }
         // Pour terminer cette session
-        if(instr(cmde, ligne, "exit")) break;
+        if(keywd(line, ligne, "exit")) {
+            if(!instr(cmde, ligne, "exit")) {
+                aout("Commande invalide.\n");
+                continue;
+            }
+            break;
+        }
         // Pour évaluer une expression arithmétique
         std::size_t found = ligne.find("=");
         if(found == std::string::npos) {

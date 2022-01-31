@@ -1,5 +1,5 @@
-# Ce programme en langage Opera calcule une approximation de pi
-# ayant c décimales exactes avec la formule suivante.
+# Ce programme en langage Opera calcule des approximations de pi
+# jusqu'à c décimales exactes avec la formule suivante.
 # pi = 4 / (1 + 1² / (3 + 2² / (5 + 3² / (7 + 4² / (9 + ... )))))
 # Pour l'utiliser on peut écrire :
 #    n = 16

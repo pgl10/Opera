@@ -12,8 +12,8 @@ e = c*d
 v = a-b*-c
 w = a-b*-c+d
 x = a-b*-e
-y = a-b*-c*d
 # a-b*-c*d : a-(b*(-c))*d
-z = a-b*-c^d
+y = a-b*-c*d
 # a-b*-c^d : a-b*((-c)^d)
+z = a-b*-c^d
 lister

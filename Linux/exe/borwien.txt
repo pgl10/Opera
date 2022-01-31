@@ -35,4 +35,6 @@ exec factoriel.txt x6,f6
 x3 = (f6*(a+b*3))/(f3*((3*2)^3)*c^(x3+3/2))
 p3 = 1/(12*(x0-x1+x2-x3))
 envoyer p3 p3
+enti p1*10^50
+enti p2*10^75
 enti p3*10^100

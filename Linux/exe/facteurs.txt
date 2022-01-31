@@ -12,10 +12,11 @@ continuer
 0 < 1
 boucle
    facteur nm
-   p = last
-   # si facteur en échec : last = 0
-   si last < 1
+   f = last
+   # si facteur en échec : f = 0
+   si f < 1
    quitter
+   p = f
    prochain p
    # si p = nm : c'est le dernier facteur premier
    si p > nm - 1

@@ -11,9 +11,9 @@ i = 1
 p = 1
 i < n
 boucle
-i = i + 1
-prem i
-si last > 0
-p = p*i
+   i = i + 1
+   prem i
+   si last > 0
+   p = p*i
 retour
 renvoyer p

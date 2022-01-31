@@ -11,7 +11,7 @@ i = 1
 f = 1
 i < n
 boucle
-i = i + 1
-f = f*i
+   i = i + 1
+   f = f*i
 retour
 renvoyer f
