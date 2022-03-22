@@ -1,2 +1,3 @@
 @echo off
-opera fridman.txt 
+opera fridman.txt
+

@@ -564,9 +564,6 @@ int main(int argc, char *argv[]) {
             if(!good) {
                 std::cout << "Variable ou expression invalide." << std::endl;
             }
-            else if(n == 0) {
-                std::cout << "0" << std::endl;
-            }
             else {
                 std::cout << n << std::endl;
                 bigRa brn = bigRa(n);
@@ -1073,7 +1070,7 @@ int main(int argc, char *argv[]) {
                 aout("Commande invalide.\n");
                 continue;
             }
-            std::cout << "Opera version 1.55" << std::endl;
+            std::cout << "Opera version 1.56" << std::endl;
             continue;
         }
         // Pour terminer cette session

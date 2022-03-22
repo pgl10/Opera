@@ -15,10 +15,8 @@ boucle
    prem n
    last > 0
    boucle
-      d*p
-      d = last
-      u + (n-1)/d
-      u = last
+      d = d*p
+      u = u + (n-1)/d
       t = t+1
       p = n
       i = 0
