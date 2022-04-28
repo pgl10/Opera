@@ -1,9 +1,9 @@
 # Opera
-Rational numbers of any size (as big as needed)<br>
+The Opera programming language is performing mathematically exact arithmetic operations<br>
 <br>
-Opera performs the mathematically exact operations on rational numbers of any size. The command files are true small programs.<br>
+Opera performs the mathematically exact operations on rational numbers of any size, as big as needed. The command files are true small programs.<br>
 <br>
-The class bigRa implements a rational number with its numerator and its denominator being integer numbers of any size, as big as needed, using the GMP library working like normal arithmetic created by Paul Herman.<br>
+The class bigRa implements a rational number with its numerator and its denominator using the GMP library working like normal arithmetic created by Paul Herman.<br>
 <br>
 Each number of this class has a name and its value. These numbers may be defined or red, computed and saved.<br>
 <br>
@@ -11,5 +11,5 @@ The code is able to perform seven arithmetic operations. The user can enter comm
 <br>
 Opera is available on Windows and Linux : source, project, executable, examples, documentation.<br>
 <br>
-You may have a look at the file : Opera.pdf <br>
+You may have a look at the files : description.pdf and Opera.pdf <br>
 <br>
