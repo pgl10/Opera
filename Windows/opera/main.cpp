@@ -20,7 +20,7 @@ void aide() {
     aout("exec, copier, renvoyer, prochain, recevoir, envoyer, supprimer, aide, pause,\n");
     aout("lister, noter, garder, lire, valeur, nbch, enti, frac, num, den, continuer,\n");
     aout("quitter, si, boucle, retour, exit, reste, pgcd, ppcm, hasard, facteur, prem,\n");
-    aout("invmod, expmod, pnps, version.\n");
+    aout("invmod, expmod, pnps, version, entrez.\n");
 }    
 
 void fermeture() {
@@ -40,6 +40,14 @@ void fermeture() {
     listetrv.pop_back();
     // Pour aller au niveau précédent
     if(lect > 0) lect = lect - 1;
+}
+
+std::string entrez(std::string nv) {
+    // Pour la commande : entrez nv
+    std::string str;
+    std::cout << "Entrez " << nv << " : ";
+    std::getline(std::cin, str);
+    return str;
 }
 
 int main(int argc, char *argv[]) {
@@ -118,6 +126,17 @@ int main(int argc, char *argv[]) {
         premiermot(line);
         // ligne : l'instruction actuelle sans aucun ' '
         outspaces(ligne);
+        if(line == "entrez") {
+            // On modifie : cmde, line et ligne pour créer ou redéfinir
+            // la variable nommée nv avec sa valeur entrée au clavier.
+            std::string nv, sv;
+            nv = ligne.substr(6);
+            sv = entrez(nv);
+            cmde = nv + " = " + sv;
+            line = nv;
+            outspaces(sv);
+            ligne = nv + "=" + sv;
+        }
         // Pour supprimer toutes les variables temporaires actuelles du niveau actuel 
         std::list<Var>::iterator vt;
         bool done = false;
@@ -226,7 +245,7 @@ int main(int argc, char *argv[]) {
                 std::cout << "Le fichier " << file << " n'est pas disponible.\n";
                 continue;
             }
-            ret.clear();
+            if(lect == 0) ret.clear();
             here = -1;
             copier = true;
             lect = lect + 1;
@@ -347,6 +366,10 @@ int main(int argc, char *argv[]) {
             std::stringstream ss(cmde);
             std::string verbe, var, res;
             ss >> verbe >> var >> res;
+            if(res.size() == 0) {
+                std::cout << "Commande invalide" << std::endl;
+                continue;
+            }
             bigRa val;
             if(!chercherra(lect, var, val)) {
                 std::cout << "La variable locale " << var << " n'existe pas." << std::endl;
@@ -1070,7 +1093,7 @@ int main(int argc, char *argv[]) {
                 aout("Commande invalide.\n");
                 continue;
             }
-            std::cout << "Opera version 1.56" << std::endl;
+            std::cout << "Opera version 1.6" << std::endl;
             continue;
         }
         // Pour terminer cette session

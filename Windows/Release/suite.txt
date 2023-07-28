@@ -1,0 +1,19 @@
+# Ce fichier de commandes suite.txt 
+# permet de calculer les racines carrées
+# d'une suite des nombres entrés au clavier.
+# Si on entre un nombre négatif le programme
+# s'arrête et passe en mode conversationnel.
+k = 0
+n = 100000000000000000000000000000000000000
+r = 0
+1 > 0
+boucle
+    entrez x
+    si x < 0
+    quitter    
+    exec sqrt.txt x,n,r
+    k = k + 1
+    envoyer x x[k]
+    envoyer r r[k]  
+    valeur r
+retour

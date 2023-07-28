@@ -1,41 +1,67 @@
-# Approximations p0, p1, p2 et p3 de pi selon Borwien
+# Approximations p0, p1, p2, p3, p4 et p5 de pi selon les frères Borwien
 # Voir https://en.wikipedia.org/wiki/Borwein's_algorithm
-# 1/pi = 12*(somme(k=0,1,2,...){(-1)^k*((6*k)!*(a+b*k)/(((3*k)!)*(k!)^3*(c^(3*k+3/2))}
-# Le nombre p0 a 24 chiffres exacts, p1 en a 49, p2 en a 74 et p3 en a 99.
-# Pour obtenir une valeur correcte de x3 et p3 il faut une bonne approximation de r61.
-setapprox = 128
+# 1/pi = 12*[somme(n=0,1,2,...){(-1)^n*((6*n)!)*(a+n*b)/((n!)^3*((3*n)!)*c^(n+1/2))}]
+# Le nombre p0 a 24 chiffres exacts, p1 en a 49, p2 en a 74 et p3 en a 99, etc. 
+# Pour obtenir une valeur acceptable de x0 à x5 il faut une bonne approximation de r61.
+setapprox = 160
 r61 = 61^(1/2)
 envoyer r61 r61
 a = 1657145277365+212175710912*r61
 b = 107578229802750+13773980892672*r61
-c = 5280*(236674+30303*r61)
-x0 = a/(c^(3/2))
+c = (5280*(236674+30303*r61))^3
+x0 = a/(c^(1/2))
 p0 = 1/(12*x0)
 envoyer p0 p0
-x3 = 3
-f3 = 0
-x6 = 6
-f6 = 0
-exec factoriel.txt x3,f3
-exec factoriel.txt x6,f6
-x1 = (f6*(a+b))/(f3*c^(x3+3/2))
+n = 1
+fn = 0
+n3 = 3
+f3n = 0
+n6 = 6
+f6n = 0
+exec factoriel.txt n3,f3n
+exec factoriel.txt n6,f6n
+x1 = (f6n*(a+n*b))/(f3n*c^(n+1/2))
 p1 = 1/(12*(x0-x1))
 envoyer p1 p1
-x3 = 3*2
-x6 = 6*2
-exec factoriel.txt x3,f3
-exec factoriel.txt x6,f6
-x2 = (f6*(a+b*2))/(f3*(2^3)*c^(x3+3/2))
+n = 2
+n3 = 3*n
+n6 = 6*n
+exec factoriel.txt n,fn
+exec factoriel.txt n3,f3n
+exec factoriel.txt n6,f6n
+x2 = (f6n*(a+n*b))/(fn^3*f3n*c^(n+1/2))
 p2 = 1/(12*(x0-x1+x2))
 envoyer p2 p2
-x3 = 3*3
-x6 = 6*3
-exec factoriel.txt x3,f3
-exec factoriel.txt x6,f6
-x3 = (f6*(a+b*3))/(f3*((3*2)^3)*c^(x3+3/2))
+n = 3
+n3 = 3*n
+n6 = 6*n
+exec factoriel.txt n,fn
+exec factoriel.txt n3,f3n
+exec factoriel.txt n6,f6n
+x3 = (f6n*(a+n*b))/(fn^3*f3n*c^(n+1/2))
 p3 = 1/(12*(x0-x1+x2-x3))
 envoyer p3 p3
+n = 4
+n3 = 3*n
+n6 = 6*n
+exec factoriel.txt n,fn
+exec factoriel.txt n3,f3n
+exec factoriel.txt n6,f6n
+x4 = (f6n*(a+n*b))/(fn^3*f3n*c^(n+1/2))
+p4 = 1/(12*(x0-x1+x2-x3+x4))
+envoyer p4 p4
+n = 5
+n3 = 3*n
+n6 = 6*n
+exec factoriel.txt n,fn
+exec factoriel.txt n3,f3n
+exec factoriel.txt n6,f6n
+x5 = (f6n*(a+n*b))/(fn^3*f3n*c^(n+1/2))
+p5 = 1/(12*(x0-x1+x2-x3+x4-x5))
+envoyer p5 p5
 enti p0*10^25
 enti p1*10^50
 enti p2*10^75
 enti p3*10^100
+enti p4*10^125
+enti p5*10^150

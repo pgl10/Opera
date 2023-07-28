@@ -1,4 +1,4 @@
-# Ce fichier de commandes essai.txt
+# Ce fichier de commandes essais.txt
 # est simplement un exemple pouvant 
 # être commode en phase de mise au point.
 # On peut essayer divers formules avec

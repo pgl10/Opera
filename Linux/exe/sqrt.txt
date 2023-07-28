@@ -1,0 +1,35 @@
+# Ce fichier de commandes sqrt.txt 
+# calcule r : une approximation de s = sqrt(x) = x^(1/2)  
+# par dichotomie telle que abs(r*r - x) < x/n 
+# Exemple avec x=1005 et n=10^100 et r=0 : exec sqrt.txt x,n,r
+copier x,n,m
+x > 0
+continuer
+n > 1
+continuer
+y = x
+si x < 1
+y = 1/x
+a = 1
+b = y
+m = (a+b)/2
+mm = m*m
+dif = mm-y
+si dif < 0
+dif = -dif
+eps = y/n
+dif > eps
+boucle
+   si y > mm
+   a = m
+   si y < mm
+   b = m
+   m = (a+b)/2
+   mm = m*m
+   dif = mm-y
+   si dif < 0
+   dif = -dif
+retour
+si x < 1
+m = 1/m
+renvoyer m
